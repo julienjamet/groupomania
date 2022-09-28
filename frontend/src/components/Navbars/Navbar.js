@@ -3,9 +3,9 @@
 import { useContext } from "react" /*Imports the useContext() hook*/
 
 /*------------Components*/
-import { UserDataContext } from "./AppContext" /*Imports the Context*/
+import { UserDataContext } from "../AppContext" /*Imports the Context*/
 import { NavLink } from "react-router-dom" /*Imports a NavLink component*/
-import Logout from "./Log/Logout" /*Imports the Logout component*/
+import Logout from "../Log/Logout" /*Imports the Logout component*/
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
