@@ -5,6 +5,7 @@ import { useContext, useState } from "react" /*Imports the useContext() hook*/
 
 /*------------Components*/
 import { UserDataContext } from "../AppContext" /*Imports the Context*/
+import Followings from "../Followings"
 import LeftNav from "../Navbars/LeftNav" /*Imports the LeftNav component*/
 import dateParser from "../Utils"
 import UploadImg from "./UploadImg" /*Imports the UploadImg component*/
@@ -76,9 +77,7 @@ function UpdateProfile() { /*Runs an UpdateProfile() function...*/
                     <div className="modal">
                         <h3>Abonnements</h3>
                         <span onClick={() => setFollowingsPopup(false)} className="cross">&#10005;</span>
-                        <ul>
-
-                        </ul>
+                        <Followings />
                     </div>
                 </div>
             }
@@ -87,9 +86,7 @@ function UpdateProfile() { /*Runs an UpdateProfile() function...*/
                     <div className="modal">
                         <h3>Abonnés</h3>
                         <span onClick={() => setFollowersPopup(false)} className="cross">&#10005;</span>
-                        <ul>
 
-                        </ul>
                     </div>
                 </div>
             }
