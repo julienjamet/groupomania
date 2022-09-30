@@ -1,7 +1,8 @@
 function dateParser(num) {
     let options = {
-        year: "numeric", month: "short", weekday: "long", day: "numeric",
-        hour: "2-digit", minute: "2-digit", second: "2-digit"
+        year: "numeric",
+        month: "long",
+        day: "numeric"
     }
 
     let timestamp = Date.parse(num)

@@ -13,8 +13,14 @@ function UploadImg() { /*Runs an UploadImg() function...*/
     /*------------Calls*/
     const [file, setFile] = useState() /*...that calls a useState(file) hook...*/
     const userData = useContext(UserDataContext) /*...runs the useContext() hook to retrieve the user data...*/
+    const fileInput = document.getElementById("file")
 
     /*------------Middlewares*/
+    if (file) {
+        fileInput.style.color = "black"
+        fileInput.style.marginLeft = "1px"
+    }
+
     function handlePicture(e) { /*...and creates a handlePicture() function...*/
         e.preventDefault()
 
@@ -28,8 +34,9 @@ function UploadImg() { /*Runs an UploadImg() function...*/
             data: data, /*...that contains the FormData object*/
             withCredentials: true
         })
-            .then(res => console.log(res))
+            .then(res => { console.log(res) })
             .catch(error => console.log(error))
+
     }
 
     /*------------Return*/

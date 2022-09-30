@@ -16,9 +16,15 @@
     }
   }
 
+#file {
+  color: $color-2;
+  background-color: $color-2;
+  margin-left: -5px;
+}
+
   .connection-form {
     border: none;
-    background: $color-4;
+    background: $color-2;
     min-width: 490px;
     width: 90%;
     text-align: center;
@@ -52,17 +58,14 @@
         }
 
         .active-btn {
-          background: $color-2;
-
-          &:hover {
-            background: $color-1;
-            color: $color-4;
-          }
+          background-color: $color-1;
+          color: $color-2;
         }
 
         li:not(.active-btn) {
           &:hover {
             transform: translateX(3px);
+            color: $color-1;
           }
         }
 
@@ -91,7 +94,6 @@
           padding: 14px 20px;
           margin: 0;
           font-size: 1.2rem;
-          font-family: $font-2;
           border-radius: 20px;
 
           &:focus {
@@ -100,7 +102,10 @@
         }
 
         a {
-          color: rgb(62, 62, 214);
+          color: $color-3;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
     }
@@ -142,7 +147,7 @@
     }
 
     >div {
-      background: $color-4;
+      background: $color-2;
       border-radius: 20px;
       padding: 25px;
       margin: 20px 10px;
@@ -183,9 +188,20 @@
           transition: 0.2s;
           z-index: 10;
           cursor: pointer;
+          transition: all 400ms;
+          &:hover {
+            color: $color-1;
+            border: 1px solid $color-1;
+            background-color: $color-4;
+            filter: brightness(110%);
+          }
         }
 
         input[type="file"] {
+          font-style: italic;
+          color: $color-2;
+          background-color: $color-2;
+          margin-left: -5px;
           position: absolute;
           opacity: 1;
           transform: translate(-3px, -50%);
@@ -202,14 +218,13 @@
           border-radius: 20px;
 
           &:hover {
-            letter-spacing: 1px;
+            filter: brightness(110%);
           }
         }
       }
 
       p {
         color: red;
-        font-family: $font-3;
         margin-top: 6px;
       }
     }
@@ -225,21 +240,30 @@
       p,
       textarea {
         min-height: 80px;
-        border: 1px solid $color-1;
         border-radius: 20px 20px 6px 20px;
         padding: 10px 20px;
         font-size: 1.1rem;
+        background-color: $color-4
       }
 
       textarea {
+        background-color: white;
+        font-family: $font-1;
         width: 100%;
         margin-bottom: -6px;
-        font-size: 1.2rem;
       }
 
       button {
         margin: 5px 0;
         float: right;
+        background-color: $color-3;
+        color: $color-2;
+        margin-left: 20px;
+        &:hover {
+          background-color: $color-4;
+          color: $color-1;
+          filter: brightness(110%);
+        }
       }
 
       h4 {
@@ -247,9 +271,9 @@
       }
 
       h5 {
+        border: 1px solid $color-2;
         background: $color-1;
         color: $color-4;
-        font-family: $font-1;
         margin: 20px 0;
         padding: 12px;
         font-size: 1.1rem;
@@ -258,6 +282,9 @@
         cursor: pointer;
 
         &:hover {
+          border-color: $color-1;
+          color: $color-1;
+          background-color: $color-4;
           filter: brightness(110%);
           transform: translateX(2px);
         }
@@ -272,13 +299,6 @@
     left: 0;
     height: 100%;
     position: fixed;
-    animation: popup 1s forwards;
-
-    @keyframes popup {
-      to {
-        backdrop-filter: blur(2px);
-      }
-    }
 
     .modal {
       position: absolute;
@@ -288,7 +308,7 @@
       background: $color-2;
       padding: 25px;
       border-radius: 20px;
-      box-shadow: 0 0 2px rgba(131, 130, 130, 0.356);
+      box-shadow: 2px 2px 6px $color-3, -2px -2px 6px $color-3;
       overflow: auto;
       transform: scaleY(0);
       transform-origin: center;
@@ -327,7 +347,7 @@
         }
 
         &::-webkit-scrollbar-track {
-          background: $color-4;
+          background: $color-2;
         }
 
         &::-webkit-scrollbar-thumb {
@@ -360,15 +380,19 @@
           .follow-handler {
             text-align: left;
 
-            button {
-              background: $color-4;
+            .unfollow-btn, .follow-btn {
+              background-color: $color-1;
+              color: $color-4;
               border-radius: 20px;
-              margin-right: 6px;
+              margin-left: 12px;
 
               &:hover {
-                color: $color-3;
-                transform: translateX(2px);
+                color: $color-1;
+                background-color: $color-4;
               }
+            }
+            .follow-btn {
+              padding-right: 31px;
             }
           }
         }

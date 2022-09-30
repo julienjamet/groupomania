@@ -1,14 +1,6 @@
 @font-face {
-  font-family: "font-1";
-  src: url(./assets/fonts/JosefinSans-ExtraLight.ttf);
-}
-@font-face {
-  font-family: "font-2";
-  src: url(./assets/fonts/JosefinSans-Regular.ttf);
-}
-@font-face {
-  font-family: "font-3";
-  src: url(./assets/fonts/JosefinSans-Bold.ttf);
+  font-family: "Lato";
+  src: url(./assets/fonts/Lato-Regular.ttf);
 }
 * {
   margin: 0;
@@ -58,7 +50,7 @@ textarea {
   resize: none;
   border-radius: 20px;
   width: 270px;
-  font-family: "font-1", sans-serif;
+  font-family: "Lato", sans-serif;
   background: rgb(253, 253, 253);
 }
 
@@ -68,21 +60,32 @@ textarea:focus {
 
 button,
 input[type=submit] {
-  background: #FFD7D7;
-  color: #FD2D01;
-  font-family: "font-3", serif;
+  color: #4E5166;
+  background-color: #fdeeee;
+  font-family: "Lato", sans-serif;
   cursor: pointer;
   transition: 0.2s;
   margin: 0;
   padding: 10px 20px;
   cursor: pointer;
   font-size: 1.1rem;
-  border-radius: 20px 6px 20px 20px;
+  border-top: 1px solid #FFD7D7;
+  border-bottom: 1px solid #FFD7D7;
+  border-radius: 20px;
 }
 button:hover,
 input[type=submit]:hover {
-  background: #FD2D01;
-  color: #FFD7D7;
+  color: #FD2D01;
+  border: 1px solid #FD2D01;
+}
+
+#submit {
+  width: 50%;
+  transform: translateY(5px);
+  transition: transform 400ms;
+}
+#submit:hover {
+  transform: translateY(0);
 }
 
 input[type=checkbox] {
@@ -99,7 +102,7 @@ i:hover {
 }
 
 body {
-  font-family: "font-2", serif;
+  font-family: "Lato", sans-serif;
   line-height: 1.4rem;
   background: rgb(253, 253, 253);
   color: #4E5166;
@@ -140,7 +143,7 @@ body {
   text-align: center;
 }
 .home .main .home-header .connection-form {
-  background: #fdeeee;
+  background: #FFD7D7;
   border-radius: 20px;
   padding: 20px;
 }
@@ -169,7 +172,6 @@ body {
   padding: 10px 14px;
   margin: 0;
   font-size: 1.2rem;
-  font-family: "font-2", serif;
   border-radius: 20px;
 }
 .home .main .home-header .connection-form form input:focus {
@@ -235,7 +237,6 @@ nav .nav-container .logo {
 nav .nav-container .logo h3 {
   transform: translate(15px, 2px);
   font-size: 1.5rem;
-  font-family: "font-3", serif;
 }
 nav .nav-container .logo img {
   height: 26px;
@@ -256,9 +257,6 @@ nav .nav-container ul .welcome {
   nav .nav-container ul .welcome {
     display: none;
   }
-}
-nav .nav-container ul .welcome h5 {
-  font-family: "font-3", serif;
 }
 nav .nav-container ul li img {
   height: 24px;
@@ -381,7 +379,6 @@ nav .nav-container ul li img {
 }
 .card-container .card-right .card-header span {
   font-style: italic;
-  font-family: "font-1", sans-serif;
 }
 @media screen and (max-width: 440px) {
   .card-container .card-right .card-header span {
@@ -473,7 +470,7 @@ nav .nav-container ul li img {
   transform: translate(29px, 2px);
 }
 .card-container .card-right .comment-container.client {
-  background: #fdeeee;
+  background: #FFD7D7;
   border: none;
   border-radius: 20px 20px 6px 20px;
 }
@@ -511,16 +508,12 @@ nav .nav-container ul li img {
 .card-container .card-right .comment-container .comment-header .pseudo {
   display: flex;
 }
-.card-container .card-right .comment-container .comment-header .pseudo h3 {
-  font-family: "font-1", sans-serif;
-}
 .card-container .card-right .comment-container .comment-header .pseudo span {
   transform: translateX(6px);
 }
 .card-container .card-right .comment-container .comment-header span {
   font-size: 0.9rem;
   font-style: italic;
-  font-family: "font-1", sans-serif;
 }
 .card-container .card-right .comment-container p {
   margin-top: 8px;
@@ -551,7 +544,6 @@ nav .nav-container ul li img {
   cursor: pointer;
   transition: 0.2s;
   display: inline-block;
-  font-family: "font-3", serif;
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form label:hover {
   transform: scale(1.05);
@@ -597,7 +589,7 @@ nav .nav-container ul li img {
 }
 .card-container .card-right .comment-form input[type=text] {
   width: 100%;
-  background: #fdeeee;
+  background: #FFD7D7;
   border-radius: 20px 20px 6px 20px;
   padding: 20px;
   font-size: 1.4rem;
@@ -709,9 +701,14 @@ nav .nav-container ul li img {
     grid-template-columns: 1fr;
   }
 }
+.profil-page #file {
+  color: #FFD7D7;
+  background-color: #FFD7D7;
+  margin-left: -5px;
+}
 .profil-page .connection-form {
   border: none;
-  background: #fdeeee;
+  background: #FFD7D7;
   min-width: 490px;
   width: 90%;
   text-align: center;
@@ -746,14 +743,12 @@ nav .nav-container ul li img {
   }
 }
 .profil-page .connection-form .form-container ul .active-btn {
-  background: #FFD7D7;
-}
-.profil-page .connection-form .form-container ul .active-btn:hover {
-  background: #FD2D01;
-  color: #fdeeee;
+  background-color: #FD2D01;
+  color: #FFD7D7;
 }
 .profil-page .connection-form .form-container ul li:not(.active-btn):hover {
   transform: translateX(3px);
+  color: #FD2D01;
 }
 .profil-page .connection-form .form-container ul #login {
   position: relative;
@@ -777,14 +772,16 @@ nav .nav-container ul li img {
   padding: 14px 20px;
   margin: 0;
   font-size: 1.2rem;
-  font-family: "font-2", serif;
   border-radius: 20px;
 }
 .profil-page .connection-form .form-container form input:focus {
   box-shadow: 0 0 3px rgba(51, 51, 51, 0.2);
 }
 .profil-page .connection-form .form-container form a {
-  color: rgb(62, 62, 214);
+  color: #4E5166;
+}
+.profil-page .connection-form .form-container form a:hover {
+  text-decoration: underline;
 }
 .profil-page h1 {
   text-align: center;
@@ -823,7 +820,7 @@ nav .nav-container ul li img {
   }
 }
 .profil-page .update-container > div {
-  background: #fdeeee;
+  background: #FFD7D7;
   border-radius: 20px;
   padding: 25px;
   margin: 20px 10px;
@@ -863,8 +860,19 @@ nav .nav-container ul li img {
   transition: 0.2s;
   z-index: 10;
   cursor: pointer;
+  transition: all 400ms;
+}
+.profil-page .update-container .left-part form label:hover {
+  color: #FD2D01;
+  border: 1px solid #FD2D01;
+  background-color: #fdeeee;
+  filter: brightness(110%);
 }
 .profil-page .update-container .left-part form input[type=file] {
+  font-style: italic;
+  color: #FFD7D7;
+  background-color: #FFD7D7;
+  margin-left: -5px;
   position: absolute;
   opacity: 1;
   transform: translate(-3px, -50%);
@@ -881,11 +889,10 @@ nav .nav-container ul li img {
   border-radius: 20px;
 }
 .profil-page .update-container .left-part form input[type=submit]:hover {
-  letter-spacing: 1px;
+  filter: brightness(110%);
 }
 .profil-page .update-container .left-part p {
   color: red;
-  font-family: "font-3", serif;
   margin-top: 6px;
 }
 .profil-page .update-container .right-part {
@@ -898,27 +905,36 @@ nav .nav-container ul li img {
 .profil-page .update-container .right-part p,
 .profil-page .update-container .right-part textarea {
   min-height: 80px;
-  border: 1px solid #FD2D01;
   border-radius: 20px 20px 6px 20px;
   padding: 10px 20px;
   font-size: 1.1rem;
+  background-color: #fdeeee;
 }
 .profil-page .update-container .right-part textarea {
+  background-color: white;
+  font-family: "Lato", sans-serif;
   width: 100%;
   margin-bottom: -6px;
-  font-size: 1.2rem;
 }
 .profil-page .update-container .right-part button {
   margin: 5px 0;
   float: right;
+  background-color: #4E5166;
+  color: #FFD7D7;
+  margin-left: 20px;
+}
+.profil-page .update-container .right-part button:hover {
+  background-color: #fdeeee;
+  color: #FD2D01;
+  filter: brightness(110%);
 }
 .profil-page .update-container .right-part h4 {
   margin: 60px 0 10px;
 }
 .profil-page .update-container .right-part h5 {
+  border: 1px solid #FFD7D7;
   background: #FD2D01;
   color: #fdeeee;
-  font-family: "font-1", sans-serif;
   margin: 20px 0;
   padding: 12px;
   font-size: 1.1rem;
@@ -927,6 +943,9 @@ nav .nav-container ul li img {
   cursor: pointer;
 }
 .profil-page .update-container .right-part h5:hover {
+  border-color: #FD2D01;
+  color: #FD2D01;
+  background-color: #fdeeee;
   filter: brightness(110%);
   transform: translateX(2px);
 }
@@ -937,20 +956,6 @@ nav .nav-container ul li img {
   left: 0;
   height: 100%;
   position: fixed;
-  -webkit-animation: popup 1s forwards;
-          animation: popup 1s forwards;
-}
-@-webkit-keyframes popup {
-  to {
-    -webkit-backdrop-filter: blur(2px);
-            backdrop-filter: blur(2px);
-  }
-}
-@keyframes popup {
-  to {
-    -webkit-backdrop-filter: blur(2px);
-            backdrop-filter: blur(2px);
-  }
 }
 .profil-page .popup-profil-container .modal {
   position: absolute;
@@ -960,7 +965,7 @@ nav .nav-container ul li img {
   background: #FFD7D7;
   padding: 25px;
   border-radius: 20px;
-  box-shadow: 0 0 2px rgba(131, 130, 130, 0.356);
+  box-shadow: 2px 2px 6px #4E5166, -2px -2px 6px #4E5166;
   overflow: auto;
   transform: scaleY(0);
   transform-origin: center;
@@ -1000,7 +1005,7 @@ nav .nav-container ul li img {
   width: 2px;
 }
 .profil-page .popup-profil-container .modal ul::-webkit-scrollbar-track {
-  background: #fdeeee;
+  background: #FFD7D7;
 }
 .profil-page .popup-profil-container .modal ul::-webkit-scrollbar-thumb {
   background: #FD2D01;
@@ -1029,14 +1034,18 @@ nav .nav-container ul li img {
 .profil-page .popup-profil-container .modal ul li .follow-handler {
   text-align: left;
 }
-.profil-page .popup-profil-container .modal ul li .follow-handler button {
-  background: #fdeeee;
+.profil-page .popup-profil-container .modal ul li .follow-handler .unfollow-btn, .profil-page .popup-profil-container .modal ul li .follow-handler .follow-btn {
+  background-color: #FD2D01;
+  color: #fdeeee;
   border-radius: 20px;
-  margin-right: 6px;
+  margin-left: 12px;
 }
-.profil-page .popup-profil-container .modal ul li .follow-handler button:hover {
-  color: #4E5166;
-  transform: translateX(2px);
+.profil-page .popup-profil-container .modal ul li .follow-handler .unfollow-btn:hover, .profil-page .popup-profil-container .modal ul li .follow-handler .follow-btn:hover {
+  color: #FD2D01;
+  background-color: #fdeeee;
+}
+.profil-page .popup-profil-container .modal ul li .follow-handler .follow-btn {
+  padding-right: 31px;
 }
 
 .post-container {
@@ -1044,7 +1053,7 @@ nav .nav-container ul li img {
   padding: 16px 40px;
   border-radius: 20px;
   position: relative;
-  background: #fdeeee;
+  background: #FFD7D7;
 }
 .post-container i {
   font-size: 1.5rem;
@@ -1200,7 +1209,6 @@ nav .nav-container ul li img {
   cursor: pointer;
 }
 .post-container .post-form .footer-form p {
-  font-family: "font-3", serif;
   margin-top: 4px;
   color: red;
 }
@@ -1210,7 +1218,7 @@ nav .nav-container ul li img {
   background: rgb(253, 253, 253);
 }
 .post-container .post-form .footer-form .btn-send .cancel:hover {
-  color: #fdeeee;
+  color: #FFD7D7;
   background: #4E5166;
 }
 .post-container .post-form .footer-form .btn-send .send:hover {
@@ -1263,21 +1271,20 @@ nav .nav-container ul li img {
 .get-friends-container ul .user-hint p {
   text-align: left;
   font-size: 0.9rem;
-  font-family: "font-3", serif;
 }
 .get-friends-container ul .user-hint span {
   text-align: right;
 }
 .get-friends-container ul .user-hint span button {
   background: #FD2D01;
-  color: #fdeeee;
+  color: #FFD7D7;
   padding: 10px 24px 8px;
   transition: 0.2s;
   border-radius: 20px;
   font-size: 0.9rem;
 }
 .get-friends-container ul .user-hint span button:hover {
-  background: #fdeeee;
+  background: #FFD7D7;
   color: #FD2D01;
 }
 
@@ -1298,7 +1305,7 @@ nav .nav-container ul li img {
   display: grid;
   align-items: center;
   grid-template-columns: 68px 1fr;
-  background: #fdeeee;
+  background: #FFD7D7;
   border-radius: 20px;
   padding: 16px;
   box-shadow: 5px 7px 20px 9px rgba(255, 124, 119, 0.1960784314);
@@ -1332,7 +1339,6 @@ nav .nav-container ul li img {
 }
 .trending-container ul li .trend-content span {
   color: #FD2D01;
-  font-family: "font-3", serif;
   position: absolute;
   right: 6px;
   bottom: -11px;
@@ -1369,7 +1375,7 @@ nav .nav-container ul li img {
   height: 45px;
   width: 45px;
   position: absolute;
-  background: #fdeeee;
+  background: #FFD7D7;
   border-radius: 50px;
 }
 .left-nav-container .icons .icons-bis a:hover {

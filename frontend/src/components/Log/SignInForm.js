@@ -34,10 +34,13 @@ function SignInForm() { /*Runs a SignInForm() function...*/
         })
             .then(() => { /*...before redirecting the user to its authenticated profile page...*/
                 submitBox.style.backgroundColor = "#c9f0d4"
-                submitButton.style.backgroundColor = "#76ba6a"
-                submitButton.style.color = "white"
-                loginButton.style.backgroundColor = "#76ba6a"
-                loginButton.style.color = "white"
+
+                submitButton.style.borderColor = "#76ba6a"
+                submitButton.style.backgroundColor = "white"
+                submitButton.style.color = "#76ba6a"
+
+                loginButton.style.backgroundColor = "white"
+                loginButton.style.color = "#76ba6a"
 
                 setTimeout(function () {
                     window.location = "/profile"
@@ -77,7 +80,7 @@ function SignInForm() { /*Runs a SignInForm() function...*/
             />
             <div className="password error"></div>
             <br />
-            <input type="submit" id="submit" value="Se connecter" />
+            <input type="submit" id="submit" value="Connexion" />
         </form>
     )
 }

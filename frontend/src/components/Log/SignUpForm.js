@@ -52,10 +52,13 @@ function SignUpForm() { /*Runs a SignUpForm() function...*/
         })
             .then(() => { /*...before redirecting the user to the login page...*/
                 submitBox.style.backgroundColor = "#c9f0d4"
-                submitButton.style.backgroundColor = "#76ba6a"
-                submitButton.style.color = "white"
-                registerButton.style.backgroundColor = "#76ba6a"
-                registerButton.style.color = "white"
+
+                submitButton.style.borderColor = "#76ba6a"
+                submitButton.style.backgroundColor = "#white"
+                submitButton.style.color = "#76ba6a"
+
+                registerButton.style.backgroundColor = "white"
+                registerButton.style.color = "#76ba6a"
 
                 setTimeout(function () {
                     window.location = "/profile"
@@ -141,7 +144,7 @@ function SignUpForm() { /*Runs a SignUpForm() function...*/
             <label htmlFor="terms">J'accepte les <a href="/" target="_blank" rel="noopener noreferrer">conditions générales</a></label>
             <div className="terms error"></div>
             <br />
-            <input type="submit" id="submit" value="Valider inscription" />
+            <input type="submit" id="submit" value="Inscription" />
         </form>
     )
 }

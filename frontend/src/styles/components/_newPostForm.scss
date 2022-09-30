@@ -3,7 +3,7 @@
   padding: 16px 40px;
   border-radius: 20px;
   position: relative;
-  background: $color-4;
+  background: $color-2;
 
   i {
     font-size: 1.5rem;
@@ -156,7 +156,6 @@
         }
       }
       p {
-        font-family: $font-3;
         margin-top: 4px;
         color: red;
       }
@@ -167,7 +166,7 @@
           background: $white;
 
           &:hover {
-            color: $color-4;
+            color: $color-2;
             background: $color-3;
           }
         }
