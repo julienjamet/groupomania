@@ -1,35 +1,40 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------Modules*/
-import React from 'react' /*Imports React*/
-import ReactDOM from 'react-dom/client' /*Imports ReactDOM*/
-import { Provider } from "react-redux"
+/*------------React & Redux modules*/
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import { createStore, applyMiddleware } from "redux"
-import thunk from "redux-thunk"
 import { composeWithDevTools } from "redux-devtools-extension"
+import thunk from "redux-thunk"
+import { Provider } from "react-redux"
 
-/*------------Components*/
-import App from './App' /*Imports the App component*/
-import rootReducer from "./components/Store/reducers"
-import './styles/index.css' /*Imports styles*/
+/*------------Actions & Reducers*/
 import GetUsers from './components/Store/actions/users.action'
 import GetPosts from './components/Store/actions/posts.action'
+import rootReducer from "./components/Store/reducers/root.reducer"
+
+/*------------Components*/
+import App from './App'
+import './styles/index.css'
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-/*------------Calls*/
-const root = ReactDOM.createRoot(document.getElementById('root')) /*Targets the "root" div of the "index.html" file and runs the ReactDOM createRoot() function on it*/
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+/*------------Redux Store*/
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk))) /*Creates a Redux Store*/
+
+store.dispatch(GetUsers()) /*Runs a Users action*/
+store.dispatch(GetPosts()) /*Runs a Posts action*/
 
 /*------------React App*/
-store.dispatch(GetUsers())
-store.dispatch(GetPosts())
+const root = ReactDOM.createRoot(document.getElementById('root')) /*Creates a React Root*/
 
-root.render( /*Runs on the "root" div the App component as a React App*/
+root.render( /*Runs on the React Root a React App...*/
+
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
+    <Provider store={store}> {/*...that uses the Store at its highest level...*/}
+      <App /> {/*...and runs the App component*/}
     </Provider>
   </React.StrictMode>
+
 )
 /*-------------------------------------------------------------------------------------------------------------------*/

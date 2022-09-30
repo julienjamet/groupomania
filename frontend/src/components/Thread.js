@@ -56,7 +56,7 @@ function Thread() {
                                                 allowFullScreen
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media;
                                                 gyroscope; picture-in-picture"
-                                                frameborder="0">
+                                                frameBorder="0">
                                             </iframe>
                                         )}
                                         <div className="card-footer">
