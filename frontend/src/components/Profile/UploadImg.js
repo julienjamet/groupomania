@@ -25,8 +25,9 @@ function UploadImg() { /*Runs an UploadImg() function...*/
         e.preventDefault()
 
         const data = new FormData() /*...that creates a new FormData object...*/
-        data.append("picture", `./uploads/profil/${file.name}`) /*...containing the data from the useState(file) hook...*/
+        data.append("file", file) /*...containing the data from the useState(file) hook...*/
 
+        console.log(data)
         axios({ /*...then runs an Axios PUT method on the backend "api/user/:id" route...*/
             method: "put",
             headers: { "Content-Type": "multipart/form-data" },
@@ -46,7 +47,7 @@ function UploadImg() { /*Runs an UploadImg() function...*/
             <input
                 type="file"
                 id="file"
-                name="id"
+                name="image"
                 accept=".jpg, .jpeg, .png"
                 onChange={(e) => { setFile(e.target.files[0]) }} /*...and whose input sets the useState(file) hook*/
             />

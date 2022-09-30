@@ -49,6 +49,7 @@ function Thread() {
                                         {post.picture && <img src={post.picture} alt="card-pic" className="card-pic" />}
                                         {post.video && (
                                             <iframe
+                                                title={post._id}
                                                 width="500"
                                                 height="300"
                                                 src={post.video}

@@ -11,12 +11,12 @@ const MIME_TYPES = { /*Creates a MIME type dictionary that handles image formats
 /*Operation----------------------------------------------------------------------------------------------------------*/
 const storage = multer.diskStorage({ /*Runs the Multer diskStorage() function to create an image file...*/
     destination: (req, file, callback) => {
-        callback(null, '.uploads/profil') /*...then save it to the "images" folder*/
+        callback(null, 'images') /*...then saves it to the "images" folder*/
     },
     filename: (req, file, callback) => { /*The function also handles the filename...*/
         const name = file.originalname.split(' ').join('_') /*...by replacing any spaces with underscores...*/
         const extension = MIME_TYPES[file.mimetype] /*... and converting formats with the MIME type dictionary*/
-        callback(null, name + Date.now() + '.' + extension)
+        callback(null, name)
     }
 })
 /*-------------------------------------------------------------------------------------------------------------------*/
