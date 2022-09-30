@@ -12,6 +12,7 @@ import App from './App' /*Imports the App component*/
 import rootReducer from "./components/Store/reducers"
 import './styles/index.css' /*Imports styles*/
 import GetUsers from './components/Store/actions/users.action'
+import GetPosts from './components/Store/actions/posts.action'
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -22,6 +23,7 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 
 /*------------React App*/
 store.dispatch(GetUsers())
+store.dispatch(GetPosts())
 
 root.render( /*Runs on the "root" div the App component as a React App*/
   <React.StrictMode>

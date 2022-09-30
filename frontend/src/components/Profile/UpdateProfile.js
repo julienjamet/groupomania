@@ -85,7 +85,7 @@ function UpdateProfile() { /*Runs an UpdateProfile() function...*/
                         <h3>Abonnements</h3>
                         <span onClick={() => setFollowingsPopup(false)} className="cross">&#10005;</span>
                         <ul>
-                            {usersData.map((user) => {
+                            {usersData.map(user => {
                                 for (let i = 0; i < userData.followings.length; i++) {
                                     if (user._id === userData.followings[i]) {
                                         return (
@@ -118,7 +118,7 @@ function UpdateProfile() { /*Runs an UpdateProfile() function...*/
                                                 <img src={user.picture} alt={`${user.pseudo} pic`} />
                                                 <p>{user.pseudo}</p>
                                                 <div className="follow-handler">
-                                                    <FollowHandler idToFollow={user._id} />
+                                                    <FollowHandler idToFollow={user._id} type="suggestion" />
                                                 </div>
                                             </li>
                                         )

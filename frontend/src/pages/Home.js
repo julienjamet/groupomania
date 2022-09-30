@@ -6,6 +6,7 @@ import { useContext } from "react" /*Imports the useContext() hook*/
 import { UserDataContext } from "../components/AppContext" /*Imports the Context*/
 import LeftNav from "../components/Navbars/LeftNav" /*Imports the LeftNav component*/
 import Log from "../components/Log" /*Imports the Log component*/
+import Thread from "../components/Thread"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -20,7 +21,9 @@ function Home() { /*Runs a Home() function...*/
             {userData ? ( /*If the Context contains indeed user data...*/
                 <>
                     <LeftNav />
-                    <h1>HOME PAGE</h1> {/*...the user is automatically redirected to its authenticated home page*/}
+                    <div className="main">
+                        <Thread />
+                    </div> {/*...the user is automatically redirected to its authenticated home page*/}
                 </>
             ) : (
                 <div className="log-container">

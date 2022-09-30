@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { UserDataContext } from "../AppContext"
 import axios from "axios"
 
-function FollowHandler({ idToFollow }) {
+function FollowHandler({ idToFollow, type }) {
     const userData = useContext(UserDataContext)
     const [isFollowed, setIsFollowed] = useState(false)
 
@@ -42,12 +42,18 @@ function FollowHandler({ idToFollow }) {
         <>
             {isFollowed && (
                 <span>
-                    <button onClick={handleUnfollow} className="unfollow-btn">Abonné</button>
+                    {type === "suggestion" &&
+                        <button onClick={handleUnfollow} className="unfollow-btn">Abonné</button>}
+                    {type === "card" &&
+                        <img onClick={handleUnfollow} src="./img/icons/checked.svg" alt="checked" />}
                 </span>
             )}
             {!isFollowed && (
                 <span>
-                    <button onClick={handleFollow} className="follow-btn">Suivre</button>
+                    {type === "suggestion" &&
+                        <button onClick={handleFollow} className="follow-btn">Suivre</button>}
+                    {type === "card" &&
+                        <img onClick={handleFollow} src="./img/icons/check.svg" alt="check" />}
                 </span>
             )}
         </>
