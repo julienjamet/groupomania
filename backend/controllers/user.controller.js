@@ -37,10 +37,9 @@ exports.updateUser = (req, res) => { /*Exports to the User router a updateUser()
                 return res.status(401).json({ message: 'Vous ne pouvez pas modifier un autre utilisateur que vous !' }) /*...the function returns an error message*/
             }
 
-            console.log(req.file.filename)
-            const userObject = req.file ? {
+            const userObject = req.body.file ? {
                 ...JSON.parse(req.body),
-                imageUrl: `./uploads/profil/${req.file.filename}`,
+                imageUrl: `.uploads/profil/${req.file.filename}`,
                 id: user._id,
                 password: user.password,
                 followers: user.followers,

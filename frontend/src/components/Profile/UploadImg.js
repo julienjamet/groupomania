@@ -36,7 +36,6 @@ function UploadImg() { /*Runs an UploadImg() function...*/
         })
             .then(res => { console.log(res) })
             .catch(error => console.log(error))
-
     }
 
     /*------------Return*/
@@ -46,7 +45,7 @@ function UploadImg() { /*Runs an UploadImg() function...*/
             <input
                 type="file"
                 id="file"
-                name="image"
+                name="id"
                 accept=".jpg, .jpeg, .png"
                 onChange={(e) => { setFile(e.target.files[0]) }} /*...and whose input sets the useState(file) hook*/
             />
