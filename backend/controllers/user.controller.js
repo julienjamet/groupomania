@@ -40,7 +40,7 @@ exports.updateUser = (req, res) => { /*Exports to the User router a updateUser()
             console.log(req.file.filename)
             const userObject = req.file ? {
                 ...JSON.parse(req.body),
-                imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+                imageUrl: `./uploads/profil/${req.file.filename}`,
                 id: user._id,
                 password: user.password,
                 followers: user.followers,

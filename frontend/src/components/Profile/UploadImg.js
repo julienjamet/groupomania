@@ -25,9 +25,8 @@ function UploadImg() { /*Runs an UploadImg() function...*/
         e.preventDefault()
 
         const data = new FormData() /*...that creates a new FormData object...*/
-        data.append("file", file) /*...containing the data from the useState(file) hook...*/
+        data.append("picture", `./uploads/profil/${file.name}`) /*...containing the data from the useState(file) hook...*/
 
-        console.log(data)
         axios({ /*...then runs an Axios PUT method on the backend "api/user/:id" route...*/
             method: "put",
             headers: { "Content-Type": "multipart/form-data" },
