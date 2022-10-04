@@ -13,12 +13,16 @@ function UploadImg() { /*Runs an UploadImg() function...*/
     /*------------Calls*/
     const [file, setFile] = useState() /*...that calls a useState(file) hook...*/
     const userData = useContext(UserDataContext) /*...runs the useContext() hook to retrieve the user data...*/
+
+    const label = document.querySelector(".upload-pic label")
     const fileInput = document.getElementById("file")
 
     /*------------Middlewares*/
     if (file) {
-        fileInput.style.color = "black"
-        fileInput.style.marginLeft = "1px"
+        label.textContent = "Votre fichier est chargé"
+        label.style.background = "none"
+        label.style.color = "green"
+        label.style.fontStyle = "italic"
     }
 
     function handlePicture(e) { /*...and creates a handlePicture() function...*/
@@ -34,7 +38,7 @@ function UploadImg() { /*Runs an UploadImg() function...*/
             data: data, /*...that contains the FormData object*/
             withCredentials: true
         })
-            .then(res => { console.log(res) })
+            .then(() => { window.location.reload() })
             .catch(error => console.log(error))
     }
 
@@ -50,7 +54,7 @@ function UploadImg() { /*Runs an UploadImg() function...*/
                 onChange={(e) => { setFile(e.target.files[0]) }} /*...and whose input sets the useState(file) hook*/
             />
             <br />
-            <input type="submit" value="Envoyer" />
+            <input type="submit" id="submit" value="Envoyer" />
         </form>
     )
 }

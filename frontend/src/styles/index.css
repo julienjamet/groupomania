@@ -878,7 +878,7 @@ nav .nav-container ul li img {
   background-color: #FFD7D7;
   margin-left: -5px;
   position: absolute;
-  opacity: 1;
+  opacity: 0;
   transform: translate(-3px, -50%);
   cursor: pointer;
   padding: 10px 20px;

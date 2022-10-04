@@ -19,10 +19,6 @@ function SignInForm() { /*Runs a SignInForm() function...*/
         const passwordError = document.querySelector('.password.error') /*...and the "password error" div...*/
         passwordError.textContent = ""
 
-        const submitBox = document.querySelector(".connection-form")
-        const submitButton = document.getElementById('submit')
-        const loginButton = document.getElementById('login')
-
         axios({ /*...then runs an Axios POST method on the backend "/api/user/login" route...*/
             method: "post",
             url: `http://localhost:5000/api/user/login`,
@@ -32,20 +28,7 @@ function SignInForm() { /*Runs a SignInForm() function...*/
                 password,
             }
         })
-            .then(() => { /*...before redirecting the user to its authenticated profile page...*/
-                submitBox.style.backgroundColor = "#c9f0d4"
-
-                submitButton.style.borderColor = "#76ba6a"
-                submitButton.style.backgroundColor = "white"
-                submitButton.style.color = "#76ba6a"
-
-                loginButton.style.backgroundColor = "white"
-                loginButton.style.color = "#76ba6a"
-
-                setTimeout(function () {
-                    window.location = "/profile"
-                }, 500)
-            })
+            .then(() => { window.location.reload() }) /*...before redirecting the user to its authenticated profile page...*/
             .catch(error => { /*...or returning error messages*/
                 const errorMessage = error.response.data.message
 
