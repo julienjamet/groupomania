@@ -1,22 +1,25 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-import { NavLink } from "react-router-dom" /*Imports a NavLink component*/
+import { NavLink } from "react-router-dom"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-function LeftNav() { /*Runs a LeftNav() function...*/
-    return ( /*...that returns a navigation bar...*/
+export default function LeftNav() { /*Exports a LeftNav component...*/
+
+    return ( /*...that returns a navigation menu*/
         <div className="left-nav-container">
             <div className="icons">
-                <div className="icons-bis"> {/*...containing a link to the Home page...*/}
+                <div className="icons-bis">
                     <NavLink to="/home" className={(link) => (link.isActive ? "active-left-nav" : null)}>
                         <img src="./img/icons/home.svg" alt="home-icon" />
                     </NavLink>
-                    <br /> {/*...one to the Trendings page...*/}
+                    <br />
+
                     <NavLink to="/trendings" className={(link) => (link.isActive ? "active-left-nav" : null)}>
                         <img src="./img/icons/rocket.svg" alt="rocket-icon" />
                     </NavLink>
-                    <br /> {/*...and one to the Profile page...*/}
+                    <br />
+
                     <NavLink to="/profile" className={(link) => (link.isActive ? "active-left-nav" : null)}>
                         <img src="./img/icons/user.svg" alt="user-icon" />
                     </NavLink>
@@ -25,9 +28,4 @@ function LeftNav() { /*Runs a LeftNav() function...*/
         </div>
     )
 }
-/*-------------------------------------------------------------------------------------------------------------------*/
-
-
-/*Export-------------------------------------------------------------------------------------------------------------*/
-export default LeftNav /*Exports the LeftNav component to the Home, Trendings and Profile components*/
 /*-------------------------------------------------------------------------------------------------------------------*/
