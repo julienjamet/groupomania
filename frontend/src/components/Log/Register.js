@@ -1,38 +1,43 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-import { useState } from "react" /*Imports the useState() hook*/
-import axios from "axios" /*Imports Axios*/
+import { useState } from "react"
+import axios from "axios"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-function SignUpForm() { /*Runs a SignUpForm() function...*/
-    /*------------Calls*/
-    const [pseudo, setPseudo] = useState('') /*...that calls a useState(pseudo) hook...*/
-    const [email, setEmail] = useState('') /*...a useState(email) hook...*/
-    const [password, setPassword] = useState('') /*...a useState(password) hook...*/
-    const [controlPassword, setControlPassword] = useState('') /*...and a useState(controlPassword) hook...*/
+export default function SignUpForm() { /*Exports to the LogModal a Register component...*/
+
+    const [pseudo, setPseudo] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [controlPassword, setControlPassword] = useState('')
 
     /*------------Middleware*/
-    function handleRegister(e) { /*...then creates a handleRegister() function...*/
+    function handleRegister(e) { /*...running a middleware...*/
         e.preventDefault()
 
-        const pseudoError = document.querySelector('.pseudo.error') /*...that targets the "pseudo error" div...*/
+        const pseudoError = document.querySelector('.pseudo.error')
         pseudoError.textContent = ""
-        const emailError = document.querySelector('.email.error') /*...the "email error" div...*/
+
+        const emailError = document.querySelector('.email.error')
         emailError.textContent = ""
-        const passwordError = document.querySelector('.password.error') /*...the "password error" div...*/
+
+        const passwordError = document.querySelector('.password.error')
         passwordError.textContent = ""
-        const passwordConfirmError = document.querySelector('.password-confirm.error') /*...the "password-confirm error" div...*/
+
+        const passwordConfirmError = document.querySelector('.password-confirm.error')
         passwordConfirmError.textContent = ""
-        const terms = document.getElementById('terms') /*...the checkbox input...*/
-        const termsError = document.querySelector('.terms.error') /*...and the "terms error" div*/
+
+        const terms = document.getElementById('terms')
+
+        const termsError = document.querySelector('.terms.error')
         termsError.textContent = ""
 
         const submitBox = document.querySelector(".connection-form")
         const submitButton = document.getElementById('submit')
         const registerButton = document.getElementById('register')
 
-        if (password !== controlPassword || !terms.checked) { /*If the two passwords do not match or if the checkbox is not checked, the function returns error messages*/
+        if (password !== controlPassword || !terms.checked) { /*...that controls the client-side validity of the form...*/
             if (password !== controlPassword) {
                 return passwordConfirmError.textContent = "Les mots de passe ne correspondent pas"
             }
@@ -41,30 +46,30 @@ function SignUpForm() { /*Runs a SignUpForm() function...*/
             }
         }
 
-        axios({ /*Otherwise the middleware runs an Axios POST method on the backend "/api/user/register" route...*/
+        axios({ /*...then runs a POST (Register) request...*/
             method: "post",
-            url: `http://localhost:5000/api/user/register`,
+            url: 'http://localhost:5000/api/user/register',
             data: {
                 pseudo: pseudo,
                 email: email,
                 password: password
-            }
+            },
+            withCredentials: true
         })
-            .then(() => { /*...before redirecting the user to the login page...*/
+
+            .then(() => { /*...before reloading the page*/
                 submitBox.style.backgroundColor = "#c9f0d4"
 
                 submitButton.style.borderColor = "#76ba6a"
-                submitButton.style.backgroundColor = "#white"
+                submitButton.style.backgroundColor = "white"
                 submitButton.style.color = "#76ba6a"
 
                 registerButton.style.backgroundColor = "white"
                 registerButton.style.color = "#76ba6a"
 
-                setTimeout(function () {
-                    window.location = "/profile"
-                }, 500)
+                setTimeout(() => { window.location.reload() }, 500)
             })
-            .catch(error => { /*...or returning error messages*/
+            .catch(error => {
                 const RegexErrorMessage = error.response.data.message
 
                 if (RegexErrorMessage) {
@@ -92,8 +97,8 @@ function SignUpForm() { /*Runs a SignUpForm() function...*/
     }
 
     /*------------Return*/
-    return ( /*The function finally returns...*/
-        <form action="" onSubmit={handleRegister} id="sign-up-form"> {/*...a form that runs the handleRegister() function when submitted...*/}
+    return ( /*The Register component returns...*/
+        <form action="" onSubmit={handleRegister} id="sign-up-form"> {/*...a form that runs the middleware when submitted...*/}
             <label htmlFor="pseudo">Pseudo</label>
             <br />
             <input
@@ -101,7 +106,7 @@ function SignUpForm() { /*Runs a SignUpForm() function...*/
                 type="text"
                 name="pseudo"
                 id="pseudo"
-                onChange={(e) => setPseudo(e.target.value)} /*...and whose inputs set the useState(pseudo) hook...*/
+                onChange={(e) => setPseudo(e.target.value)} /*...and whose inputs set the States when manipulated*/
                 value={pseudo}
             />
             <div className="pseudo error"></div>
@@ -112,7 +117,7 @@ function SignUpForm() { /*Runs a SignUpForm() function...*/
                 type="text"
                 name="email"
                 id="email"
-                onChange={(e) => setEmail(e.target.value)} /*...the useState(email) hook...*/
+                onChange={(e) => setEmail(e.target.value)}
                 value={email}
             />
             <div className="email error"></div>
@@ -124,7 +129,7 @@ function SignUpForm() { /*Runs a SignUpForm() function...*/
                 type="password"
                 name="password"
                 id="password"
-                onChange={(e) => setPassword(e.target.value)} /*...the useState(password) hook...*/
+                onChange={(e) => setPassword(e.target.value)}
                 value={password}
             />
             <div className="password error"></div>
@@ -135,7 +140,7 @@ function SignUpForm() { /*Runs a SignUpForm() function...*/
                 type="password"
                 name="password"
                 id="password-conf"
-                onChange={(e) => setControlPassword(e.target.value)} /*...and the useState(controlPassword) hook*/
+                onChange={(e) => setControlPassword(e.target.value)}
                 value={controlPassword}
             />
             <div className="password-confirm error"></div>
@@ -148,9 +153,4 @@ function SignUpForm() { /*Runs a SignUpForm() function...*/
         </form>
     )
 }
-/*-------------------------------------------------------------------------------------------------------------------*/
-
-
-/*Export-------------------------------------------------------------------------------------------------------------*/
-export default SignUpForm /*Exports the Register component to the Log component*/
 /*-------------------------------------------------------------------------------------------------------------------*/

@@ -5,7 +5,6 @@ import { useContext, useState } from "react" /*Imports the useContext() hook*/
 import { useSelector } from "react-redux"
 
 /*------------Components*/
-import { UserDataContext } from "../AppContext" /*Imports the Context*/
 import LeftNav from "../Navbars/LeftNav" /*Imports the LeftNav component*/
 import dateParser from "../Utils"
 import FollowHandler from "./FollowHandler"
@@ -16,7 +15,7 @@ import UploadImg from "./UploadImg" /*Imports the UploadImg component*/
 /*Operation----------------------------------------------------------------------------------------------------------*/
 function UpdateProfile() { /*Runs an UpdateProfile() function...*/
     /*------------Calls*/
-    const userData = useContext(UserDataContext) /*...that runs itself the useContext() hook to retrieve the user data*/
+    const userData = useSelector(state => state.clientReducer) /*...that runs itself the useContext() hook to retrieve the user data*/
     const usersData = useSelector(state => state.usersReducer)
     const [bio, setBio] = useState(userData.bio)
     const [updateForm, setUpdateForm] = useState(false)

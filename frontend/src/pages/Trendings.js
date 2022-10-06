@@ -3,7 +3,7 @@
 import { useSelector } from "react-redux"
 
 /*------------Components*/
-import Log from "../components/Log"
+import LogModal from "../components/Log/LogModal"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -20,7 +20,7 @@ export default function Trendings() { /*Exports to the App a Trendings component
                 <h1>VIEW TRENDINGS</h1> /*...the ViewTrendings component...*/
             ) : ( /*...and if there is no client data...*/
                 < div className="log-container">
-                    <Log signUp={false} signIn={true} /> {/*...the Log component*/}
+                    <LogModal /> {/*...the LogModal component*/}
                     <div className="img-container">
                         <img src="./img/log.svg" alt="img-log" />
                     </div>

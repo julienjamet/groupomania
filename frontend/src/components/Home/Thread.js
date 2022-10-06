@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-/*import LikeButton from "./LikeButton"*/
-import FollowHandler from "./Profile/FollowHandler"
-import dateParser, { isEmpty } from "./Utils"
+import LikeButton from "./LikeButton"
+import FollowHandler from "../Profile/FollowHandler"
+import dateParser, { isEmpty } from "../Utils"
+import LeftNav from "../Navbars/LeftNav"
 
 function Thread() {
     const [isLoading, setIsLoading] = useState(true)
@@ -15,6 +16,7 @@ function Thread() {
 
     return (
         <div className="thread-container">
+            <LeftNav />
             <ul>
                 {postsData.map(post => {
                     return (
@@ -65,7 +67,7 @@ function Thread() {
                                                 <img src="./img/icons/message1.svg" alt="comment" />
                                                 <span>{post.comments.length}</span>
                                             </div>
-                                            <h6>LikeButton</h6>
+                                            {/*<LikeButton />*/}
                                             <img src="./img/icons/share.svg" alt="share" />
                                         </div>
                                     </div>

@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react"
-import { UserDataContext } from "../AppContext"
+import { useSelector } from "react-redux"
+
 import axios from "axios"
 
 function FollowHandler({ idToFollow, type }) {
-    const userData = useContext(UserDataContext)
+    const userData = useSelector(state => state.clientReducer)
     const [isFollowed, setIsFollowed] = useState(false)
 
     function handleFollow() {

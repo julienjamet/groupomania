@@ -3,8 +3,8 @@
 import { useSelector } from "react-redux"
 
 /*------------Components*/
-import Thread from "../components/Thread"
-import Log from "../components/Log"
+import Thread from "../components/Home/Thread"
+import LogModal from "../components/Log/LogModal"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -23,7 +23,7 @@ export default function Home() { /*Exports a Home component...*/
                 </div>
             ) : ( /*...and if there is no client data...*/
                 <div className="log-container">
-                    <Log signUp={false} signIn={true} /> {/*...the Log component*/}
+                    <LogModal /> {/*...the LogModal component*/}
                     <div className="img-container">
                         <img src="./img/log.svg" alt="img-log" />
                     </div>

@@ -2,9 +2,8 @@
 /*------------Modules*/
 import axios from "axios" /*Imports Axios*/
 import { useContext, useState } from "react" /*Imports the useState() and useContext() hooks*/
-
+import { useSelector } from "react-redux"
 /*------------Components*/
-import { UserDataContext } from "../AppContext" /*Imports the Context*/
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -12,7 +11,7 @@ import { UserDataContext } from "../AppContext" /*Imports the Context*/
 function UploadImg() { /*Runs an UploadImg() function...*/
     /*------------Calls*/
     const [file, setFile] = useState() /*...that calls a useState(file) hook...*/
-    const userData = useContext(UserDataContext) /*...runs the useContext() hook to retrieve the user data...*/
+    const userData = useSelector(state => state.clientReducer) /*...runs the useContext() hook to retrieve the user data...*/
 
     const label = document.querySelector(".upload-pic label")
     const fileInput = document.getElementById("file")

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 
 /*------------Components*/
 import UpdateProfile from "../components/Profile/UpdateProfile"
-import Log from "../components/Log"
+import LogModal from "../components/Log/LogModal"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -21,7 +21,7 @@ export default function Profile() { /*Exports to the App a Profile component...*
                 <UpdateProfile /> /*...the UpdateProfile component*/
             ) : ( /*...and if there is no client data...*/
                 <div className="log-container">
-                    <Log signUp={false} signIn={true} /> {/*...the Log component*/}
+                    <LogModal /> {/*...the LogModal component*/}
                     <div className="img-container">
                         <img src="./img/log.svg" alt="img-log" />
                     </div>
