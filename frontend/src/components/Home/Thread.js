@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import LikeButton from "./LikeButton"
 import FollowHandler from "../Profile/FollowHandler"
 import dateParser, { isEmpty } from "../Utils"
 import LeftNav from "../Navbars/LeftNav"
@@ -31,6 +30,7 @@ function Thread() {
                                                 if (user._id === post.posterId) {
                                                     return user.picture
                                                 }
+                                                return null
                                             }).join('')
                                         } alt="profile-pic" />
                                     </div>
@@ -42,6 +42,7 @@ function Thread() {
                                                         if (user._id === post.posterId) {
                                                             return user.pseudo
                                                         }
+                                                        return null
                                                     })}
                                                 </h3>
                                                 <FollowHandler idToFollow={post.posterId} type="card" />

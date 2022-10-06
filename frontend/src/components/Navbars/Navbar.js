@@ -33,7 +33,7 @@ export default function Navbar() { /*Exports to the App a Navbar component...*/
                                 <h5>Bienvenue {clientData.pseudo} !</h5>
                             </NavLink>
                         </li>
-                        <Logout /> {/*...and a Logout component*/}
+                        <Logout /> {/*...and the Logout component*/}
                     </ul>
                 ) : (
                     <div></div>
