@@ -6,14 +6,15 @@ import { useContext } from "react" /*Imports the useContext() hook*/
 import { UserDataContext } from "../AppContext" /*Imports the Context*/
 import { NavLink } from "react-router-dom" /*Imports a NavLink component*/
 import Logout from "../Log/Logout" /*Imports the Logout component*/
+import { useSelector } from "react-redux"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
 function Navbar() { /*Runs a Navbar function...*/
     /*------------Calls*/
-    const userData = useContext(UserDataContext) /*...that runs itself the useContext() hook to retrieve the user data*/
-
+    const userData = useSelector(state => state.clientReducer) /*...that runs itself the useContext() hook to retrieve the user data*/
+    console.log(userData.data)
     /*------------Return*/
     return ( /*The function then returns...*/
         <nav> {/*...a navigation bar...*/}

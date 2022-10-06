@@ -29,19 +29,19 @@ function SignInForm() { /*Runs a SignInForm() function...*/
             }
         })
             .then(() => { window.location.reload() }) /*...before redirecting the user to its authenticated profile page...*/
-            .catch(error => { /*...or returning error messages*/
-                const errorMessage = error.response.data.message
+        /*.catch(error => { /*...or returning error messages*/
+        /*const errorMessage = error.response.data.message
 
-                if (errorMessage.includes("incomplet")) {
-                    e.preventDefault()
-                }
-                if (errorMessage.includes("email")) {
-                    emailError.textContent = errorMessage
-                }
-                if (errorMessage.includes("mot de passe")) {
-                    passwordError.textContent = errorMessage
-                }
-            })
+        if (errorMessage.includes("incomplet")) {
+            e.preventDefault()
+        }
+        if (errorMessage.includes("email")) {
+            emailError.textContent = errorMessage
+        }
+        if (errorMessage.includes("mot de passe")) {
+            passwordError.textContent = errorMessage
+        }
+    })*/
     }
 
     /*------------Return*/

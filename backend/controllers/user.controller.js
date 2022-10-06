@@ -7,14 +7,14 @@ const fs = require('fs') /*Calls FS*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-/*------------GET(All)*/
+/*------------GET (All)*/
 exports.getAllUsers = (req, res) => { /*Exports to the User router a getAllUsers() function...*/
     UserModel.find().select('-password') /*...that searches the database and selects all User objects (omitting passwords)...*/
         .then(users => res.status(200).json(users)) /*...before returning them to the frontend*/
         .catch(error => res.status(404).json({ error }))
 }
 
-/*------------GET(One)*/
+/*------------GET (One)*/
 exports.userInfo = (req, res) => { /*Exports to the User router a userInfo() function...*/
     if (!ObjectId.isValid(req.params.id)) { /*...that runs the ObjectId isValid() function to check that the identifier is indeed present in the database. If it is not...*/
         return res.status(404).json({ message: `Ce compte n'existe pas !` }) /*...the function returns an error message*/
@@ -86,7 +86,7 @@ exports.deleteUser = (req, res) => { /*Exports to the User router a deleteUser()
         .catch(error => res.status(404).json({ error }))
 }
 
-/*------------PATCH(Follow)*/
+/*------------PATCH (Follow)*/
 exports.follow = (req, res) => { /*Exports to the User router a follow() function...*/
     if (!ObjectId.isValid(req.params.id) || !ObjectId.isValid(req.body.idToFollow)) { /*...that runs the ObjectId isValid() function to check that the identifiers are indeed present in the database. If at least one of them is not...*/
         return res.status(404).json({ message: `Ce compte n'existe pas !` }) /*...the function returns an error message*/
@@ -122,7 +122,7 @@ exports.follow = (req, res) => { /*Exports to the User router a follow() functio
         .catch(() => res.status(404).json({ message: `Ce compte n'existe pas !` }))
 }
 
-/*------------PATCH(Unfollow)*/
+/*------------PATCH (Unfollow)*/
 exports.unfollow = (req, res) => { /*Exports to the User router an unfollow() function...*/
     if (!ObjectId.isValid(req.params.id) || !ObjectId.isValid(req.body.idToUnfollow)) { /*...that runs the ObjectId's isValid() function to check that the identifiers are indeed present in the database. If at least one of them is not...*/
         return res.status(404).json({ message: `Ce compte n'existe pas !` }) /*...the function returns an error message*/

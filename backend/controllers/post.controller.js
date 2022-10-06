@@ -80,7 +80,7 @@ module.exports.deletePost = (req, res) => { /*Exports to the Post router a delet
         .catch(error => res.status(404).json({ error }))
 }
 
-/*------------PATCH(Like)*/
+/*------------PATCH (Like)*/
 module.exports.likePost = (req, res) => { /*Exports to the Post router a likePost() function...*/
     if (!ObjectId.isValid(req.params.id)) { /*...that runs the ObjectId isValid() function to check that the identifier of the post is indeed present in the database. If it is not...*/
         return res.status(404).json({ message: `Ce post n'existe pas !` }) /*...the function returns an error message*/
@@ -108,7 +108,7 @@ module.exports.likePost = (req, res) => { /*Exports to the Post router a likePos
         .catch(() => res.status(404).json({ message: `Ce post n'existe pas !` }))
 }
 
-/*------------PATCH(Unlike)*/
+/*------------PATCH (Unlike)*/
 module.exports.unlikePost = (req, res) => { /*Exports to the Post router an unlikePost() function...*/
     if (!ObjectId.isValid(req.params.id)) { /*...that runs the ObjectId isValid() function to check that the identifier of the post is indeed present in the database. If it is not...*/
         return res.status(404).json({ message: `Ce post n'existe pas !` }) /*...the function returns an error message*/
@@ -136,7 +136,7 @@ module.exports.unlikePost = (req, res) => { /*Exports to the Post router an unli
         .catch(() => res.status(404).json({ message: `Ce post n'existe pas !` }))
 }
 
-/*------------PATCH(Add comment post)*/
+/*------------PATCH (Add comment post)*/
 module.exports.commentPost = (req, res) => { /*Exports to the Post router a commentPost() function...*/
     if (!ObjectId.isValid(req.params.id)) { /*...that runs the ObjectId isValid() function to check that the identifier of the post is indeed present in the database. If it is not...*/
         return res.status(404).json({ message: `Ce post n'existe pas !` }) /*...the function returns an error message*/
@@ -164,7 +164,7 @@ module.exports.commentPost = (req, res) => { /*Exports to the Post router a comm
         .catch(() => res.status(404).json({ message: `Ce post n'existe pas !` }))
 }
 
-/*------------PATCH(Edit comment post)*/
+/*------------PATCH (Edit comment post)*/
 module.exports.editCommentPost = (req, res) => { /*Exports to the Post router an editCommentPost() function...*/
     if (!ObjectId.isValid(req.params.id)) { /*...that runs the ObjectId isValid() function to check that the identifier of the post is indeed present in the database. If it is not...*/
         return res.status(404).json({ message: `Ce post n'existe pas !` }) /*...the function returns an error message*/
@@ -193,7 +193,7 @@ module.exports.editCommentPost = (req, res) => { /*Exports to the Post router an
         .catch(error => res.status(404).json({ error }))
 }
 
-/*------------DELETE(Delete comment post)*/
+/*------------DELETE (Delete comment post)*/
 module.exports.deleteCommentPost = (req, res) => { /*Exports to the Post router an deleteCommentPost() function...*/
     if (!ObjectId.isValid(req.params.id)) { /*...that runs the ObjectId isValid() function to check that the identifier of the post is indeed present in the database. If it is not...*/
         return res.status(404).json({ message: `Ce post n'existe pas !` }) /*...the function returns an error message*/

@@ -1,23 +1,19 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------Modules*/
-import { useContext } from "react" /*Imports the useContext() hook*/
-
-/*------------Components*/
-import { UserDataContext } from "../components/AppContext" /*Imports the Context*/
 import LeftNav from "../components/Navbars/LeftNav" /*Imports the LeftNav component*/
 import Log from "../components/Log" /*Imports the Log component*/
+import { useSelector } from "react-redux"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
 function Trendings() { /*Runs a Trendings() function...*/
     /*------------Calls*/
-    const userData = useContext(UserDataContext) /*...that runs the useContext() hook to retrieve the user data*/
-
+    const userData = useSelector(state => state.clientReducer) /*...that runs the useContext() hook to retrieve the user data*/
+    console.log(userData)
     /*------------Return*/
     return (
         <div className="profil-page">
-            {userData ? ( /*If the Context contains indeed user data...*/
+            {userData === null ? ( /*If the Context contains indeed user data...*/
                 <>
                     <LeftNav />
                     <h1>TRENDINGS PAGE</h1> {/*...the user is automatically redirected to its authenticated trendings page*/}

@@ -5,15 +5,15 @@ import axios from "axios"
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
 /*------------Action type*/
-export const GET_POSTS = "GET_POSTS" /*Exports a "Posts" action type*/
+export const GET_CLIENT = "GET_CLIENT" /*Exports a "Client" action type*/
 
 /*------------Action*/
-export default function GetPosts() { /*Exports a Posts action...*/
+export default function GetClient(userId) { /*Exports a Client action...*/
 
     return (dispatch) => {
-        axios.get('http://localhost:5000/api/post', { withCredentials: true }) /*...that runs a GET (All posts) request...*/
+        axios.get(`http://localhost:5000/api/user/${userId}`, { withCredentials: true }) /*...that runs a GET (One user) request...*/
 
-            .then(res => { dispatch({ type: GET_POSTS, payload: res.data }) }) /*...then sends the retrieved data to the Posts reducer*/
+            .then(res => { dispatch({ type: GET_CLIENT, payload: res.data }) }) /*...then sends the retrieved data to the Client reducer*/
             .catch(error => console.log(error))
     }
 }

@@ -1,18 +1,18 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------React & Redux modules*/
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+/*------------Redux & React modules*/
 import { createStore, applyMiddleware } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension"
 import thunk from "redux-thunk"
-import { Provider } from "react-redux"
+import ReactDOM from 'react-dom/client'
+import React from 'react'
 
-/*------------Actions & Reducers*/
+/*------------Reducers & Actions*/
+import rootReducer from "./components/Store/reducers/root.reducer"
 import GetUsers from './components/Store/actions/users.action'
 import GetPosts from './components/Store/actions/posts.action'
-import rootReducer from "./components/Store/reducers/root.reducer"
 
-/*------------Components*/
+/*------------Components & Styles*/
+import { Provider } from "react-redux"
 import App from './App'
 import './styles/index.css'
 /*-------------------------------------------------------------------------------------------------------------------*/
@@ -28,13 +28,11 @@ store.dispatch(GetPosts()) /*Runs a Posts action*/
 /*------------React App*/
 const root = ReactDOM.createRoot(document.getElementById('root')) /*Creates a React Root*/
 
-root.render( /*Runs on the React Root a React App...*/
-
-  <React.StrictMode>
+root.render( /*Runs on the Root...*/
+  <React.StrictMode> {/*...a React App...*/}
     <Provider store={store}> {/*...that uses the Store at its highest level...*/}
       <App /> {/*...and runs the App component*/}
     </Provider>
   </React.StrictMode>
-
 )
 /*-------------------------------------------------------------------------------------------------------------------*/

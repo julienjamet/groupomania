@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+/*import LikeButton from "./LikeButton"*/
 import FollowHandler from "./Profile/FollowHandler"
 import dateParser, { isEmpty } from "./Utils"
 
@@ -64,7 +65,7 @@ function Thread() {
                                                 <img src="./img/icons/message1.svg" alt="comment" />
                                                 <span>{post.comments.length}</span>
                                             </div>
-                                            <h6>Like button</h6>
+                                            <h6>LikeButton</h6>
                                             <img src="./img/icons/share.svg" alt="share" />
                                         </div>
                                     </div>

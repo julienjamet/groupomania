@@ -1,5 +1,5 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-import { GET_POSTS } from "../actions/posts.action"
+import { GET_CLIENT } from "../actions/client.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -8,11 +8,11 @@ import { GET_POSTS } from "../actions/posts.action"
 const initialState = {} /*Creates an empty object as initial state*/
 
 /*------------Reducer*/
-export default function postsReducer(state = initialState, action) { /*Exports a Posts reducer...*/
+export default function clientReducer(state = initialState, action) { /*Exports a Client reducer...*/
 
     switch (action.type) {
-        case GET_POSTS:
-            return action.payload /*...that sends to the Store the data retrieved from the Posts action*/
+        case GET_CLIENT:
+            return action.payload /*...that sends to the Store the data retrieved from the Client action*/
 
         default:
             return state
