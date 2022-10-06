@@ -1,41 +1,39 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------Modules*/
-import { useContext } from "react" /*Imports the useContext() hook*/
+/*------------Redux modules*/
+import { useSelector } from "react-redux"
 
 /*------------Components*/
-import { UserDataContext } from "../AppContext" /*Imports the Context*/
-import { NavLink } from "react-router-dom" /*Imports a NavLink component*/
-import Logout from "../Log/Logout" /*Imports the Logout component*/
-import { useSelector } from "react-redux"
+import { NavLink } from "react-router-dom"
+import Logout from "../Log/Logout"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-function Navbar() { /*Runs a Navbar function...*/
-    /*------------Calls*/
-    const userData = useSelector(state => state.clientReducer) /*...that runs itself the useContext() hook to retrieve the user data*/
-    console.log(userData.data)
-    /*------------Return*/
-    return ( /*The function then returns...*/
-        <nav> {/*...a navigation bar...*/}
+export default function Navbar() { /*Exports to the App a Navbar component...*/
+
+    /*------------Data*/
+    const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/
+
+    return ( /*...then returns...*/
+        <nav> {/*...a navigation menu...*/}
             <div className="nav-container">
                 <div className="logo">
-                    <NavLink to="/home"> {/*...that in all cases contains a link to the Home page...*/}
+                    <NavLink to="/home"> {/*...that contains a link to the Home page...*/}
                         <div className="logo">
                             <img src="./img/round_logo.png" alt="icon" />
                             <h3>Groupomania</h3>
                         </div>
                     </NavLink>
                 </div>
-                {userData ? ( /*...and, if the Context contains user data...*/
+                {clientData._id ? ( /*...and, if there is client data...*/
                     <ul>
                         <li></li>
                         <li className="welcome">
-                            <NavLink to="/profile"> {/*...that also contains one to the authenticated profile page...*/}
-                                <h5>Bienvenue {userData.pseudo} !</h5>
+                            <NavLink to="/profile"> {/*...that also contains one to the Profile page...*/}
+                                <h5>Bienvenue {clientData.pseudo} !</h5>
                             </NavLink>
                         </li>
-                        <Logout /> {/*...and the Logout component*/}
+                        <Logout /> {/*...and a Logout component*/}
                     </ul>
                 ) : (
                     <div></div>
@@ -44,9 +42,4 @@ function Navbar() { /*Runs a Navbar function...*/
         </nav>
     )
 }
-/*-------------------------------------------------------------------------------------------------------------------*/
-
-
-/*Export-------------------------------------------------------------------------------------------------------------*/
-export default Navbar /*Exports the Navbar component to the App component*/
 /*-------------------------------------------------------------------------------------------------------------------*/

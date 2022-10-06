@@ -1,33 +1,29 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------Modules*/
-import { useContext } from "react" /*Imports the useContext() hook*/
+/*------------Redux modules*/
+import { useSelector } from "react-redux"
 
 /*------------Components*/
-import { UserDataContext } from "../components/AppContext" /*Imports the Context*/
-import LeftNav from "../components/Navbars/LeftNav" /*Imports the LeftNav component*/
-import Log from "../components/Log" /*Imports the Log component*/
 import Thread from "../components/Thread"
+import Log from "../components/Log"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-function Home() { /*Runs a Home() function...*/
-    /*------------Calls*/
-    const userData = useContext(UserDataContext) /*...that runs itself the useContext() hook to retrieve the user data*/
+export default function Home() { /*Exports a Home component...*/
+
+    /*------------Data*/
+    const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/
 
     /*------------Return*/
-    return (
+    return ( /*...then returns...*/
         <div className="profil-page">
-            {userData ? ( /*If the Context contains indeed user data...*/
-                <>
-                    <LeftNav />
-                    <div className="main">
-                        <Thread />
-                    </div> {/*...the user is automatically redirected to its authenticated home page*/}
-                </>
-            ) : (
+            {clientData._id ? ( /*...if there is client data...*/
+                <div className="main">
+                    <Thread /> {/*...the Thread component...*/}
+                </div>
+            ) : ( /*...and if there is no client data...*/
                 <div className="log-container">
-                    <Log signUp={false} signIn={true} /> {/*Otherwise it is redirected to the Log component to register or log in*/}
+                    <Log signUp={false} signIn={true} /> {/*...the Log component*/}
                     <div className="img-container">
                         <img src="./img/log.svg" alt="img-log" />
                     </div>
@@ -36,9 +32,4 @@ function Home() { /*Runs a Home() function...*/
         </div>
     )
 }
-/*-------------------------------------------------------------------------------------------------------------------*/
-
-
-/*Export-------------------------------------------------------------------------------------------------------------*/
-export default Home /*Exports the Home page to the App component*/
 /*-------------------------------------------------------------------------------------------------------------------*/

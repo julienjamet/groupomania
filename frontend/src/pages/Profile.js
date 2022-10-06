@@ -1,27 +1,27 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------Modules*/
-import { useContext } from "react" /*Imports the useContext() hook*/
+/*------------Redux modules*/
+import { useSelector } from "react-redux"
 
 /*------------Components*/
-import { UserDataContext } from "../components/AppContext" /*Imports the Context*/
-import Log from "../components/Log" /*Imports the Log component*/
-import UpdateProfile from "../components/Profile/UpdateProfile" /*Imports the UpdateProfile component*/
+import UpdateProfile from "../components/Profile/UpdateProfile"
+import Log from "../components/Log"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-function Profile() { /*Runs a Profile() function...*/
-    /*------------Calls*/
-    const userData = useContext(UserDataContext) /*...that runs the useContext() hook to retrieve the user data*/
+export default function Profile() { /*Exports to the App a Profile component...*/
+
+    /*------------Data*/
+    const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/
 
     /*------------Return*/
-    return (
+    return ( /*...then returns...*/
         <div className="profil-page">
-            {userData ? ( /*If the Context contains indeed user data...*/
-                <UpdateProfile /> /*...the user is automatically redirected to its authenticated profile page*/
-            ) : (
+            {clientData._id ? ( /*...if there is client data...*/
+                <UpdateProfile /> /*...the UpdateProfile component*/
+            ) : ( /*...and if there is no client data...*/
                 <div className="log-container">
-                    <Log signUp={false} signIn={true} /> {/*Otherwise it is redirected to the Log component to register or log in*/}
+                    <Log signUp={false} signIn={true} /> {/*...the Log component*/}
                     <div className="img-container">
                         <img src="./img/log.svg" alt="img-log" />
                     </div>
@@ -30,9 +30,4 @@ function Profile() { /*Runs a Profile() function...*/
         </div>
     )
 }
-/*-------------------------------------------------------------------------------------------------------------------*/
-
-
-/*Export-------------------------------------------------------------------------------------------------------------*/
-export default Profile /*Exports the Profile page to the App component*/
 /*-------------------------------------------------------------------------------------------------------------------*/

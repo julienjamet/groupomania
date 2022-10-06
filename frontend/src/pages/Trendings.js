@@ -1,37 +1,33 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-import LeftNav from "../components/Navbars/LeftNav" /*Imports the LeftNav component*/
-import Log from "../components/Log" /*Imports the Log component*/
+/*------------Redux modules*/
 import { useSelector } from "react-redux"
+
+/*------------Components*/
+import Log from "../components/Log"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-function Trendings() { /*Runs a Trendings() function...*/
-    /*------------Calls*/
-    const userData = useSelector(state => state.clientReducer) /*...that runs the useContext() hook to retrieve the user data*/
-    console.log(userData)
+export default function Trendings() { /*Exports to the App a Trendings component...*/
+
+    /*------------Data*/
+    const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/
+
     /*------------Return*/
-    return (
+    return ( /*...then returns...*/
         <div className="profil-page">
-            {userData === null ? ( /*If the Context contains indeed user data...*/
-                <>
-                    <LeftNav />
-                    <h1>TRENDINGS PAGE</h1> {/*...the user is automatically redirected to its authenticated trendings page*/}
-                </>
-            ) : (
-                <div className="log-container">
-                    <Log signUp={false} signIn={true} /> {/*Otherwise it is redirected to the Log component to register or log in*/}
+            {clientData._id ? ( /*...if there is client data...*/
+                <h1>VIEW TRENDINGS</h1> /*...the ViewTrendings component...*/
+            ) : ( /*...and if there is no client data...*/
+                < div className="log-container">
+                    <Log signUp={false} signIn={true} /> {/*...the Log component*/}
                     <div className="img-container">
                         <img src="./img/log.svg" alt="img-log" />
                     </div>
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
     )
 }
-/*-------------------------------------------------------------------------------------------------------------------*/
-
-
-/*Export-------------------------------------------------------------------------------------------------------------*/
-export default Trendings /*Exports the Trendings page to the App component*/
 /*-------------------------------------------------------------------------------------------------------------------*/

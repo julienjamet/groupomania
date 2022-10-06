@@ -37,7 +37,7 @@ export default function App() { /*Exports to the Root an App component...*/
   /*------------Return*/
   return ( /*The App component returns...*/
     <BrowserRouter> {/*...a Router...*/}
-      <Navbar /> {/*...running the Navbar component on all routes...*/}
+      <Navbar /> {/*...running the Navbar component on all routes*/}
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/trendings" element={<Trendings />} />
