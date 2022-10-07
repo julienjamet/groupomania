@@ -28,7 +28,7 @@ export default function App() { /*Exports to the Root an App component...*/
       .then(res => {
         axios.get(`http://localhost:5000/api/user/${res.data}`, { withCredentials: true }) /*...then a GET (One user) request using the data retrieved from the token...*/
 
-          .then(res => { dispatch(GetClient(res.data._id)) }) /*...before sending the retrieved client data to the Store*/
+          .then(res => { dispatch(GetClient(res.data._id)) }) /*...before running a Get client action*/
           .catch(error => console.log(error))
       })
       .catch(error => console.log(error))

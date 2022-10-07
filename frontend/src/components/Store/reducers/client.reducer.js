@@ -1,5 +1,5 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-import { GET_CLIENT, PUT_IMAGE, PUT_BIO } from "../actions/client.action"
+import { GET_CLIENT, PUT_IMAGE, PUT_BIO, FOLLOW_USER, UNFOLLOW_USER } from "../actions/client.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -10,13 +10,28 @@ export default function clientReducer(state = initialState, action) { /*Exports 
 
     switch (action.type) {
         case GET_CLIENT:
-            return action.payload /*...that sends to the Store the data retrieved from the Client action*/
+            return action.payload /*...that sends to the Store the data retrieved from the Client actions*/
 
         case PUT_IMAGE:
             return action.payload
 
         case PUT_BIO:
-            return action.payload
+            return {
+                ...state,
+                bio: action.payload
+            }
+
+        case FOLLOW_USER:
+            return {
+                ...state,
+                followings: [action.payload, ...state.followings]
+            }
+
+        case UNFOLLOW_USER:
+            return {
+                ...state,
+                followings: state.followings.filter(id => id !== action.payload)
+            }
 
         default:
             return state

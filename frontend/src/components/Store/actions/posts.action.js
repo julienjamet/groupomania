@@ -4,11 +4,10 @@ import axios from "axios"
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-/*------------Action type*/
 export const GET_POSTS = "GET_POSTS"
 
-/*------------Action*/
-export default function GetPosts() { /*Exports a Posts action...*/
+/*------------GET (All posts)*/
+export default function GetPosts() { /*Exports a Get (All posts) action...*/
 
     return (dispatch) => {
         axios.get('http://localhost:5000/api/post', { withCredentials: true }) /*...that runs a GET (All posts) request...*/

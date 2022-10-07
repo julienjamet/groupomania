@@ -4,11 +4,10 @@ import axios from "axios"
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-/*------------Action type*/
 export const GET_USERS = "GET_USERS"
 
-/*------------Action*/
-export default function GetUsers() { /*Exports a Users action...*/
+/*------------GET (All users)*/
+export default function GetUsers() { /*Exports a Get (All users) action...*/
 
     return (dispatch) => {
         axios.get('http://localhost:5000/api/user', { withCredentials: true }) /*...that runs a GET (All users) request...*/

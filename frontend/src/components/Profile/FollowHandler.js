@@ -1,57 +1,57 @@
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+/*Imports------------------------------------------------------------------------------------------------------------*/
+/*------------Redux & React modules*/
+import { useDispatch, useSelector } from "react-redux"
+import { useState, useEffect } from "react"
 
-import axios from "axios"
+/*------------Actions*/
+import { FollowUser } from "../Store/actions/client.action"
+import { UnfollowUser } from "../Store/actions/client.action"
+/*-------------------------------------------------------------------------------------------------------------------*/
 
-export default function FollowHandler({ idToFollow, type }) {
-    const userData = useSelector(state => state.clientReducer)
+
+/*Operation----------------------------------------------------------------------------------------------------------*/
+export default function FollowHandler({ idToFollow, type }) { /*Exports a FollowHandler component...*/
+
+    /*------------Data*/
+    const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/
+    const dispatch = useDispatch()
+
     const [isFollowed, setIsFollowed] = useState(false)
 
-    function handleFollow() {
-        axios({
-            method: "patch",
-            url: `http://localhost:5000/api/user/follow/${userData._id}`,
-            data: { "idToFollow": idToFollow },
-            withCredentials: true
-        })
-            .then(() => { setIsFollowed(true) })
-            .catch(error => console.log(error))
+    /*------------Middlewares*/
+    function handleFollow() { /*...then runs a Follow middleware...*/
+        dispatch(FollowUser(idToFollow, clientData._id)) /*...running a Patch (Follow) action...*/
+        setIsFollowed(true) /*...and setting the IsFollowed State to "true"...*/
     }
 
-    function handleUnfollow() {
-        axios({
-            method: "patch",
-            url: `http://localhost:5000/api/user/unfollow/${userData._id}`,
-            data: { "idToUnfollow": idToFollow },
-            withCredentials: true
-        })
-            .then(() => { setIsFollowed(false) })
-            .catch(error => console.log(error))
+    function handleUnfollow() { /*...an Unfollow middleware...*/
+        dispatch(UnfollowUser(idToFollow, clientData._id)) /*...running a Patch (Unfollow) action...*/
+        setIsFollowed(false) /*...and setting the IsFollowed State to "false"...*/
     }
 
-    useEffect(() => {
-        if (userData.followings.includes(idToFollow)) {
+    useEffect(() => { /*...and a UseEffect hook...*/
+        if (clientData.followings.includes(idToFollow)) { /*...checking if the user is followed or not*/
             setIsFollowed(true)
         }
         else {
             setIsFollowed(false)
         }
+    }, [clientData, idToFollow])
 
-    }, [userData, idToFollow])
-
-    return (
+    /*------------Return*/
+    return ( /*The FollowHandler component returns...*/
         <>
-            {isFollowed && (
+            {isFollowed && ( /*...if the user is followed...*/
                 <span>
-                    {type === "suggestion" &&
+                    {type === "suggestion" && /*...an item running the Unfollow middleware when clicked...*/
                         <button onClick={handleUnfollow} className="unfollow-btn">Abonné</button>}
                     {type === "card" &&
                         <img onClick={handleUnfollow} src="./img/icons/checked.svg" alt="checked" />}
                 </span>
             )}
-            {!isFollowed && (
+            {!isFollowed && ( /*...and if the user is not followed...*/
                 <span>
-                    {type === "suggestion" &&
+                    {type === "suggestion" && /*...an item running the Follow middleware when clicked*/
                         <button onClick={handleFollow} className="follow-btn">Suivre</button>}
                     {type === "card" &&
                         <img onClick={handleFollow} src="./img/icons/check.svg" alt="check" />}
@@ -60,3 +60,4 @@ export default function FollowHandler({ idToFollow, type }) {
         </>
     )
 }
+/*-------------------------------------------------------------------------------------------------------------------*/

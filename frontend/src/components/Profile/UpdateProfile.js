@@ -30,7 +30,7 @@ export default function UpdateProfile() { /*Exports an UpdateProfile component..
 
     /*Middlewares*/
     function handleUpdate() { /*...then runs a handling middleware...*/
-        dispatch(PutBio(bio, clientData._id)) /*...sending the data to the Store...*/
+        dispatch(PutBio(bio, clientData._id)) /*...running a Put (Bio) action...*/
         setUpdateForm(false) /*...and setting the UpdateForm State to "false"*/
     }
 

@@ -24,7 +24,7 @@ export default function UploadImage() { /*Exports an UploadImage component...*/
         const data = new FormData() /*...that creates an object...*/
         data.append("picture", `./uploads/profil/${file.name}`) /*...containing the data retrieved from the State...*/
 
-        dispatch(PutImage(data, clientData._id)) /*...then sends it to the Store...*/
+        dispatch(PutImage(data, clientData._id)) /*...then runs a PUT (Image) action...*/
 
         setTimeout(() => { setLoadedFile(false) }, 300) /*...before setting the LoadedFile State to "false"*/
     }
