@@ -196,6 +196,12 @@
             filter: brightness(110%);
           }
         }
+        #loaded {
+          background: none;
+          border: none;
+          color: green;
+          font-style: italic;
+        }
 
         input[type="file"] {
           font-style: italic;

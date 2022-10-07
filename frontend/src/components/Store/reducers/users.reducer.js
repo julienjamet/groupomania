@@ -4,10 +4,8 @@ import { GET_USERS } from "../actions/users.action"
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-/*------------Reducer initial state*/
-const initialState = {} /*Creates an empty object as initial state*/
+const initialState = {}
 
-/*------------Reducer*/
 export default function usersReducer(state = initialState, action) { /*Exports a Users reducer...*/
 
     switch (action.type) {

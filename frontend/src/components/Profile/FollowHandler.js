@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 
 import axios from "axios"
 
-function FollowHandler({ idToFollow, type }) {
+export default function FollowHandler({ idToFollow, type }) {
     const userData = useSelector(state => state.clientReducer)
     const [isFollowed, setIsFollowed] = useState(false)
 
@@ -60,5 +60,3 @@ function FollowHandler({ idToFollow, type }) {
         </>
     )
 }
-
-export default FollowHandler

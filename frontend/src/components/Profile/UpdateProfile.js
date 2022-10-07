@@ -1,8 +1,10 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------Redux, React & Axios modules*/
-import { useSelector } from "react-redux"
+/*------------Redux & React modules*/
+import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
-import axios from "axios"
+
+/*------------Actions*/
+import { PutBio } from "../Store/actions/client.action"
 
 /*------------Components*/
 import LeftNav from "../Navbars/LeftNav"
@@ -18,6 +20,7 @@ export default function UpdateProfile() { /*Exports an UpdateProfile component..
     /*------------Data*/
     const clientData = useSelector(state => state.clientReducer) /*...that gets the client data...*/
     const usersData = useSelector(state => state.usersReducer) /*...and the users data from the Store...*/
+    const dispatch = useDispatch()
 
     const [bio, setBio] = useState(clientData.bio)
     const [updateForm, setUpdateForm] = useState(false)
@@ -27,15 +30,8 @@ export default function UpdateProfile() { /*Exports an UpdateProfile component..
 
     /*Middlewares*/
     function handleUpdate() { /*...then runs a handling middleware...*/
-        axios({ /*...running a PUT (Bio) request...*/
-            method: "put",
-            url: `http://localhost:5000/api/user/${clientData._id}`,
-            data: { "bio": bio },
-            withCredentials: true
-        })
-
-            .then(() => { setUpdateForm(false) }) /*...before setting the UpdateForm State to "false"...*/
-            .catch(error => console.log(error))
+        dispatch(PutBio(bio, clientData._id)) /*...sending the data to the Store...*/
+        setUpdateForm(false) /*...and setting the UpdateForm State to "false"*/
     }
 
     function cancelUpdate() { /*...and a cancelling middleware...*/

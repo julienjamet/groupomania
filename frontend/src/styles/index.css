@@ -872,6 +872,12 @@ nav .nav-container ul li img {
   background-color: #fdeeee;
   filter: brightness(110%);
 }
+.profil-page .update-container .left-part form #loaded {
+  background: none;
+  border: none;
+  color: green;
+  font-style: italic;
+}
 .profil-page .update-container .left-part form input[type=file] {
   font-style: italic;
   color: #FFD7D7;

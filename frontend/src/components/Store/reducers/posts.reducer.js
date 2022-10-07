@@ -4,10 +4,8 @@ import { GET_POSTS } from "../actions/posts.action"
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-/*------------Reducer initial state*/
-const initialState = {} /*Creates an empty object as initial state*/
+const initialState = {}
 
-/*------------Reducer*/
 export default function postsReducer(state = initialState, action) { /*Exports a Posts reducer...*/
 
     switch (action.type) {

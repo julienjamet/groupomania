@@ -5,7 +5,7 @@ import axios from "axios"
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
 /*------------Action type*/
-export const GET_USERS = "GET_USERS" /*Exports a "Users" action type*/
+export const GET_USERS = "GET_USERS"
 
 /*------------Action*/
 export default function GetUsers() { /*Exports a Users action...*/

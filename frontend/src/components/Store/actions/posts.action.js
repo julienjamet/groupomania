@@ -5,7 +5,7 @@ import axios from "axios"
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
 /*------------Action type*/
-export const GET_POSTS = "GET_POSTS" /*Exports a "Posts" action type*/
+export const GET_POSTS = "GET_POSTS"
 
 /*------------Action*/
 export default function GetPosts() { /*Exports a Posts action...*/
