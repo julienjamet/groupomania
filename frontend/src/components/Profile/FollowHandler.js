@@ -10,7 +10,7 @@ import { UnfollowUser } from "../Store/actions/client.action"
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-export default function FollowHandler({ idToFollow, type }) { /*Exports a FollowHandler component...*/
+export default function FollowHandler({ idToFollow, type }) { /*Exports to the UpdateProfile and the Thread a FollowHandler component...*/
 
     /*------------Data*/
     const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/

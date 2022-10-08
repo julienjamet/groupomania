@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-export default function LeftNav() { /*Exports a LeftNav component...*/
+export default function LeftNav() { /*Exports to the Home, Trendings and Profile pages a LeftNav component...*/
 
     return ( /*...that returns a navigation menu*/
         <div className="left-nav-container">

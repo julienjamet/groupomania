@@ -5,7 +5,7 @@ import axios from 'axios'
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-export default function Login() { /*Exports a Login component...*/
+export default function Login() { /*Exports to the LogModal a Login component...*/
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

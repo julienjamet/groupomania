@@ -12,7 +12,7 @@ import dateParser from "../Utils"
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-export default function Card({ post }) { /*Exports a Card component...*/
+export default function Card({ post }) { /*Exports to the Thread a Card component...*/
 
     /*------------Data*/
     const usersData = useSelector(state => state.usersReducer) /*...that gets the users data from the Store...*/

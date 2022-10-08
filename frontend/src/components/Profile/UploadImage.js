@@ -9,7 +9,7 @@ import { PutImage } from "../Store/actions/client.action"
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-export default function UploadImage() { /*Exports an UploadImage component...*/
+export default function UploadImage() { /*Exports to the UpdateProfile an UploadImage component...*/
 
     const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/
     const dispatch = useDispatch()

@@ -15,7 +15,7 @@ import FollowHandler from "./FollowHandler"
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-export default function UpdateProfile() { /*Exports an UpdateProfile component...*/
+export default function UpdateProfile() { /*Exports to the Profile page an UpdateProfile component...*/
 
     /*------------Data*/
     const clientData = useSelector(state => state.clientReducer) /*...that gets the client data...*/

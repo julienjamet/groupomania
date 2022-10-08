@@ -6,7 +6,7 @@ import { LikePost, UnlikePost } from "../Store/actions/posts.action"
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-export default function LikeButton({ post }) { /*Exports a Likebutton component...*/
+export default function LikeButton({ post }) { /*Exports to the Card a Likebutton component...*/
 
     /*------------Data*/
     const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/
