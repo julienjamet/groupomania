@@ -26,7 +26,8 @@ export default function UploadImage() { /*Exports an UploadImage component...*/
 
         dispatch(PutImage(data, clientData._id)) /*...then runs a PUT (Image) action...*/
 
-        setTimeout(() => { setLoadedFile(false) }, 300) /*...before setting the LoadedFile State to "false"*/
+        setFile(undefined) /*...before setting the File State to "undefined"...*/
+        setTimeout(() => { setLoadedFile(false) }, 300) /*...and the LoadedFile State to "false"*/
     }
 
     /*------------Return*/

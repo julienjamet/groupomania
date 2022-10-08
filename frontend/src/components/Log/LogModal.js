@@ -47,7 +47,7 @@ export default function LogModal() { /*Exports to the Home, Trendings and Profil
                     </li>
                 </ul>
 
-                {signUpModal && <Register />} {/*...and, depending on which State has been set to "true", the Register component...*/}
+                {signUpModal && <Register />} {/*...and, depending on which State is set to "true", the Register component...*/}
                 {signInModal && <Login />} {/*...or the Login component*/}
             </div>
         </div >

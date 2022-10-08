@@ -1,44 +1,50 @@
-/*import { useContext, useEffect, useState } from "react"
-import { UserDataContext } from "./AppContext"
-import axios from "axios"
-import { useDispatch } from "react-redux"
-import { LikePost } from "./Store/actions/posts.action"
+/*Imports------------------------------------------------------------------------------------------------------------*/
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { LikePost, UnlikePost } from "../Store/actions/posts.action"
+/*-------------------------------------------------------------------------------------------------------------------*/
 
-export default function LikeButton({ post }) {
-    const [liked, setLiked] = useState(false)
-    const userData = useContext(UserDataContext)
+
+/*Operation----------------------------------------------------------------------------------------------------------*/
+export default function LikeButton({ post }) { /*Exports a Likebutton component...*/
+
+    /*------------Data*/
+    const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (post.likers.includes(userData._id)) {
+    const [liked, setLiked] = useState(false)
+
+    /*------------Middlewares*/
+    function likeHandle() { /*...then runs a Like middleware...*/
+        dispatch(LikePost(clientData._id, post._id)) /*...running a Patch (Like) action...*/
+        setLiked(true) /*...and setting the Liked State to "true"...*/
+    }
+
+    function unlikeHandle() { /*...an Unlike middleware...*/
+        dispatch(UnlikePost(clientData._id, post._id)) /*...running a Patch (Unlike) action...*/
+        setLiked(false) /*...and setting the Liked State to "false"...*/
+    }
+
+    useEffect(() => { /*...and a UseEffect hook...*/
+        if (post.likers.includes(clientData._id)) { /*...checking if the post is liked or not*/
             setLiked(true)
         }
-    }, [userData, post.likers, liked])
+        else {
+            setLiked(false)
+        }
+    }, [clientData._id, post.likers, liked])
 
-
-    function likeHandle() {
-        dispatch(LikePost(userData._id, post))
-    }
-
-    function unlikeHandle() {
-        axios({
-            method: "patch",
-            url: `http://localhost:5000/api/post/unlike-post/${post._id}`,
-            data: { "id": userData._id },
-            withCredentials: true
-        })
-            .then(() => { setLiked(false) })
-            .catch(error => console.log(error))
-    }
-
-    return (
+    /*------------Return*/
+    return ( /*The LikeButton component returns...*/
         <div className="like-container">
-            {userData && liked === false && (
-                <img src="./img/icons/heart.svg" onClick={likeHandle} alt="like" />
+            {clientData && liked === false && ( /*...depending on whether the Liked State is set to "true" or "false"...*/
+                <img src="./img/icons/heart.svg" onClick={likeHandle} alt="like" /> /*...an icon that runs the Like middleware...*/
             )}
-            {userData && liked === true && (
-                <img src="./img/icons/heart-filled.svg" onClick={unlikeHandle} alt="unlike" />
+            {clientData && liked === true && (
+                <img src="./img/icons/heart-filled.svg" onClick={unlikeHandle} alt="unlike" /> /*...or the Unlike middleware*/
             )}
+            <span>{post.likers.length}</span>
         </div>
     )
-}*/
+}
+/*-------------------------------------------------------------------------------------------------------------------*/
