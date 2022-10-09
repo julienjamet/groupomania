@@ -7,6 +7,8 @@ import axios from "axios"
 export const GET_POSTS = "GET_POSTS"
 export const LIKE_POST = "LIKE_POST"
 export const UNLIKE_POST = "UNLIKE_POST"
+export const UPDATE_POST = "UPDATE_POST"
+export const DELETE_POST = "DELETE_POST"
 
 /*------------GET (All posts)*/
 export default function GetPosts(num) { /*Exports a Get (All posts) action...*/
@@ -23,7 +25,7 @@ export default function GetPosts(num) { /*Exports a Get (All posts) action...*/
 }
 
 /*------------PATCH (Like)*/
-export function LikePost(clientId, postId) {
+export function LikePost(clientId, postId) { /*Exports a Patch (Like) action...*/
 
     return (dispatch) => {
         axios({ /*...that runs a PATCH (Like) request...*/
@@ -39,7 +41,7 @@ export function LikePost(clientId, postId) {
 }
 
 /*------------PATCH (Unlike)*/
-export function UnlikePost(clientId, postId) {
+export function UnlikePost(clientId, postId) { /*Exports a Patch (Unlike) action...*/
 
     return (dispatch) => {
         axios({ /*...that runs a PATCH (Unlike) request...*/
@@ -50,6 +52,35 @@ export function UnlikePost(clientId, postId) {
         })
 
             .then(() => { dispatch({ type: UNLIKE_POST, payload: { clientId, postId } }) }) /*...before sending the id to unlike to the Posts reducer*/
+            .catch(error => console.log(error))
+    }
+}
+
+/*------------PUT (Update)*/
+export function UpdatePost(message, postId) { /*Exports a Put (Update) action...*/
+
+    return (dispatch) => {
+        axios({ /*...that runs a PUT (Update) request...*/
+            method: "put",
+            url: `http://localhost:5000/api/post/${postId}`,
+            data: { message },
+            withCredentials: true
+        })
+            .then(() => { dispatch({ type: UPDATE_POST, payload: { message, postId } }) }) /*...before sending the data to the Posts reducer*/
+            .catch(error => console.log(error))
+    }
+}
+
+/*------------DELETE*/
+export function DeletePost(postId) { /*Exports a Delete action...*/
+
+    return (dispatch) => {
+        axios({ /*...that runs a DELETE request...*/
+            method: "delete",
+            url: `http://localhost:5000/api/post/${postId}`,
+            withCredentials: true
+        })
+            .then(() => { dispatch({ type: DELETE_POST, payload: { postId } }) }) /*...before sending the data to the Posts reducer*/
             .catch(error => console.log(error))
     }
 }
