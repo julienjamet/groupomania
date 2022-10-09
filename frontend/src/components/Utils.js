@@ -9,9 +9,11 @@ export default function dateParser(num) {
     return date.toString()
 }
 
+/*------------Timestamp Parser*/
+export function timestampParser(num) {
+    let options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
 
-/*------------Is Empty*/
-export function isEmpty(value) {
+    let date = new Date(num).toLocaleDateString('fr-FR', options)
 
-    return value === undefined || value === null
+    return date.toString()
 }

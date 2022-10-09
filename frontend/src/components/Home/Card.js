@@ -10,6 +10,7 @@ import { UpdatePost } from "../Store/actions/posts.action"
 import FollowHandler from "../Profile/FollowHandler"
 import DeleteCard from "./DeleteCard"
 import LikeButton from "./LikeButton"
+import CardComments from "./CardComments"
 
 /*------------Utils*/
 import dateParser from "../Utils"
@@ -26,6 +27,8 @@ export default function Card({ post }) { /*Exports to the Thread a Card componen
 
     const [updatePost, setUpdatePost] = useState(false)
     const [textUpdate, setTextUpdate] = useState(null)
+
+    const [showComments, setShowComments] = useState(false)
 
     /*------------Middlewares*/
     function handleUpdate() { /*...then runs a handling middleware...*/
@@ -110,12 +113,13 @@ export default function Card({ post }) { /*Exports to the Thread a Card componen
 
                 <div className="card-footer"> {/*The Card component finally returns...*/}
                     <div className="comment-icon">
-                        <img src="./img/icons/message1.svg" alt="comment" />
-                        <span>{post.comments.length}</span> {/*...a comments section...*/}
+                        <img onClick={() => setShowComments(!showComments)} src="./img/icons/message1.svg" alt="comment" /> {/*...an image that sets the ShowComments State to "true" when clicked...*/}
+                        <span>{post.comments.length}</span>
                     </div>
-                    <LikeButton post={post} /> {/*...and a LikeButton component*/}
+                    <LikeButton post={post} /> {/*...a LikeButton component...*/}
                     <img src="./img/icons/share.svg" alt="share" />
                 </div>
+                {showComments && <CardComments post={post} />} {/*...and, if the ShowComments State has been set to "true", a CardComments component*/}
             </div>
         </>
     )

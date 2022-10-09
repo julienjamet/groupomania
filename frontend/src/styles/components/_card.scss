@@ -91,9 +91,10 @@
             box-shadow: none;
             height: 28px;
             width: 28px;
+            transform: translate(6px, 3px);
 
             &:hover {
-              transform: scale(1.2) translate(0px, 0px);
+              transform: scale(1.2) translate(6px, 3px);
             }
           }
 
@@ -244,7 +245,13 @@
           display: flex;
 
           span {
-            transform: translateX(6px);
+            cursor: pointer;
+          }
+          img {
+            box-shadow: none;
+            height: 15px;
+            width: 15px;
+            transform: translate(6px, 2px);
           }
         }
 

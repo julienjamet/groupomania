@@ -371,9 +371,10 @@ nav .nav-container ul li img {
   box-shadow: none;
   height: 28px;
   width: 28px;
+  transform: translate(6px, 3px);
 }
 .card-container .card-right .card-header .pseudo span img:hover {
-  transform: scale(1.2) translate(0px, 0px);
+  transform: scale(1.2) translate(6px, 3px);
 }
 .card-container .card-right .card-header .pseudo span .fas {
   color: #FD2D01;
@@ -513,7 +514,13 @@ nav .nav-container ul li img {
   display: flex;
 }
 .card-container .card-right .comment-container .comment-header .pseudo span {
-  transform: translateX(6px);
+  cursor: pointer;
+}
+.card-container .card-right .comment-container .comment-header .pseudo img {
+  box-shadow: none;
+  height: 15px;
+  width: 15px;
+  transform: translate(6px, 2px);
 }
 .card-container .card-right .comment-container .comment-header span {
   font-size: 0.9rem;
