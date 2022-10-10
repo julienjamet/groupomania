@@ -9,6 +9,9 @@ export const LIKE_POST = "LIKE_POST"
 export const UNLIKE_POST = "UNLIKE_POST"
 export const UPDATE_POST = "UPDATE_POST"
 export const DELETE_POST = "DELETE_POST"
+export const ADD_COMMENT = "ADD_COMMENT"
+export const EDIT_COMMENT = "EDIT_COMMENT"
+export const DELETE_COMMENT = "DELETE_COMMENT"
 
 /*------------GET (All posts)*/
 export default function GetPosts(num) { /*Exports a Get (All posts) action...*/
@@ -81,6 +84,56 @@ export function DeletePost(postId) { /*Exports a Delete action...*/
             withCredentials: true
         })
             .then(() => { dispatch({ type: DELETE_POST, payload: { postId } }) }) /*...before sending the data to the Posts reducer*/
+            .catch(error => console.log(error))
+    }
+}
+
+/*------------PATCH (Add comment)*/
+export function AddComment(postId, commenterId, text, commenterPseudo) { /*Exports a Patch (Add comment) action...*/
+
+    return (dispatch) => {
+        axios({ /*...that runs a PATCH request...*/
+            method: "patch",
+            url: `http://localhost:5000/api/post/comment-post/${postId}`,
+            data: { commenterId, text, commenterPseudo },
+            withCredentials: true
+        })
+            .then(() => {
+                axios.get(`http://localhost:5000/api/post/`, { withCredentials: true }) /*...then runs a GET (Client) request...*/
+
+                    .then(res => { dispatch({ type: GET_POSTS, payload: res.data }) }) /*...before sending the retrieved data to the Posts reducer*/
+                    .catch(error => console.log(error))
+            })
+            .catch(error => console.log(error))
+    }
+}
+
+/*------------PATCH (Edit comment)*/
+export function EditComment(postId, commentId, commenterId, text) { /*Exports a Patch (Edit comment) action...*/
+
+    return (dispatch) => {
+        axios({ /*...that runs a PATCH request...*/
+            method: "patch",
+            url: `http://localhost:5000/api/post/edit-comment-post/${postId}`,
+            data: { commentId, commenterId, text },
+            withCredentials: true
+        })
+            .then(() => { dispatch({ type: EDIT_COMMENT, payload: { postId, commentId, commenterId, text } }) }) /*...before sending the data to the Posts reducer*/
+            .catch(error => console.log(error))
+    }
+}
+
+/*------------DELETE (comment)*/
+export function DeleteComment(postId, commentId, commenterId) { /*Exports a Delete (comment) action...*/
+
+    return (dispatch) => {
+        axios({ /*...that runs a DELETE request...*/
+            method: "delete",
+            url: `http://localhost:5000/api/post/delete-comment-post/${postId}`,
+            data: { commentId, commenterId },
+            withCredentials: true
+        })
+            .then(() => { dispatch({ type: DELETE_COMMENT, payload: { postId, commentId } }) }) /*...before sending the data to the Posts reducer*/
             .catch(error => console.log(error))
     }
 }

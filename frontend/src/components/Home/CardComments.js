@@ -5,9 +5,11 @@ import { useState } from "react"
 
 /*------------Components*/
 import FollowHandler from "../Profile/FollowHandler"
+import EditDeleteComment from "./EditDeleteComment"
 
 /*------------Utils*/
 import { timestampParser } from "../Utils"
+import { AddComment } from "../Store/actions/posts.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -22,20 +24,20 @@ export default function CardComments({ post }) { /*Exports a CardComments compon
     const [text, setText] = useState("")
 
     /*------------Middleware*/
-    function handleComment(e) {
+    function handleComment(e) { /*...then runs a middleware...*/
         e.preventDefault()
 
-        if (text) {
-            dispatch()
-        }
+        dispatch(AddComment(post._id, clientData._id, text, clientData.pseudo)) /*...running itself a Patch (Add comment) action...*/
+        setText("") /*...before resetting the Text State*/
     }
 
     /*------------Return*/
-    return (
+    return ( /*The CardComments component returns...*/
         <div className="comments-container">
-            {post.comments.map(comment => {
+            {post.comments.map(comment => { /*...for each comment retrieved from the Store...*/
                 return (
                     <div key={comment._id} className={comment.commenterId === clientData._id ? "comment-container client" : "comment-container"}>
+
                         <div className="left-part">
                             <img src={
                                 usersData.map(user => {
@@ -50,24 +52,26 @@ export default function CardComments({ post }) { /*Exports a CardComments compon
                         <div className="right-part">
                             <div className="comment-header">
                                 <div className="pseudo">
-                                    <h4>{comment.commenterPseudo}</h4>
+                                    <h4>{comment.commenterPseudo}</h4> {/*...and the pseudo of the creator of the comment...*/}
 
-                                    {clientData._id !== comment.commenterId && <FollowHandler idToFollow={comment.commenterId} type="card" />}
+                                    {clientData._id !== comment.commenterId && <FollowHandler idToFollow={comment.commenterId} type="card" />} {/*...a Followhandler component...*/}
                                 </div>
 
                                 <span>{timestampParser(comment.timestamp)}</span>
                             </div>
 
-                            <p>{comment.text}</p>
+                            <p>{comment.text}</p> {/*...the body of the comment...*/}
+
+                            {clientData._id === comment.commenterId && <EditDeleteComment comment={comment} postId={post._id} />} {/*...and, if the client is the creator of the comment, an EditDeleteComment component*/}
                         </div>
                     </div>
                 )
             })}
 
-            <form action="" onSubmit={handleComment} className="comment-form">
-                <input placeholder="Laisser un commentaire" value={text} type="text" name="text" onChange={(e) => setText(e.target.value)} />
+            <form action="" onSubmit={handleComment} className="comment-form"> {/*The CardComments component finally returns a form running the middleware when submitted...*/}
+                <input placeholder="Ecrire un commentaire ici" value={text} type="text" name="text" onChange={(e) => setText(e.target.value)} /> {/*...and whose input sets the Text State*/}
                 <br />
-                <input type="submit" value="Envoyer" />
+                <input type="submit" id="comment-button" value="Envoyer" />
             </form>
         </div>
     )

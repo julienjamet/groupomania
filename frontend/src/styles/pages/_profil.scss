@@ -254,9 +254,13 @@
 
       textarea {
         background-color: white;
+        color: $color-3;
         font-family: $font-1;
         width: 100%;
         margin-bottom: -6px;
+        &::placeholder {
+          color: $color-3;
+        }
       }
 
       button {

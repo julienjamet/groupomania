@@ -530,7 +530,7 @@ nav .nav-container ul li img {
   margin-top: 8px;
 }
 .card-container .card-right .comment-container .edit-comment {
-  color: #FFD7D7;
+  color: #4E5166;
 }
 .card-container .card-right .comment-container .edit-comment img {
   float: right;
@@ -540,9 +540,10 @@ nav .nav-container ul li img {
   box-shadow: none;
   height: 20px;
   width: 20px;
+  transition: 400ms;
 }
 .card-container .card-right .comment-container .edit-comment img:hover {
-  transform: scale(1.1);
+  background-color: white;
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form {
   margin-top: 14px;
@@ -561,8 +562,10 @@ nav .nav-container ul li img {
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form input[type=text] {
   margin: 4px 0;
+  color: grey;
+  font-style: italic;
   background: rgb(253, 253, 253);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   padding: 16px;
   width: 100%;
   border-radius: 6px 20px 6px 20px;
@@ -573,18 +576,18 @@ nav .nav-container ul li img {
   float: right;
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form .btn span {
-  background: rgb(253, 253, 253);
+  background: #FFD7D7;
   padding: 10px 5px;
   border-radius: 50px;
   margin-right: 6px;
-  transition: 0.2s;
   cursor: pointer;
-}
-.card-container .card-right .comment-container .edit-comment .edit-comment-form .btn span:hover {
-  background: #FFD7D7;
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form .btn span img {
   transform: translate(-5px, 0);
+  transition: 0.4s;
+}
+.card-container .card-right .comment-container .edit-comment .edit-comment-form .btn span img:hover {
+  background-color: white;
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form .btn input[type=submit] {
   background: #FFD7D7;
@@ -595,15 +598,29 @@ nav .nav-container ul li img {
   width: inherit;
   background: #FD2D01;
 }
+.card-container .card-right .comment-container .edit-comment .edit-comment-form #edit-button, .card-container .card-right .comment-container .edit-comment .edit-comment-form #cancel-edit {
+  background-color: #4E5166;
+  color: #FFD7D7;
+}
+.card-container .card-right .comment-container .edit-comment .edit-comment-form #edit-button:hover, .card-container .card-right .comment-container .edit-comment .edit-comment-form #cancel-edit:hover {
+  background-color: #fdeeee;
+  color: #FD2D01;
+  filter: brightness(110%);
+}
+.card-container .card-right .comment-container .edit-comment .edit-comment-form #cancel-edit {
+  margin-left: 10px;
+}
 .card-container .card-right .comment-form {
   margin-top: 6px;
 }
 .card-container .card-right .comment-form input[type=text] {
   width: 100%;
-  background: #FFD7D7;
+  background: white;
+  border: 1px solid #FFD7D7;
   border-radius: 20px 20px 6px 20px;
   padding: 20px;
-  font-size: 1.4rem;
+  font-size: 1.05rem;
+  color: #4E5166;
 }
 .card-container .card-right .comment-form input[type=text]:focus {
   box-shadow: 0 0 2px rgba(51, 51, 51, 0.5);
@@ -612,15 +629,19 @@ nav .nav-container ul li img {
   margin-top: 4px;
   padding: 12px 16px;
   width: 120px;
-  background: #FFD7D7;
+  background-color: #FFD7D7;
+  color: #4E5166;
   border-radius: 20px 6px 20px 20px;
   transition: 0.2s;
   float: right;
+  transform: translateX(0px);
+  transition: transform 400ms;
 }
 .card-container .card-right .comment-form input[type=submit]:hover {
-  background: #FD2D01;
-  letter-spacing: 2px;
-  width: 130px;
+  transform: translateX(-5px);
+  background-color: #fdeeee;
+  color: #FD2D01;
+  filter: brightness(110%);
 }
 .card-container .card-right .comment-form button {
   float: right;
@@ -929,9 +950,19 @@ nav .nav-container ul li img {
 }
 .profil-page .update-container .right-part textarea {
   background-color: white;
+  color: #4E5166;
   font-family: "Lato", sans-serif;
   width: 100%;
   margin-bottom: -6px;
+}
+.profil-page .update-container .right-part textarea::-moz-placeholder {
+  color: #4E5166;
+}
+.profil-page .update-container .right-part textarea:-ms-input-placeholder {
+  color: #4E5166;
+}
+.profil-page .update-container .right-part textarea::placeholder {
+  color: #4E5166;
 }
 .profil-page .update-container .right-part button {
   margin: 5px 0;
