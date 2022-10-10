@@ -63,7 +63,7 @@ exports.signIn = (req, res) => { /*Exports to the User router a signIn() functio
                             token: jwt.sign( /*...and an authentication token randomly created by JsonWebToken...*/
                                 { userId: user._id },
                                 'RANDOM_TOKEN_SECRET',
-                                { expiresIn: '1h' }
+                                { expiresIn: '120h' }
                             )
                         }
                         res.cookie('token', token, { httpOnly: true }) /*...before returning it as a cookie*/

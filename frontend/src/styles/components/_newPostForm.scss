@@ -65,6 +65,11 @@
       box-shadow: 2px 2px 2px rgba(51, 51, 51, 0.16);
       object-fit: cover;
       align-self: center;
+      transform: scale(1);
+      transition: all 400ms;
+      &:hover {
+        transform: scale(1.1);
+      }
     }
     h3 {
       color: $black;

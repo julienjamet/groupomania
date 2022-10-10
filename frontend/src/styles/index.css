@@ -1172,6 +1172,11 @@ nav .nav-container ul li img {
   -o-object-fit: cover;
      object-fit: cover;
   align-self: center;
+  transform: scale(1);
+  transition: all 400ms;
+}
+.post-container .user-info img:hover {
+  transform: scale(1.1);
 }
 .post-container .user-info h3 {
   color: rgb(40, 40, 40);
