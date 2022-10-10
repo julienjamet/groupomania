@@ -1,5 +1,8 @@
-.thread-container {
+.thread-container, .home-header {
   width: 70%;
+}
+.home-header {
+  height: 250px;
 }
 
 .card-container {
@@ -132,12 +135,14 @@
       }
       .button-container {
         .btn {
-          background: $color-2;
+          background: $color-3;
+          color: $color-2;
           width: 240px;
           transform: translateY(-3px);
 
           &:hover {
-            background: $color-1;
+            background: white;
+            color: $color-1;
             width: 250px;
             letter-spacing: 1px;
           }

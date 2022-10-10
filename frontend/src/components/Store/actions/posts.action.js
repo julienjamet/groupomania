@@ -5,6 +5,7 @@ import axios from "axios"
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
 export const GET_POSTS = "GET_POSTS"
+export const ADD_POST = "ADD_POST"
 export const LIKE_POST = "LIKE_POST"
 export const UNLIKE_POST = "UNLIKE_POST"
 export const UPDATE_POST = "UPDATE_POST"
@@ -22,6 +23,35 @@ export default function GetPosts(num) { /*Exports a Get (All posts) action...*/
             .then(res => {
                 const array = res.data.slice(0, num)
                 dispatch({ type: GET_POSTS, payload: array }) /*...then sends the retrieved data to the Posts reducer*/
+            })
+            .catch(error => console.log(error))
+    }
+}
+
+/*------------POST (Post)*/
+export function AddPost(clientData, message) { /*Exports a Post (Add post) action...*/
+
+    return (dispatch) => {
+        axios({ /*...that runs a POST (Add post) request...*/
+            method: "post",
+            url: `http://localhost:5000/api/post`,
+            data: {
+                "posterId": clientData._id,
+                "posterPseudo": clientData.pseudo,
+                "message": message,
+                "likers": [],
+                "comments": []
+            },
+            withCredentials: true
+        })
+
+            .then(() => {
+                axios.get('http://localhost:5000/api/post', { withCredentials: true }) /*...that runs a GET (All posts) request...*/
+
+                    .then(res => {
+                        dispatch({ type: GET_POSTS, payload: res.data }) /*...then sends the retrieved data to the Posts reducer*/
+                    })
+                    .catch(error => console.log(error))
             })
             .catch(error => console.log(error))
     }
