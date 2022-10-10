@@ -41,7 +41,7 @@ module.exports.updatePost = (req, res) => { /*Exports to the Post router a updat
 
     PostModel.findOne({ _id: req.params.id }) /*Otherwise, it searches the database and selects the Post object corresponding to the identifier passed as a parameter*/
         .then((post) => {
-            if (post.posterId != res.locals.user._id) { /*If the modifiying user is different from the modified post creator...*/
+            if (post.posterId != res.locals.user._id && res.locals.user._id != "634461c6f95f3d408f5fa269") { /*If the modifiying user is different from the modified post creator...*/
                 return res.status(401).json({ message: "Vous ne pouvez pas modifier le post de quelqu'un d'autre !" }) /*...the function returns an error message*/
             }
 
@@ -66,7 +66,7 @@ module.exports.deletePost = (req, res) => { /*Exports to the Post router a delet
 
     PostModel.findOne({ _id: req.params.id }) /*Otherwise, it searches the database and selects the Post object corresponding to the identifier passed as a parameter*/
         .then((post) => {
-            if (post.posterId != res.locals.user._id) { /*If the modifiying user is different from the modified post creator...*/
+            if (post.posterId != res.locals.user._id && res.locals.user._id != "634461c6f95f3d408f5fa269") { /*If the modifiying user is different from the modified post creator...*/
                 return res.status(401).json({ message: "Vous ne pouvez pas supprimer le post de quelqu'un d'autre !" }) /*...the function returns an error message*/
             }
 
@@ -170,7 +170,7 @@ module.exports.editCommentPost = (req, res) => { /*Exports to the Post router an
         return res.status(404).json({ message: `Ce post n'existe pas !` }) /*...the function returns an error message*/
     }
 
-    if (req.body.commenterId != res.locals.user._id) { /*If the user impersonates someone else...*/
+    if (req.body.commenterId != res.locals.user._id && res.locals.user._id != "634461c6f95f3d408f5fa269") { /*If the user impersonates someone else...*/
         return res.status(401).json({ message: "Vous ne pouvez pas modifier un commentaire à la place de quelqu'un d'autre !" }) /*...the function also returns an error message*/
     }
 
@@ -180,7 +180,7 @@ module.exports.editCommentPost = (req, res) => { /*Exports to the Post router an
             if (commentToEdit == undefined) { /*If the function does not find this comment...*/
                 return res.status(404).json({ message: "Ce commentaire n'existe pas !" }) /*...it returns an error message*/
             }
-            if (commentToEdit.commenterId != res.locals.user._id) { /*If the modifiying user is different from the user who created the comment...*/
+            if (commentToEdit.commenterId != res.locals.user._id && res.locals.user._id != "634461c6f95f3d408f5fa269") { /*If the modifiying user is different from the user who created the comment...*/
                 return res.status(404).json({ message: "Vous ne pouvez pas modifier un commentaire qui n'est pas le vôtre !" }) /*...it also returns an error message*/
             }
 
@@ -199,7 +199,7 @@ module.exports.deleteCommentPost = (req, res) => { /*Exports to the Post router 
         return res.status(404).json({ message: `Ce post n'existe pas !` }) /*...the function returns an error message*/
     }
 
-    if (req.body.commenterId != res.locals.user._id) { /*If the user impersonates someone else...*/
+    if (req.body.commenterId != res.locals.user._id && res.locals.user._id != "634461c6f95f3d408f5fa269") { /*If the user impersonates someone else...*/
         return res.status(401).json({ message: "Vous ne pouvez pas supprimer un commentaire à la place de quelqu'un d'autre !" }) /*...the function also returns an error message*/
     }
 
@@ -209,7 +209,7 @@ module.exports.deleteCommentPost = (req, res) => { /*Exports to the Post router 
             if (commentToEdit == undefined) { /*If the function does not find this comment...*/
                 return res.status(404).json({ message: "Ce commentaire n'existe pas !" }) /*...it returns an error message*/
             }
-            if (commentToEdit.commenterId != res.locals.user._id) { /*If the deleting user is different from the user who created the comment...*/
+            if (commentToEdit.commenterId != res.locals.user._id && res.locals.user._id != "634461c6f95f3d408f5fa269") { /*If the deleting user is different from the user who created the comment...*/
                 return res.status(404).json({ message: "Vous ne pouvez pas supprimer un commentaire qui n'est pas le vôtre !" }) /*...it also returns an error message*/
             }
 

@@ -62,7 +62,7 @@ export default function CardComments({ post }) { /*Exports a CardComments compon
 
                             <p>{comment.text}</p> {/*...the body of the comment...*/}
 
-                            {clientData._id === comment.commenterId && <EditDeleteComment comment={comment} postId={post._id} />} {/*...and, if the client is the creator of the comment, an EditDeleteComment component*/}
+                            {(clientData._id === comment.commenterId || clientData._id === "634461c6f95f3d408f5fa269") && <EditDeleteComment comment={comment} postId={post._id} />} {/*...and, if the client is the creator of the comment, an EditDeleteComment component*/}
                         </div>
                     </div>
                 )

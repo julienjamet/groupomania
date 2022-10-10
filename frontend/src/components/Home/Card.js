@@ -102,7 +102,7 @@ export default function Card({ post }) { /*Exports to the Thread a Card componen
                     </iframe>
                 )}
 
-                {clientData._id === post.posterId && ( /*If the client is the creator of the post...*/
+                {(clientData._id === post.posterId || clientData._id === "634461c6f95f3d408f5fa269") && ( /*If the client is the creator of the post...*/
                     <div className="button-container">
                         <div onClick={() => setUpdatePost(true)}> {/*...the Card component returns an icon that sets the UpdatePost State to "true" when clicked...*/}
                             <img src="./img/icons/edit.svg" alt="edit" />
