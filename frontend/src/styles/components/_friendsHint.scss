@@ -1,4 +1,11 @@
 .get-friends-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  right: 8%;
+  top: 80px;
   width: 356px;
   background: linear-gradient(145deg, $color-2 30%, #ffe1d9 100%);
   border-radius: 20px;
@@ -20,6 +27,8 @@
   ul {
     width: 100%;
     padding: 14px 0 0;
+
+  #all {margin-top: 30px;}
 
     .user-hint {
       display: grid;
@@ -50,7 +59,7 @@
           font-size: 0.9rem;
 
           &:hover {
-            background: $color-2;
+            background: white;
             color: $color-1;
           }
         }

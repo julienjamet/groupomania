@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 /*------------Components*/
 import NewPostForm from "../components/Home/NewPostForm"
 import Thread from "../components/Home/Thread"
+import FriendsHint from "../components/Profile/FriendsHint"
 import LogModal from "../components/Log/LogModal"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
@@ -19,12 +20,21 @@ export default function Home() { /*Exports a Home component...*/
     return ( /*...then returns...*/
         <div className="profil-page">
             {clientData._id ? ( /*...if there is client data...*/
-                <div className="main">
-                    <div className="home-header">
-                        <NewPostForm /> {/*...the NewPostForm component...*/}
+                <>
+                    <div className="main">
+                        <div className="home-header">
+                            <NewPostForm /> {/*...the NewPostForm component...*/}
+                        </div>
+                        <Thread /> {/*...the Thread component...*/}
                     </div>
-                    <Thread /> {/*...the Thread component...*/}
-                </div>
+                    <div className="right-side">
+                        <div className="right-side-container">
+                            <div className="wrapper">
+                                <FriendsHint />
+                            </div>
+                        </div>
+                    </div>
+                </>
             ) : ( /*...and if there is no client data...*/
                 <div className="log-container">
                     <LogModal /> {/*...the LogModal component*/}
