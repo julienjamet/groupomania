@@ -54,7 +54,7 @@ export default function FriendsHint() {
                         if (user === usersData[i]._id) {
                             return (
                                 <li className="user-hint" key={user}>
-                                    <img src={usersData[i].picture} alt="friend-pic" />
+                                    <img src={usersData[i].picture} alt="friend-pic" title={usersData[i].bio} />
                                     <p>{usersData[i].pseudo}</p>
                                     <FollowHandler idToFollow={usersData[i]._id} type="suggestion" />
                                 </li>
