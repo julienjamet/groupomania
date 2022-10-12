@@ -27,7 +27,6 @@ export function PutImage(data, clientId) { /*Exports a Put (Image) action...*/
     return (dispatch) => {
         axios({ /*...that runs a PUT (Image) request...*/
             method: "put",
-            headers: { "Content-Type": "multipart/form-data" },
             url: `http://localhost:5000/api/user/${clientId}`,
             data: data,
             withCredentials: true

@@ -37,9 +37,9 @@ exports.updateUser = (req, res) => { /*Exports to the User router a updateUser()
                 return res.status(401).json({ message: 'Vous ne pouvez pas modifier un autre utilisateur que vous !' }) /*...the function returns an error message*/
             }
 
-            const userObject = req.body.file ? {
-                ...JSON.parse(req.body),
-                imageUrl: `.uploads/profil/${req.file.filename}`,
+            const userObject = req.file ? {
+                ...req.body,
+                picture: `./uploads/profil/client/${req.file.filename}`,
                 id: user._id,
                 password: user.password,
                 followers: user.followers,
@@ -54,14 +54,18 @@ exports.updateUser = (req, res) => { /*Exports to the User router a updateUser()
                 likes: user.likes
             }
 
-            UserModel.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id }) /*...then updates the former User object with the new information*/
-                .then(() => res.status(200).json({ message: 'La modification a été effectuée !' }))
-                .catch(error => {
-                    const errors = errorHandling(error)
-                    res.status(400).json({ errors })
-                })
+            const filename = user.picture.split('/client/')[1] /*Otherwise it targets in the "images" folder any image associated with this user...*/
+            fs.unlink(`../frontend/public/uploads/profil/client/${filename}`, () => {
+
+                UserModel.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id }) /*...then updates the former User object with the new information*/
+                    .then(() => res.status(200).json({ message: 'La modification a été effectuée !' }))
+                    .catch(error => {
+                        const errors = errorHandling(error)
+                        res.status(400).json({ errors })
+                    })
+            })
         })
-        .catch(error => res.status(404).json({ error }))
+        .catch(error => res.status(400).json({ error }))
 }
 
 /*------------DELETE*/
@@ -76,8 +80,8 @@ exports.deleteUser = (req, res) => { /*Exports to the User router a deleteUser()
                 return res.status(401).json({ message: 'Vous ne pouvez pas supprimer un autre utilisateur que vous !' }) /*...the function also returns an error message*/
             }
 
-            const filename = user.imageUrl.split('/images/')[1] /*Otherwise it targets in the "images" folder any image associated with this user...*/
-            fs.unlink(`images/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
+            const filename = user.picture.split('/client/')[1] /*Otherwise it targets in the "images" folder any image associated with this user...*/
+            fs.unlink(`../../frontend/public/uploads/profil/client/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
                 UserModel.deleteOne({ _id: req.params.id }) /*...before deleting the User object itself*/
                     .then(() => res.status(200).json({ message: `Le compte de ${user.pseudo} a été supprimé !` }))
                     .catch(error => res.status(500).json({ error }))

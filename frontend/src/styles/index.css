@@ -1327,7 +1327,7 @@ nav .nav-container ul li img {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  position: absolute;
+  position: fixed;
   right: 8%;
   top: 80px;
   width: 356px;

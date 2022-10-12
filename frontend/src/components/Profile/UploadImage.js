@@ -22,7 +22,7 @@ export default function UploadImage() { /*Exports to the UpdateProfile an Upload
         e.preventDefault()
 
         const data = new FormData() /*...that creates an object...*/
-        data.append("picture", `./uploads/profil/${file.name}`) /*...containing the data retrieved from the State...*/
+        data.append("image", file) /*...containing the data retrieved from the State...*/
 
         dispatch(PutImage(data, clientData._id)) /*...then runs a PUT (Image) action...*/
 
