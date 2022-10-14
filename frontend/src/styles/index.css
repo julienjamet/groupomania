@@ -1101,6 +1101,27 @@ nav .nav-container ul li img {
   padding-right: 31px;
 }
 
+#activity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFD7D7;
+  border-radius: 25px;
+  padding: 10px;
+  margin: 50px auto 40px;
+}
+#activity h2 {
+  margin: 20px auto 20px;
+}
+#activity .thread-container {
+  width: 100%;
+}
+#activity .thread-container .card-container {
+  background-color: white;
+  width: 60%;
+  margin-bottom: 20px;
+}
+
 #newpost--send, #newpost--cancel {
   background-color: #4E5166;
   color: #FFD7D7;
