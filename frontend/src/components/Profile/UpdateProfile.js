@@ -102,34 +102,37 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
                         </ul>
                     </div>
                 </div>
-            )}
-            {followers && ( /*If the Followers State has been set to "true"...*/
-                <div className="popup-profil-container">
-                    <div className="modal"> {/*...the UpdateProfile component returns a Followers pop-up...*/}
-                        <h3>Abonnés</h3>
-                        <span onClick={() => setFollowers(false)} className="cross">&#10005;</span>
-                        <ul>
-                            {usersData.map((user) => {
-                                for (let i = 0; i < clientData.followers.length; i++) {
-                                    if (user._id === clientData.followers[i]) {
-                                        return ( /*...that returns, for each user found in the client's followers list...*/
-                                            <li key={user._id}>
-                                                <img src={user.picture} alt={`${user.pseudo} pic`} /> {/*...its profile picture...*/}
-                                                <p>{user.pseudo}</p> {/*...its name...*/}
-                                                <div className="follow-handler">
-                                                    <FollowHandler idToFollow={user._id} type="suggestion" /> {/*...and the FollowHandler component*/}
-                                                </div>
-                                            </li>
-                                        )
+            )
+            }
+            {
+                followers && ( /*If the Followers State has been set to "true"...*/
+                    <div className="popup-profil-container">
+                        <div className="modal"> {/*...the UpdateProfile component returns a Followers pop-up...*/}
+                            <h3>Abonnés</h3>
+                            <span onClick={() => setFollowers(false)} className="cross">&#10005;</span>
+                            <ul>
+                                {usersData.map((user) => {
+                                    for (let i = 0; i < clientData.followers.length; i++) {
+                                        if (user._id === clientData.followers[i]) {
+                                            return ( /*...that returns, for each user found in the client's followers list...*/
+                                                <li key={user._id}>
+                                                    <img src={user.picture} alt={`${user.pseudo} pic`} /> {/*...its profile picture...*/}
+                                                    <p>{user.pseudo}</p> {/*...its name...*/}
+                                                    <div className="follow-handler">
+                                                        <FollowHandler idToFollow={user._id} type="suggestion" /> {/*...and the FollowHandler component*/}
+                                                    </div>
+                                                </li>
+                                            )
+                                        }
                                     }
-                                }
-                                return null
-                            })}
-                        </ul>
+                                    return null
+                                })}
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )
+            }
+        </div >
     )
 }
 /*-------------------------------------------------------------------------------------------------------------------*/

@@ -33,7 +33,7 @@ export default function App() { /*Exports to the Root an App component...*/
           .catch(error => console.log(error))
       })
       .catch(error => console.log(error))
-  })
+  }, [dispatch])
 
   /*------------Return*/
   return ( /*The App component returns...*/

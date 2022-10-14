@@ -1,5 +1,6 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
 import axios from "axios"
+import { GET_USERS } from "./users.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -35,7 +36,13 @@ export function PutImage(data, clientId) { /*Exports a Put (Image) action...*/
             .then(() => {
                 axios.get(`http://localhost:5000/api/user/${clientId}`, { withCredentials: true }) /*...then runs a GET (Client) request...*/
 
-                    .then(res => { dispatch({ type: GET_CLIENT, payload: res.data }) }) /*...before sending the retrieved data to the Client reducer*/
+                    .then(res => { /*...before sending the retrieved data to the Client reducer*/
+                        dispatch({ type: GET_CLIENT, payload: res.data })
+                        axios.get(`http://localhost:5000/api/user`, { withCredentials: true })
+
+                            .then(res => dispatch({ type: GET_USERS, payload: res.data }))
+                            .catch(error => console.log(error))
+                    })
                     .catch(error => console.log(error))
             })
             .catch(error => console.log(error))

@@ -36,7 +36,7 @@ export default function FollowHandler({ idToFollow, type }) { /*Exports to the U
         else {
             setIsFollowed(false)
         }
-    }, [clientData, idToFollow])
+    }, [idToFollow, clientData.followings])
 
     /*------------Return*/
     return ( /*The FollowHandler component returns...*/
