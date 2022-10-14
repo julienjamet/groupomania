@@ -54,7 +54,7 @@ export default function CardComments({ post }) { /*Exports a CardComments compon
                                 <div className="pseudo">
                                     <h4>{comment.commenterPseudo}</h4> {/*...and the pseudo of the creator of the comment...*/}
 
-                                    {clientData._id !== comment.commenterId && <FollowHandler idToFollow={comment.commenterId} type="card" />} {/*...a Followhandler component...*/}
+                                    {clientData._id !== comment.commenterId && clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && <FollowHandler idToFollow={comment.commenterId} type="card" />} {/*...a Followhandler component...*/}
                                 </div>
 
                                 <span>{timestampParser(comment.timestamp)}</span>
@@ -62,17 +62,19 @@ export default function CardComments({ post }) { /*Exports a CardComments compon
 
                             <p>{comment.text}</p> {/*...the body of the comment...*/}
 
-                            {(clientData._id === comment.commenterId || clientData._id === "634461c6f95f3d408f5fa269") && <EditDeleteComment comment={comment} postId={post._id} />} {/*...and, if the client is the creator of the comment, an EditDeleteComment component*/}
+                            {(clientData._id === comment.commenterId || clientData._id === `${process.env.REACT_APP_ADMIN_ID}`) && <EditDeleteComment comment={comment} postId={post._id} />} {/*...and, if the client is the creator of the comment, an EditDeleteComment component*/}
                         </div>
                     </div>
                 )
             })}
 
-            <form action="" onSubmit={handleComment} className="comment-form"> {/*The CardComments component finally returns a form running the middleware when submitted...*/}
-                <input placeholder="Ecrire un commentaire ici" value={text} type="text" name="text" onChange={(e) => setText(e.target.value)} /> {/*...and whose input sets the Text State*/}
-                <br />
-                <input type="submit" id="comment-button" value="Envoyer" />
-            </form>
+            {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && (
+                <form action="" onSubmit={handleComment} className="comment-form"> {/*The CardComments component finally returns a form running the middleware when submitted...*/}
+                    <input placeholder="Ecrire un commentaire ici" value={text} type="text" name="text" onChange={(e) => setText(e.target.value)} /> {/*...and whose input sets the Text State*/}
+                    <br />
+                    <input type="submit" id="comment-button" value="Envoyer" />
+                </form>
+            )}
         </div>
     )
 }

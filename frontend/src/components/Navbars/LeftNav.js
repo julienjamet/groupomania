@@ -15,11 +15,6 @@ export default function LeftNav() { /*Exports to the Home, Trendings and Profile
                     </NavLink>
                     <br />
 
-                    <NavLink to="/trendings" className={link => (link.isActive ? "active-left-nav" : null)}>
-                        <img src="./img/icons/rocket.svg" alt="rocket-icon" />
-                    </NavLink>
-                    <br />
-
                     <NavLink to="/profile" className={link => (link.isActive ? "active-left-nav" : null)}>
                         <img src="./img/icons/user.svg" alt="user-icon" />
                     </NavLink>

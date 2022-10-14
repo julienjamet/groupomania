@@ -67,7 +67,7 @@ export default function Card({ post }) { /*Exports to the Thread a Card componen
                                 return null
                             })}
                         </h3>
-                        {clientData._id !== post.posterId && <FollowHandler idToFollow={post.posterId} type="card" />} {/*...and a FollowHandler component*/}
+                        {clientData._id !== post.posterId && clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && <FollowHandler idToFollow={post.posterId} type="card" />} {/*...and a FollowHandler component*/}
                     </div>
 
                     <span>{dateParser(post.createdAt)}</span>
@@ -116,8 +116,7 @@ export default function Card({ post }) { /*Exports to the Thread a Card componen
                         <img onClick={() => setShowComments(!showComments)} src="./img/icons/message1.svg" alt="comment" /> {/*...an image that sets the ShowComments State to "true" when clicked...*/}
                         <span>{post.comments.length}</span>
                     </div>
-                    <LikeButton post={post} /> {/*...a LikeButton component...*/}
-                    <img src="./img/icons/share.svg" alt="share" />
+                    {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && <LikeButton post={post} />} {/*...a LikeButton component...*/}
                 </div>
                 {showComments && <CardComments post={post} />} {/*...and, if the ShowComments State has been set to "true", a CardComments component*/}
             </div>

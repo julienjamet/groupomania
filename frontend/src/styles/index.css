@@ -456,8 +456,7 @@ nav .nav-container ul li img {
 .card-container .card-right .card-footer {
   display: flex;
   align-items: center;
-  justify-content: center;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 12px 0 4px;
 }
 .card-container .card-right .card-footer img {
@@ -1528,41 +1527,5 @@ nav .nav-container ul li img {
   .left-nav-container .icons .icons-bis .active-left-nav::after {
     height: 33px;
     left: -8px;
-  }
-}
-
-.trending-page {
-  max-width: 1200px;
-  margin: 62px auto 0;
-  display: grid;
-  grid-template-columns: 60px 1fr 374px;
-}
-@media screen and (max-width: 990px) {
-  .trending-page {
-    grid-template-columns: 60px 1fr;
-    margin: 58px 20px 50px;
-  }
-}
-@media screen and (max-width: 590px) {
-  .trending-page {
-    grid-template-columns: 1fr;
-    margin: 58px 8px 50px;
-  }
-}
-.trending-page .main {
-  margin-top: -8px;
-}
-.trending-page .right-side {
-  position: relative;
-  width: 100%;
-  margin: 0px 0 0 14px;
-}
-.trending-page .right-side .right-side-container {
-  position: fixed;
-  width: 35%;
-}
-@media screen and (min-width: 1200px) {
-  .trending-page .right-side .right-side-container {
-    width: 404px;
   }
 }/*# sourceMappingURL=index.css.map */

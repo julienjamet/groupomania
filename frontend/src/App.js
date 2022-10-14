@@ -1,6 +1,6 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
 /*------------Redux, React & Axios modules*/
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import axios from "axios"
 
@@ -11,13 +11,14 @@ import GetClient from "./components/Store/actions/client.action"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbars/Navbar"
 import Home from "./pages/Home"
-import Trendings from "./pages/Trendings"
 import Profile from "./pages/Profile"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
 export default function App() { /*Exports to the Root an App component...*/
+
+  const clientData = useSelector(state => state.clientReducer)
 
   /*------------Middleware*/
   const dispatch = useDispatch()
@@ -40,8 +41,7 @@ export default function App() { /*Exports to the Root an App component...*/
       <Navbar /> {/*...running the Navbar component on all routes*/}
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/trendings" element={<Trendings />} />
-        <Route path="/profile" element={<Profile />} />
+        {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && <Route path="/profile" element={<Profile />} />}
         <Route path="*" element={<Home />} />
       </Routes>
     </BrowserRouter>

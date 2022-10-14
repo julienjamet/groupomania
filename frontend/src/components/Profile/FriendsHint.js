@@ -36,7 +36,7 @@ export default function FriendsHint() {
 
         notFriendList()
 
-    }, [clientData._id, clientData.followings, usersData])
+    }, [clientData._id, usersData])
 
     return (
         <div className="get-friends-container">

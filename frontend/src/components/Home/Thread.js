@@ -15,6 +15,7 @@ export default function Thread() { /*Exports to the Home page a Thread component
 
     /*------------Data*/
     const postsData = useSelector(state => state.postsReducer) /*...that gets the posts data from the Store...*/
+    const clientData = useSelector(state => state.clientReducer)
     const dispatch = useDispatch()
 
     const [loadedPosts, setLoadedPosts] = useState(true)
@@ -42,7 +43,7 @@ export default function Thread() { /*Exports to the Home page a Thread component
     /*------------Return*/
     return ( /*...then returns...*/
         <div className="thread-container">
-            <LeftNav /> {/*...the LeftNav component...*/}
+            {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && <LeftNav />} {/*...the LeftNav component...*/}
             <ul>
                 {postsData.map(post => { /*...and, for each post retrieved from the Store...*/
                     return (

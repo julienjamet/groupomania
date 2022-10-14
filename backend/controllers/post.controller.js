@@ -41,7 +41,7 @@ module.exports.updatePost = (req, res) => { /*Exports to the Post router a updat
 
     PostModel.findOne({ _id: req.params.id }) /*Otherwise, it searches the database and selects the Post object corresponding to the identifier passed as a parameter*/
         .then((post) => {
-            if (post.posterId != res.locals.user._id && res.locals.user._id != "634461c6f95f3d408f5fa269") { /*If the modifiying user is different from the modified post creator...*/
+            if (post.posterId != res.locals.user._id && res.locals.user._id != `${process.env.ADMIN_ID}`) { /*If the modifiying user is different from the modified post creator...*/
                 return res.status(401).json({ message: "Vous ne pouvez pas modifier le post de quelqu'un d'autre !" }) /*...the function returns an error message*/
             }
 
@@ -66,7 +66,7 @@ module.exports.deletePost = (req, res) => { /*Exports to the Post router a delet
 
     PostModel.findOne({ _id: req.params.id }) /*Otherwise, it searches the database and selects the Post object corresponding to the identifier passed as a parameter*/
         .then((post) => {
-            if (post.posterId != res.locals.user._id && res.locals.user._id != "634461c6f95f3d408f5fa269") { /*If the modifiying user is different from the modified post creator...*/
+            if (post.posterId != res.locals.user._id && res.locals.user._id != `${process.env.ADMIN_ID}`) { /*If the modifiying user is different from the modified post creator...*/
                 return res.status(401).json({ message: "Vous ne pouvez pas supprimer le post de quelqu'un d'autre !" }) /*...the function returns an error message*/
             }
 

@@ -30,7 +30,7 @@ export default function Home() { /*Exports a Home component...*/
                     <div className="right-side">
                         <div className="right-side-container">
                             <div className="wrapper">
-                                <FriendsHint />
+                                {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && <FriendsHint />}
                             </div>
                         </div>
                     </div>

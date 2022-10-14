@@ -32,15 +32,19 @@ export default function NewPostForm() {
     return (
         <div className="post-container">
             <div className="data">
-                <p>
-                    <span>{clientData.followings ? clientData.followings.length : 0}</span>
-                    {' '}Abonnement{clientData.followings.length > 1 ? "s" : null}
-                </p>
+                {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && (
+                    <>
+                        <p>
+                            <span>{clientData.followings ? clientData.followings.length : 0}</span>
+                            {' '}Abonnement{clientData.followings.length > 1 ? "s" : null}
+                        </p>
 
-                <p>
-                    <span>{clientData.followers ? clientData.followers.length : 0}</span>
-                    {' '}Abonné{clientData.followers.length > 1 ? "s" : null}
-                </p>
+                        <p>
+                            <span>{clientData.followers ? clientData.followers.length : 0}</span>
+                            {' '}Abonné{clientData.followers.length > 1 ? "s" : null}
+                        </p>
+                    </>
+                )}
 
                 <div className="user-info">
                     <NavLink to="/profile">
@@ -49,14 +53,25 @@ export default function NewPostForm() {
                 </div>
 
                 <div className="post-form">
-                    <textarea
-                        name="message"
-                        id="message"
-                        placeholder={`Bonjour ${clientData.pseudo} ! Quoi de neuf ?`}
-                        onChange={(e) => setMessage(e.target.value)}
-                        value={message}
-                    >
-                    </textarea>
+                    {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` ? (
+                        <textarea
+                            name="message"
+                            id="message"
+                            placeholder={`Bonjour ${clientData.pseudo} ! Quoi de neuf ?`}
+                            onChange={(e) => setMessage(e.target.value)}
+                            value={message}
+                        >
+                        </textarea>
+                    ) : (
+                        <textarea
+                            name="message"
+                            id="message"
+                            placeholder={`Bonjour ${clientData.pseudo} !`}
+                            onChange={(e) => setMessage(e.target.value)}
+                            value={message}
+                        >
+                        </textarea>
+                    )}
                 </div>
                 <div className="footer-form">
                     {message || postPicture || video ? (
