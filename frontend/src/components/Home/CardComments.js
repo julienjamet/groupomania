@@ -27,8 +27,10 @@ export default function CardComments({ post }) { /*Exports a CardComments compon
     function handleComment(e) { /*...then runs a middleware...*/
         e.preventDefault()
 
-        dispatch(AddComment(post._id, clientData._id, text, clientData.pseudo)) /*...running itself a Patch (Add comment) action...*/
-        setText("") /*...before resetting the Text State*/
+        if (text) {
+            dispatch(AddComment(post._id, clientData._id, text, clientData.pseudo)) /*...running itself a Patch (Add comment) action...*/
+            setText("") /*...before resetting the Text State*/
+        }
     }
 
     /*------------Return*/

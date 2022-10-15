@@ -47,9 +47,11 @@ export default function NewPostForm() {
                 )}
 
                 <div className="user-info">
-                    <NavLink to="/profile">
-                        <img src={clientData.picture} alt="profile-pic" />
-                    </NavLink>
+                    {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && (
+                        <NavLink to="/profile">
+                            <img src={clientData.picture} alt="profile-pic" />
+                        </NavLink>
+                    )}
                 </div>
 
                 <div className="post-form">
@@ -63,14 +65,7 @@ export default function NewPostForm() {
                         >
                         </textarea>
                     ) : (
-                        <textarea
-                            name="message"
-                            id="message"
-                            placeholder={`Bonjour ${clientData.pseudo} !`}
-                            onChange={(e) => setMessage(e.target.value)}
-                            value={message}
-                        >
-                        </textarea>
+                        <h2 id="admin">Bonjour Administrateur !</h2>
                     )}
                 </div>
                 <div className="footer-form">

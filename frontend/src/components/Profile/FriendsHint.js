@@ -17,7 +17,7 @@ export default function FriendsHint() {
         let array = []
 
         usersData.map(user => {
-            if (user._id !== clientData._id && user._id !== "634461c6f95f3d408f5fa269" && !clientData.followings.includes(user._id)) {
+            if (user._id !== clientData._id && user._id !== `${process.env.REACT_APP_ADMIN_ID}` && !clientData.followings.includes(user._id)) {
                 return array.push(user)
             }
             else {
@@ -50,9 +50,7 @@ export default function FriendsHint() {
     }, [clientData.followings.length, usersData.length, FollowAll, allAreFollowed])
 
     function seeProfile(e) {
-        if (clientData._id !== e.target.id) {
-            dispatch(GetUser(e.target.id))
-        }
+        dispatch(GetUser(e.target.id))
     }
 
     return (

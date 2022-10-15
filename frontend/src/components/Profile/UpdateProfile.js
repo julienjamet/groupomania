@@ -139,7 +139,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
             <div id="activity">
                 <h2>Activité de {clientData.pseudo}</h2>
                 <div className="thread-container">
-                    {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && <LeftNav />} {/*...the LeftNav component...*/}
+                    <LeftNav /> {/*...the LeftNav component...*/}
                     <ul>
                         {postsData.map(post => { /*...and, for each post retrieved from the Store...*/
                             if (post.posterId === clientData._id) {

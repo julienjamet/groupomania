@@ -40,10 +40,7 @@
       object-fit: cover;
       transform: scale(1);
       transition: 400ms;
-      &:hover {
-        cursor: pointer;
-        transform: scale(1.1);
-      }
+     
 
       @media screen and(max-width: 590px) {
         height: 40px;
@@ -52,6 +49,12 @@
         border-radius: 14px;
       }
     }
+        .see-user {
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+          }
+        }
     @media screen and(max-width: 590px) {
       position: absolute;
       transform: translate(17px, 18px);
@@ -149,8 +152,6 @@
           &:hover {
             background: white;
             color: $color-1;
-            width: 250px;
-            letter-spacing: 1px;
           }
         }
       }

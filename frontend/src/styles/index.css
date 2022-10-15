@@ -222,6 +222,7 @@ nav::after {
   z-index: -8;
 }
 nav .nav-container {
+  z-index: 11;
   display: flex;
   width: 100%;
   max-width: 1190px;
@@ -314,10 +315,6 @@ nav .nav-container ul li img {
   transform: scale(1);
   transition: 400ms;
 }
-.card-container .card-left img:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-}
 @media screen and (max-width: 590px) {
   .card-container .card-left img {
     height: 40px;
@@ -325,6 +322,10 @@ nav .nav-container ul li img {
     margin-left: 18px;
     border-radius: 14px;
   }
+}
+.card-container .card-left .see-user:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 @media screen and (max-width: 590px) {
   .card-container .card-left {
@@ -424,8 +425,6 @@ nav .nav-container ul li img {
 .card-container .card-right .update-post .button-container .btn:hover {
   background: white;
   color: #FD2D01;
-  width: 250px;
-  letter-spacing: 1px;
 }
 .card-container .card-right .card-pic {
   width: 100%;
@@ -901,7 +900,7 @@ nav .nav-container ul li img {
   display: inline-block;
   padding: 9px 0;
   transition: 0.2s;
-  z-index: 10;
+  z-index: 2;
   cursor: pointer;
   transition: all 400ms;
 }
@@ -1139,6 +1138,10 @@ nav .nav-container ul li img {
 
 #newpost--cancel {
   margin-right: 10px;
+}
+
+#admin {
+  text-align: center;
 }
 
 .post-container {
@@ -1394,6 +1397,11 @@ nav .nav-container ul li img {
   -o-object-fit: cover;
      object-fit: cover;
   box-shadow: 0 0 2px rgba(51, 51, 51, 0.377);
+  transition: 400ms;
+}
+.get-friends-container ul .user-hint img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 .get-friends-container ul .user-hint p {
   text-align: left;
