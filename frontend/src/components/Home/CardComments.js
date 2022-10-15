@@ -10,6 +10,7 @@ import EditDeleteComment from "./EditDeleteComment"
 /*------------Utils*/
 import { timestampParser } from "../Utils"
 import { AddComment } from "../Store/actions/posts.action"
+import GetUser from "../Store/actions/user.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -33,6 +34,12 @@ export default function CardComments({ post }) { /*Exports a CardComments compon
         }
     }
 
+    function seeProfile(e) {
+        if (clientData._id !== e.target.id) {
+            dispatch(GetUser(e.target.id))
+        }
+    }
+
     /*------------Return*/
     return ( /*The CardComments component returns...*/
         <div className="comments-container">
@@ -41,14 +48,19 @@ export default function CardComments({ post }) { /*Exports a CardComments compon
                     <div key={comment._id} className={comment.commenterId === clientData._id ? "comment-container client" : "comment-container"}>
 
                         <div className="left-part">
-                            <img src={
-                                usersData.map(user => {
-                                    if (user._id === comment.commenterId) {
-                                        return user.picture /*...the profile picture...*/
-                                    }
-                                    return null
-                                }).join('')
-                            } alt="commenter-pic" />
+                            <img
+                                src={
+                                    usersData.map(user => {
+                                        if (user._id === comment.commenterId) {
+                                            return user.picture /*...the profile picture...*/
+                                        }
+                                        return null
+                                    }).join('')
+                                }
+                                id={comment.commenterId}
+                                className={clientData._id !== comment.commenterId && "see-user"}
+                                onClick={seeProfile}
+                                alt="commenter-pic" />
                         </div>
 
                         <div className="right-part">

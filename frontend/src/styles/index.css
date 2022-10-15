@@ -504,12 +504,17 @@ nav .nav-container ul li img {
   box-shadow: 1px 1px 3px rgba(51, 51, 51, 0.192);
   -o-object-fit: cover;
      object-fit: cover;
+  transition: 400ms;
 }
 @media screen and (max-width: 440px) {
   .card-container .card-right .comment-container img {
     height: 37px;
     width: 37px;
   }
+}
+.card-container .card-right .comment-container .see-user:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 .card-container .card-right .comment-container .comment-header {
   display: flex;

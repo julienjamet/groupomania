@@ -9,7 +9,7 @@ import React from 'react'
 /*------------Reducers & Actions*/
 import rootReducer from "./components/Store/reducers/root.reducer"
 import GetUsers from './components/Store/actions/users.action'
-import GetPosts from './components/Store/actions/posts.action'
+import GetPosts, { GetAllPosts } from './components/Store/actions/posts.action'
 
 /*------------Components & Styles*/
 import { Provider } from "react-redux"
@@ -24,6 +24,7 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 
 store.dispatch(GetUsers()) /*Runs a Get (All users) action*/
 store.dispatch(GetPosts()) /*Runs a Get (All posts) action*/
+store.dispatch(GetAllPosts())
 
 /*------------React App*/
 const root = ReactDOM.createRoot(document.getElementById('root')) /*Creates a React Root*/

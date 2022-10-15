@@ -12,7 +12,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbars/Navbar"
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
-import UserProfile from "./components/Profile/UserProfile"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -42,7 +41,6 @@ export default function App() { /*Exports to the Root an App component...*/
       <Navbar /> {/*...running the Navbar component on all routes*/}
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/profile/:id" element={<UserProfile />} />
         {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && <Route path="/profile" element={<Profile />} />}
         <Route path="*" element={<Home />} />
       </Routes>

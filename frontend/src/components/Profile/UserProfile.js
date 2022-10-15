@@ -12,12 +12,20 @@ import Card from "../Home/Card"
 export default function UserProfile() { /*Exports to the Profile page an UpdateProfile component...*/
 
     /*------------Data*/
+    const clientData = useSelector(state => state.clientReducer)
     const userData = useSelector(state => state.userReducer) /*...that gets the client data...*/
     const usersData = useSelector(state => state.usersReducer) /*...and the users data from the Store...*/
-    const postsData = useSelector(state => state.postsReducer)
+    const allPostsData = useSelector(state => state.allPostsReducer)
 
     const [followings, setFollowings] = useState(false)
     const [followers, setFollowers] = useState(false)
+    const [firstTime, setFirstTime] = useState(true)
+
+    if (firstTime) {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        setFirstTime(false)
+    }
 
     /*------------Return*/
     return ( /*The UpdateProfile component returns...*/
@@ -54,7 +62,7 @@ export default function UserProfile() { /*Exports to the Profile page an UpdateP
                                                     <img src={user.picture} alt={`${user.pseudo} pic`} /> {/*...its profile picture...*/}
                                                     <p>{user.pseudo}</p> {/*...its name...*/}
                                                     <div className="follow-handler">
-                                                        <FollowHandler idToFollow={user._id} type="suggestion" /> {/*...and the FollowHandler component*/}
+                                                        {clientData._id !== user._id && <FollowHandler idToFollow={user._id} type="suggestion" />} {/*...and the FollowHandler component*/}
                                                     </div>
                                                 </li>
                                             )
@@ -81,8 +89,9 @@ export default function UserProfile() { /*Exports to the Profile page an UpdateP
                                                     <li key={user._id}>
                                                         <img src={user.picture} alt={`${user.pseudo} pic`} /> {/*...its profile picture...*/}
                                                         <p>{user.pseudo}</p> {/*...its name...*/}
+
                                                         <div className="follow-handler">
-                                                            <FollowHandler idToFollow={user._id} type="suggestion" /> {/*...and the FollowHandler component*/}
+                                                            {clientData._id !== user._id && <FollowHandler idToFollow={user._id} type="suggestion" />} {/*...and the FollowHandler component*/}
                                                         </div>
                                                     </li>
                                                 )
@@ -101,7 +110,7 @@ export default function UserProfile() { /*Exports to the Profile page an UpdateP
                 <div className="thread-container">
                     <LeftNav /> {/*...the LeftNav component...*/}
                     <ul>
-                        {postsData.map(post => { /*...and, for each post retrieved from the Store...*/
+                        {allPostsData.map(post => { /*...and, for each post retrieved from the Store...*/
                             if (post.posterId === userData._id) {
                                 return (
                                     <li key={post._id} className="card-container">

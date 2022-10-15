@@ -21,7 +21,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
     /*------------Data*/
     const clientData = useSelector(state => state.clientReducer) /*...that gets the client data...*/
     const usersData = useSelector(state => state.usersReducer) /*...and the users data from the Store...*/
-    const postsData = useSelector(state => state.postsReducer)
+    const allPostsData = useSelector(state => state.allPostsReducer)
     const dispatch = useDispatch()
 
     const [bio, setBio] = useState(clientData.bio)
@@ -141,7 +141,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
                 <div className="thread-container">
                     <LeftNav /> {/*...the LeftNav component...*/}
                     <ul>
-                        {postsData.map(post => { /*...and, for each post retrieved from the Store...*/
+                        {allPostsData.map(post => { /*...and, for each post retrieved from the Store...*/
                             if (post.posterId === clientData._id) {
                                 return (
                                     <li key={post._id} className="card-container">
