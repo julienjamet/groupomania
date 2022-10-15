@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import GetUser from "../Store/actions/user.action"
 import FollowHandler from "./FollowHandler"
 
 export default function FriendsHint() {
     const clientData = useSelector(state => state.clientReducer)
     const usersData = useSelector(state => state.usersReducer)
+    const dispatch = useDispatch()
 
     const [loadOnce, setLoadOnce] = useState(false)
     const [FollowAll, setFollowAll] = useState(false)
@@ -47,6 +49,12 @@ export default function FriendsHint() {
         }
     }, [clientData.followings.length, usersData.length, FollowAll, allAreFollowed])
 
+    function seeProfile(e) {
+        if (clientData._id !== e.target.id) {
+            dispatch(GetUser(e.target.id))
+        }
+    }
+
     return (
         <div className="get-friends-container">
             <h4>Suggestions</h4>
@@ -61,7 +69,18 @@ export default function FriendsHint() {
                     friendsHint.map(user => {
                         return (
                             <li className="user-hint" key={user._id}>
-                                <img src={user.picture} alt="friend-pic" title={user.bio} />
+                                <img
+                                    src={user.picture}
+                                    id={
+                                        usersData.map(users => {
+                                            if (users._id === user._id) {
+                                                return user._id /*...the profile picture...*/
+                                            }
+                                            return null
+                                        }).join('')
+                                    }
+                                    alt="friend-pic"
+                                    onClick={seeProfile} />
                                 <p>{user.pseudo}</p>
                                 <FollowHandler idToFollow={user._id} type="suggestion" />
                             </li>

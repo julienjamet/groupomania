@@ -5,6 +5,7 @@ import { useState } from "react"
 
 /*------------Actions*/
 import { UpdatePost } from "../Store/actions/posts.action"
+import GetUser from "../Store/actions/user.action"
 
 /*------------Components*/
 import FollowHandler from "../Profile/FollowHandler"
@@ -41,18 +42,36 @@ export default function Card({ post }) { /*Exports to the Thread a Card componen
         setUpdatePost(false) /*...and the UpdatePost State to "false"*/
     }
 
+    function seeProfile(e) {
+        if (clientData._id !== e.target.id) {
+            dispatch(GetUser(e.target.id))
+        }
+    }
+
     /*------------Return*/
     return ( /*The Card component returns...*/
         <>
             <div className="card-left">
-                <img src={
-                    usersData.map(user => {
-                        if (user._id === post.posterId) {
-                            return user.picture /*...the profile picture...*/
-                        }
-                        return null
-                    }).join('')
-                } alt="profile-pic" />
+                <img
+                    src={
+                        usersData.map(user => {
+                            if (user._id === post.posterId) {
+                                return user.picture /*...the profile picture...*/
+                            }
+                            return null
+                        }).join('')
+                    }
+                    id={
+                        usersData.map(user => {
+                            if (user._id === post.posterId) {
+                                return user._id /*...the profile picture...*/
+                            }
+                            return null
+                        }).join('')
+                    }
+                    alt="profile-pic"
+                    onClick={seeProfile}
+                />
             </div>
 
             <div className="card-right">

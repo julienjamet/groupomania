@@ -1,15 +1,21 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------Redux modules*/
-import { combineReducers } from "redux"
-
-/*------------Reducers*/
-import usersReducer from "./users.reducer"
-import userReducer from "./user.reducer"
-import postsReducer from "./posts.reducer"
-import clientReducer from "./client.reducer"
+import { GET_USER, RESET } from "../actions/user.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-export default combineReducers({ usersReducer, userReducer, postsReducer, clientReducer }) /*Exports to the Root a Root reducer that combines all reducers*/
+const initialState = {}
+
+export default function userReducer(state = initialState, action) { /*Exports a Client reducer...*/
+    switch (action.type) {
+        case GET_USER:
+            return action.payload
+
+        case RESET:
+            return action.payload
+
+        default:
+            return state
+    }
+}
 /*-------------------------------------------------------------------------------------------------------------------*/

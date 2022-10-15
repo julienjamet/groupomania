@@ -38,6 +38,12 @@
       border-radius: 20px;
       box-shadow: 1px 1px 3px rgba(51, 51, 51, 0.192);
       object-fit: cover;
+      transform: scale(1);
+      transition: 400ms;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
 
       @media screen and(max-width: 590px) {
         height: 40px;
