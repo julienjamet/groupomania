@@ -69,14 +69,7 @@ export default function FriendsHint() {
                             <li className="user-hint" key={user._id}>
                                 <img
                                     src={user.picture}
-                                    id={
-                                        usersData.map(users => {
-                                            if (users._id === user._id) {
-                                                return user._id /*...the profile picture...*/
-                                            }
-                                            return null
-                                        }).join('')
-                                    }
+                                    id={user._id}
                                     alt="friend-pic"
                                     onClick={seeProfile} />
                                 <p>{user.pseudo}</p>

@@ -85,7 +85,18 @@ input[type="submit"] {
   transform: translateY(5px);
   transition: transform 400ms;
   &:hover {
+    background-color: white;
     transform: translateY(0);
+  }
+}
+#submit-image {
+  background-color: $color-3;
+  color: $color-2;
+  margin-bottom: -10px;
+  transform: translateY(10px);
+  &:hover {
+    background-color: white;
+    color: $color-1;
   }
 }
 

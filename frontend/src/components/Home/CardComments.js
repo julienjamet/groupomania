@@ -35,9 +35,9 @@ export default function CardComments({ post }) { /*Exports a CardComments compon
     }
 
     function seeProfile(e) {
-        if (clientData._id !== e.target.id) {
-            dispatch(GetUser(e.target.id))
-        }
+        dispatch(GetUser(e.target.id))
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }
 
     /*------------Return*/
@@ -58,9 +58,10 @@ export default function CardComments({ post }) { /*Exports a CardComments compon
                                     }).join('')
                                 }
                                 id={comment.commenterId}
-                                className={clientData._id !== comment.commenterId && "see-user"}
+                                className="see-user"
                                 onClick={seeProfile}
-                                alt="commenter-pic" />
+                                alt="commenter-pic"
+                            />
                         </div>
 
                         <div className="right-part">

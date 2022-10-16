@@ -46,7 +46,7 @@ export default function UploadImage() { /*Exports to the UpdateProfile an Upload
                 }}
             />
             <br />
-            <input type="submit" id="submit" value="Envoyer" />
+            {loadedFile && <input type="submit" id="submit-image" value="Envoyer" />}
         </form>
     )
 }

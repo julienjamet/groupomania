@@ -1,6 +1,6 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
 /*------------Redux & React modules*/
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 
 /*------------Components*/
@@ -8,6 +8,8 @@ import LeftNav from "../Navbars/LeftNav"
 import dateParser from "../Utils"
 import FollowHandler from "./FollowHandler"
 import Card from "../Home/Card"
+import GetUser, { Reset } from "../Store/actions/user.action"
+import { NavLink } from "react-router-dom"
 
 export default function UserProfile() { /*Exports to the Profile page an UpdateProfile component...*/
 
@@ -16,6 +18,7 @@ export default function UserProfile() { /*Exports to the Profile page an UpdateP
     const userData = useSelector(state => state.userReducer) /*...that gets the client data...*/
     const usersData = useSelector(state => state.usersReducer) /*...and the users data from the Store...*/
     const allPostsData = useSelector(state => state.allPostsReducer)
+    const dispatch = useDispatch()
 
     const [followings, setFollowings] = useState(false)
     const [followers, setFollowers] = useState(false)
@@ -25,6 +28,25 @@ export default function UserProfile() { /*Exports to the Profile page an UpdateP
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
         setFirstTime(false)
+    }
+
+    function seeProfile(e) {
+        if (followers) {
+            setFollowers(false)
+            dispatch(GetUser(e.target.id))
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+        else if (followings) {
+            setFollowings(false)
+            dispatch(GetUser(e.target.id))
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    }
+
+    function editProfile() {
+        dispatch(Reset())
     }
 
     /*------------Return*/
@@ -37,6 +59,12 @@ export default function UserProfile() { /*Exports to the Profile page an UpdateP
                     <div className="left-part">
                         <h3>Photo de profil</h3>
                         <img src={userData.picture} alt="user-pic" />
+                        {userData._id !== clientData._id && clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && <FollowHandler idToFollow={userData._id} type="suggestion" />}
+                        {userData._id === clientData._id && (
+                            <NavLink to="/profile" onClick={editProfile}>
+                                <button id="edit-profile">Editer le profil</button>
+                            </NavLink>
+                        )}
                     </div>
                     <div className="right-part">
                         <div className="bio-update">
@@ -59,10 +87,16 @@ export default function UserProfile() { /*Exports to the Profile page an UpdateP
                                         if (user._id === userData.followings[i]) {
                                             return ( /*...that returns, for each user found in the client's subscriptions list...*/
                                                 <li key={user._id}>
-                                                    <img src={user.picture} alt={`${user.pseudo} pic`} /> {/*...its profile picture...*/}
+                                                    <img
+                                                        src={user.picture}
+                                                        id={user._id}
+                                                        className="see-user"
+                                                        onClick={seeProfile}
+                                                        alt={`${user.pseudo} pic`}
+                                                    /> {/*...its profile picture...*/}
                                                     <p>{user.pseudo}</p> {/*...its name...*/}
                                                     <div className="follow-handler">
-                                                        {clientData._id !== user._id && <FollowHandler idToFollow={user._id} type="suggestion" />} {/*...and the FollowHandler component*/}
+                                                        {(clientData._id !== user._id && clientData._id !== `${process.env.REACT_APP_ADMIN_ID}`) && <FollowHandler idToFollow={user._id} type="suggestion" />} {/*...and the FollowHandler component*/}
                                                     </div>
                                                 </li>
                                             )
@@ -87,11 +121,17 @@ export default function UserProfile() { /*Exports to the Profile page an UpdateP
                                             if (user._id === userData.followers[i]) {
                                                 return ( /*...that returns, for each user found in the client's followers list...*/
                                                     <li key={user._id}>
-                                                        <img src={user.picture} alt={`${user.pseudo} pic`} /> {/*...its profile picture...*/}
+                                                        <img
+                                                            src={user.picture}
+                                                            id={user._id}
+                                                            className="see-user"
+                                                            onClick={seeProfile}
+                                                            alt={`${user.pseudo} pic`}
+                                                        /> {/*...its profile picture...*/}
                                                         <p>{user.pseudo}</p> {/*...its name...*/}
 
                                                         <div className="follow-handler">
-                                                            {clientData._id !== user._id && <FollowHandler idToFollow={user._id} type="suggestion" />} {/*...and the FollowHandler component*/}
+                                                            {(clientData._id !== user._id && clientData._id !== `${process.env.REACT_APP_ADMIN_ID}`) && <FollowHandler idToFollow={user._id} type="suggestion" />} {/*...and the FollowHandler component*/}
                                                         </div>
                                                     </li>
                                                 )
@@ -108,7 +148,6 @@ export default function UserProfile() { /*Exports to the Profile page an UpdateP
             <div id="activity">
                 <h2>Activité de {userData.pseudo}</h2>
                 <div className="thread-container">
-                    <LeftNav /> {/*...the LeftNav component...*/}
                     <ul>
                         {allPostsData.map(post => { /*...and, for each post retrieved from the Store...*/
                             if (post.posterId === userData._id) {

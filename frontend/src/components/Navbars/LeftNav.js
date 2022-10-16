@@ -1,5 +1,5 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 import { Reset } from "../Store/actions/user.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
@@ -8,6 +8,7 @@ import { Reset } from "../Store/actions/user.action"
 /*Operation----------------------------------------------------------------------------------------------------------*/
 export default function LeftNav() { /*Exports to the Home, Trendings and Profile pages a LeftNav component...*/
 
+    const clientData = useSelector(state => state.clientReducer)
     const dispatch = useDispatch()
 
     function resetUserData() {
@@ -23,9 +24,11 @@ export default function LeftNav() { /*Exports to the Home, Trendings and Profile
                     </NavLink>
                     <br />
 
-                    <NavLink to="/profile" className={link => (link.isActive ? "active-left-nav" : null)} onClick={resetUserData}>
-                        <img src="./img/icons/user.svg" alt="user-icon" />
-                    </NavLink>
+                    {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && (
+                        <NavLink to="/profile" className={link => (link.isActive ? "active-left-nav" : null)} onClick={resetUserData}>
+                            <img src="./img/icons/user.svg" alt="user-icon" />
+                        </NavLink>
+                    )}
                 </div>
             </div>
         </div>

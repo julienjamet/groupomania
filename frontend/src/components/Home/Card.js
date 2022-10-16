@@ -43,9 +43,9 @@ export default function Card({ post }) { /*Exports to the Thread a Card componen
     }
 
     function seeProfile(e) {
-        if (clientData._id !== e.target.id) {
-            dispatch(GetUser(e.target.id))
-        }
+        dispatch(GetUser(e.target.id))
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }
 
     /*------------Return*/
@@ -70,7 +70,7 @@ export default function Card({ post }) { /*Exports to the Thread a Card componen
                         }).join('')
                     }
                     alt="profile-pic"
-                    className={clientData._id !== post.posterId && "see-user"}
+                    className="see-user"
                     onClick={seeProfile}
                 />
             </div>

@@ -85,7 +85,19 @@ input[type=submit]:hover {
   transition: transform 400ms;
 }
 #submit:hover {
+  background-color: white;
   transform: translateY(0);
+}
+
+#submit-image {
+  background-color: #4E5166;
+  color: #FFD7D7;
+  margin-bottom: -10px;
+  transform: translateY(10px);
+}
+#submit-image:hover {
+  background-color: white;
+  color: #FD2D01;
 }
 
 input[type=checkbox] {
@@ -879,6 +891,9 @@ nav .nav-container ul li img {
 }
 .profil-page .update-container .left-part {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .profil-page .update-container .left-part h3 {
   margin-bottom: 12px;
@@ -891,6 +906,27 @@ nav .nav-container ul li img {
      object-fit: cover;
   margin-bottom: 30px;
   box-shadow: 0 0 6px rgba(51, 51, 51, 0.363);
+}
+.profil-page .update-container .left-part .follow-btn, .profil-page .update-container .left-part .unfollow-btn {
+  background-color: #FD2D01;
+  color: #FFD7D7;
+  font-weight: bold;
+  margin-top: 20px;
+}
+.profil-page .update-container .left-part .follow-btn:hover, .profil-page .update-container .left-part .unfollow-btn:hover {
+  background-color: white;
+  color: #FD2D01;
+}
+.profil-page .update-container .left-part #edit-profile {
+  background-color: #4E5166;
+  color: #FFD7D7;
+  transition: 600ms;
+  transform: translateY(15px);
+}
+.profil-page .update-container .left-part #edit-profile:hover {
+  background-color: white;
+  color: #FD2D01;
+  transform: translateY(10px);
 }
 .profil-page .update-container .left-part form {
   position: relative;
@@ -906,6 +942,7 @@ nav .nav-container ul li img {
   padding: 9px 0;
   transition: 0.2s;
   z-index: 2;
+  margin-top: 25px;
   cursor: pointer;
   transition: all 400ms;
 }
@@ -1089,6 +1126,11 @@ nav .nav-container ul li img {
   -o-object-fit: cover;
      object-fit: cover;
   box-shadow: 0 0 2px rgba(51, 51, 51, 0.376);
+  transition: all 400ms;
+}
+.profil-page .popup-profil-container .modal ul li .see-user:hover {
+  transform: scale(1.05) translateX(2px);
+  cursor: pointer;
 }
 .profil-page .popup-profil-container .modal ul li h4 {
   text-align: left;
