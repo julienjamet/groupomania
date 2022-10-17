@@ -2,6 +2,7 @@
 /*------------Redux & React modules*/
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
+import axios from "axios"
 
 /*------------Actions*/
 import { PutBio } from "../Store/actions/client.action"
@@ -58,6 +59,17 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
             document.documentElement.scrollTop = 0;
         }
     }
+
+    function handleDelete() {
+        axios({
+            method: "delete",
+            url: `http://localhost:5000/api/user/${clientData._id}`,
+            withCredentials: true
+        })
+
+        window.location.reload()
+    }
+
     /*------------Return*/
     return ( /*The UpdateProfile component returns...*/
         <>
@@ -65,7 +77,14 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
                 <>
                     <div className="profil-container">
                         <LeftNav /> {/*...the LeftNav component...*/}
-                        <h1>Profil de {clientData.pseudo}</h1>
+                        <div id="profile-title">
+                            <h1>Profil de {clientData.pseudo}</h1>
+                            <button onClick={() => {
+                                if (window.confirm("Attention, cette action est irréversible ! Voulez-vous vraiment supprimer votre compte ?")) {
+                                    handleDelete()
+                                }
+                            }}>Supprimer le compte</button>
+                        </div>
                         <div className="update-container">
                             <div className="left-part">
                                 <h3>Photo de profil</h3>

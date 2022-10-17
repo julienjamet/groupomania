@@ -842,6 +842,21 @@ nav .nav-container ul li img {
 .profil-page .connection-form .form-container form a:hover {
   text-decoration: underline;
 }
+.profil-page #profile-title {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin-left: 25%;
+}
+.profil-page #profile-title button {
+  background-color: #4E5166;
+  color: white;
+  transition: 600ms;
+}
+.profil-page #profile-title button:hover {
+  transform: scale(1.02);
+  background-color: #FD2D01;
+}
 .profil-page h1 {
   text-align: center;
   margin: 10px 0 6px;

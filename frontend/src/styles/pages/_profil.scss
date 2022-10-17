@@ -111,6 +111,22 @@
     }
   }
 
+  #profile-title {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin-left: 25%;
+    button {
+      background-color: $color-3;
+      color: white;
+      transition: 600ms;
+      &:hover {
+        transform: scale(1.02);
+        background-color: $color-1;
+      }
+    }
+  }
+
   h1 {
     text-align: center;
     margin: 10px 0 6px;

@@ -45,7 +45,7 @@ export default function CardComments({ post }) { /*Exports a CardComments compon
         <div className="comments-container">
             {post.comments.map(comment => { /*...for each comment retrieved from the Store...*/
                 return (
-                    <div key={comment._id} className={comment.commenterId === clientData._id ? "comment-container client" : "comment-container"}>
+                    <div key={comment._id} className={comment.commenterId === clientData._id || clientData._id === `${process.env.REACT_APP_ADMIN_ID}` ? "comment-container client" : "comment-container"}>
 
                         <div className="left-part">
                             <img
