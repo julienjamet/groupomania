@@ -1,11 +1,11 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
 /*------------Redux & React modules*/
 import { useDispatch, useSelector } from "react-redux"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 
 /*------------Actions*/
-import { PutBio } from "../Store/actions/client.action"
+import { PutBio, UnfollowUser } from "../Store/actions/client.action"
 
 /*------------Components*/
 import LeftNav from "../Navbars/LeftNav"
@@ -15,6 +15,7 @@ import FollowHandler from "./FollowHandler"
 import Card from "../Home/Card"
 import GetUser from "../Store/actions/user.action"
 import UserProfile from "./UserProfile"
+import { DeleteComment, DeletePost, UnlikePost } from "../Store/actions/posts.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -33,6 +34,8 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
 
     const [followings, setFollowings] = useState(false)
     const [followers, setFollowers] = useState(false)
+
+    const [isDeleted, setIsDeleted] = useState(false)
 
     /*Middlewares*/
     function handleUpdate() { /*...then runs a handling middleware...*/
@@ -60,15 +63,65 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
         }
     }
 
-    function handleDelete() {
-        axios({
-            method: "delete",
-            url: `http://localhost:5000/api/user/${clientData._id}`,
-            withCredentials: true
+    async function handleDelete() {
+        await usersData.map(user => {
+            if (user.followers.includes(clientData._id)) {
+                return dispatch(UnfollowUser(user._id, clientData._id))
+            }
+            else {
+                return null
+            }
         })
 
-        window.location.reload()
+        await usersData.map(user => {
+            if (user.followings.includes(clientData._id)) {
+                return user.followings.filter(id => id !== clientData._id)
+            }
+            else {
+                return null
+            }
+        })
+
+        await allPostsData.map(post => {
+            if (post.posterId === clientData._id) {
+                return dispatch(DeletePost(post._id))
+            }
+            else {
+                return null
+            }
+        })
+
+        await allPostsData.map(post => {
+            post.comments.map(comment => {
+                if (comment.commenterId === clientData._id) {
+                    return dispatch(DeleteComment(post._id, comment._id, comment.commenterId))
+                }
+                else {
+                    return null
+                }
+            })
+        })
+
+        await allPostsData.map(post => {
+            if (post.likers.includes(clientData._id)) {
+                return dispatch(UnlikePost(clientData._id, post._id))
+            }
+            else {
+                return null
+            }
+        })
+
+        if (!allPostsData.includes(clientData._id)) {
+            axios.delete(`http://localhost:5000/api/user/${clientData._id}`, { withCredentials: true })
+                .then(() => { setIsDeleted(true) })
+        }
     }
+
+    useEffect(() => {
+        if (isDeleted === true) {
+            window.location = "/home"
+        }
+    }, [isDeleted])
 
     /*------------Return*/
     return ( /*The UpdateProfile component returns...*/
