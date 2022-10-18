@@ -286,7 +286,7 @@ nav .nav-container ul li img {
 }
 
 .home-header {
-  height: 250px;
+  height: 290px;
 }
 
 .card-container {
@@ -1358,17 +1358,27 @@ nav .nav-container ul li img {
   margin: 0 auto;
   width: 100%;
 }
+.post-container .post-form .footer-form #buttons {
+  position: absolute;
+  right: 0;
+}
+.post-container .post-form .footer-form img {
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  margin-right: 100px;
+}
+.post-container .post-form .footer-form #loaded {
+  color: green;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 0.9em;
+}
 .post-container .post-form .footer-form .icon {
   position: relative;
   cursor: pointer;
   width: 30px;
   height: 20px;
-}
-.post-container .post-form .footer-form .icon img {
-  position: absolute;
-  height: 24px;
-  width: 24px;
-  transform: translate(-18px, -1px);
 }
 .post-container .post-form .footer-form .icon button {
   width: 190px;
@@ -1379,15 +1389,14 @@ nav .nav-container ul li img {
 .post-container .post-form .footer-form .icon button:hover {
   background: #FD2D01;
 }
-.post-container .post-form .footer-form .icon input {
-  width: 25px;
-  height: 25px;
+.post-container .post-form .footer-form #file-upload {
+  height: 50px;
   position: absolute;
-  transform: translate(-16px, -3px);
+  left: 0;
   opacity: 0;
   cursor: pointer;
 }
-.post-container .post-form .footer-form .icon input::-webkit-file-upload-button {
+.post-container .post-form .footer-form #file-upload::-webkit-file-upload-button {
   cursor: pointer;
 }
 .post-container .post-form .footer-form p {

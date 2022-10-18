@@ -41,19 +41,13 @@ export function GetAllPosts() {
 }
 
 /*------------POST (Post)*/
-export function AddPost(clientData, message) { /*Exports a Post (Add post) action...*/
+export function AddPost(data) { /*Exports a Post (Add post) action...*/
 
     return (dispatch) => {
         axios({ /*...that runs a POST (Add post) request...*/
             method: "post",
             url: `http://localhost:5000/api/post`,
-            data: {
-                "posterId": clientData._id,
-                "posterPseudo": clientData.pseudo,
-                "message": message,
-                "likers": [],
-                "comments": []
-            },
+            data: data,
             withCredentials: true
         })
 

@@ -9,24 +9,38 @@ export default function NewPostForm() {
     const dispatch = useDispatch()
 
     const [message, setMessage] = useState('')
-    const [postPicture, setPostPicture] = useState('')
-    const [video, setVideo] = useState('')
+    const [picture, setPicture] = useState('')
+    const [loadedPicture, setLoadedPicture] = useState(false)
     const [file, setFile] = useState('')
 
-    function handlePost() {
-        dispatch(AddPost(clientData, message))
+    function handlePost(e) {
+
+        if (message || picture) {
+            const data = new FormData()
+            data.append("posterId", clientData._id)
+            data.append("message", message)
+            if (file) data.append("image", file)
+
+            dispatch(AddPost(data))
+        }
 
         setMessage('')
-        setPostPicture(null)
-        setVideo('')
+        setPicture('')
+        setLoadedPicture(false)
         setFile('')
     }
 
     function cancelPost() {
         setMessage('')
-        setPostPicture(null)
-        setVideo('')
+        setPicture('')
+        setLoadedPicture(false)
         setFile('')
+    }
+
+    function handlePicture(e) {
+        setLoadedPicture(true)
+        setPicture(URL.createObjectURL(e.target.files[0]))
+        setFile(e.target.files[0])
     }
 
     return (
@@ -62,21 +76,34 @@ export default function NewPostForm() {
                             placeholder={`Bonjour ${clientData.pseudo} ! Quoi de neuf ?`}
                             onChange={(e) => setMessage(e.target.value)}
                             value={message}
-                        >
-                        </textarea>
+                        />
                     ) : (
                         <h2 id="admin">Bonjour Administrateur !</h2>
                     )}
-                </div>
-                <div className="footer-form">
-                    {message || postPicture || video ? (
-                        <>
-                            <button id="newpost--cancel" onClick={cancelPost}>Annuler</button>
-                            <button id="newpost--send" onClick={handlePost}>Envoyer</button>
-                        </>
-                    ) : (
-                        null
-                    )}
+
+                    <div className="footer-form">
+                        {!picture ? (
+                            <>
+                                <img src="./img/icons/picture.svg" alt="image" />
+                                <input
+                                    type="file"
+                                    id="file-upload"
+                                    name="file"
+                                    accept=".jpg, .jpeg, .png"
+                                    onChange={(e) => { handlePicture(e) }} />
+                            </>
+                        ) : (
+                            <span id="loaded">Votre fichier est chargé</span>
+                        )}
+                        {message || picture ? (
+                            <div id="buttons">
+                                <button id="newpost--cancel" onClick={cancelPost}>Annuler</button>
+                                <button id="newpost--send" onClick={handlePost}>Envoyer</button>
+                            </div>
+                        ) : (
+                            null
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

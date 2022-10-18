@@ -158,19 +158,30 @@
       justify-content: space-between;
       margin: 0 auto;
       width: 100%;
+      #buttons {
+        position: absolute;
+        right: 0;
+        }
+
+      img {
+          position: absolute;
+          height: 24px;
+          width: 24px;
+          margin-right: 100px;
+        }
+
+        #loaded {
+          color: green;
+          font-style: italic;
+          font-weight: normal;
+          font-size: 0.9em;
+        }
 
       .icon {
         position: relative;
         cursor: pointer;
         width: 30px;
         height: 20px;
-
-        img {
-          position: absolute;
-          height: 24px;
-          width: 24px;
-          transform: translate(-18px, -1px);
-        }
 
         button {
           width: 190px;
@@ -183,19 +194,19 @@
           }
         }
 
-        input {
-          width: 25px;
-          height: 25px;
-          position: absolute;
-          transform: translate(-16px, -3px);
-          opacity: 0;
-          cursor: pointer;
-
-          &::-webkit-file-upload-button {
-            cursor: pointer;
-          }
-        }
+        
       }
+            #file-upload {
+              height: 50px;
+              position: absolute;
+              left: 0;
+              opacity: 0;
+              cursor: pointer;
+      
+              &::-webkit-file-upload-button {
+                cursor: pointer;
+              }
+            }
       p {
         margin-top: 4px;
         color: red;
