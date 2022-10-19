@@ -78,7 +78,7 @@ export function FollowUser(idToFollow, userId) { /*Exports a Patch (Follow) acti
 
             .then(() => { /*...before sending the id to follow to the Client reducer*/
                 dispatch({ type: FOLLOW_USER, payload: idToFollow })
-                dispatch({ type: FOLLOWED_USER, payload: userId })
+                dispatch({ type: FOLLOWED_USER, payload: { userId, idToFollow } })
             })
             .catch(error => console.log(error))
     }

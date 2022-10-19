@@ -57,7 +57,6 @@ exports.updateUser = (req, res) => { /*Exports to the User router a updateUser()
             const filename = user.picture.split('/profil/')[1] /*Otherwise it targets in the "images" folder any image associated with this user...*/
 
             if (req.file !== undefined && filename !== "random-user.png") {
-                console.log("cas 1")
                 fs.unlink(`../frontend/public/uploads/profil/${filename}`, () => {
                     UserModel.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id }) /*...then updates the former User object with the new information*/
                         .then(() => res.status(200).json({ message: "La modification a été effectuée !" }))
@@ -67,8 +66,8 @@ exports.updateUser = (req, res) => { /*Exports to the User router a updateUser()
                         })
                 })
             }
+
             else if ((req.file !== undefined && filename === "random-user.png") || req.file === undefined) {
-                console.log("cas 2")
                 UserModel.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id }) /*...then updates the former User object with the new information*/
                     .then(() => res.status(200).json({ message: "La modification a été effectuée !" }))
                     .catch(error => {

@@ -19,9 +19,14 @@ export default function userReducer(state = initialState, action) { /*Exports a 
             }
 
         case FOLLOWED_USER:
-            return {
-                ...state,
-                followers: [action.payload, ...state.followers]
+            if (state._id === action.payload.idToFollow) {
+                return {
+                    ...state,
+                    followers: [action.payload.userId, ...state.followers]
+                }
+            }
+            else {
+                return state
             }
 
         case UNFOLLOWED_USER:
