@@ -1,7 +1,7 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
 /*------------Redux & React modules*/
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import axios from "axios"
 
 /*------------Actions*/
@@ -35,8 +35,6 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
     const [followings, setFollowings] = useState(false)
     const [followers, setFollowers] = useState(false)
 
-    const [isDeleted, setIsDeleted] = useState(false)
-
     /*Middlewares*/
     function handleUpdate() { /*...then runs a handling middleware...*/
         dispatch(PutBio(bio, clientData._id)) /*...running a Put (Bio) action...*/
@@ -47,6 +45,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
         setBio(clientData.bio) /*...setting the Bio State to its initial state...*/
         setUpdateForm(false) /*...and the UpdateForm State to "false"*/
     }
+
 
     function seeProfile(e) {
         if (followers) {
@@ -62,6 +61,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
             document.documentElement.scrollTop = 0;
         }
     }
+
 
     async function handleDelete() {
         await usersData.map(user => {
@@ -83,7 +83,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
         })
 
         await allPostsData.map(post => {
-            post.comments.map(comment => {
+            return post.comments.map(comment => {
                 if (comment.commenterId === clientData._id) {
                     return dispatch(DeleteComment(post._id, comment._id, comment.commenterId))
                 }

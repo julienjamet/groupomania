@@ -18,6 +18,7 @@ import Profile from "./pages/Profile"
 /*Operation----------------------------------------------------------------------------------------------------------*/
 export default function App() { /*Exports to the Root an App component...*/
 
+  /*------------Data*/
   const clientData = useSelector(state => state.clientReducer)
 
   /*------------Middleware*/

@@ -22,7 +22,9 @@ export default function Home() { /*Exports a Home component...*/
     return ( /*...then returns...*/
         <div>
             {!userData._id ? (
+
                 <div className="profil-page">
+
                     {clientData._id ? ( /*...if there is client data...*/
                         <>
                             <div className="main">
@@ -39,7 +41,9 @@ export default function Home() { /*Exports a Home component...*/
                                 </div>
                             </div>
                         </>
+
                     ) : ( /*...and if there is no client data...*/
+
                         <div className="log-container">
                             <LogModal /> {/*...the LogModal component*/}
                             <div className="img-container">
@@ -48,8 +52,8 @@ export default function Home() { /*Exports a Home component...*/
                         </div>
                     )}
                 </div>
-            ) : (
-                <UserProfile />
+            ) : ( /*If there is userData, the Home component returns instead...*/
+                <UserProfile /> /*...a UserProfile component*/
             )}
         </div>
     )

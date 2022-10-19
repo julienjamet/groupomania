@@ -16,15 +16,16 @@ export default function Navbar() { /*Exports to the App a Navbar component...*/
     const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/
     const dispatch = useDispatch()
 
-    function resetUserData() {
-        dispatch(Reset())
+    /*------------Middleware*/
+    function resetUserData() { /*...then runs a middleware...*/
+        dispatch(Reset()) /*...running itself a Reset action*/
     }
 
-    return ( /*...then returns...*/
+    return ( /*The Navbar component returns...*/
         <nav> {/*...a navigation menu...*/}
             <div className="nav-container">
                 <div className="logo">
-                    <NavLink to="/home" onClick={resetUserData}> {/*...that contains a link to the Home page...*/}
+                    <NavLink to="/home" onClick={resetUserData}> {/*...that contains a link to the Home page running the middleware when clicked...*/}
                         <div className="logo">
                             <img src="./img/round_logo.png" alt="icon" />
                             <h3>Groupomania</h3>
@@ -35,7 +36,7 @@ export default function Navbar() { /*Exports to the App a Navbar component...*/
                     <ul>
                         <li></li>
                         <li className="welcome">
-                            <NavLink to="/profile" onClick={resetUserData}> {/*...that also contains one to the Profile page...*/}
+                            <NavLink to="/profile" onClick={resetUserData}> {/*...that also contains one to the Profile page running the middleware when clicked...*/}
                                 <h5>Bienvenue {clientData.pseudo} !</h5>
                             </NavLink>
                         </li>

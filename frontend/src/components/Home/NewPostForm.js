@@ -10,7 +10,6 @@ export default function NewPostForm() {
 
     const [message, setMessage] = useState('')
     const [picture, setPicture] = useState('')
-    const [loadedPicture, setLoadedPicture] = useState(false)
     const [file, setFile] = useState('')
 
     function handlePost(e) {
@@ -26,19 +25,16 @@ export default function NewPostForm() {
 
         setMessage('')
         setPicture('')
-        setLoadedPicture(false)
         setFile('')
     }
 
     function cancelPost() {
         setMessage('')
         setPicture('')
-        setLoadedPicture(false)
         setFile('')
     }
 
     function handlePicture(e) {
-        setLoadedPicture(true)
         setPicture(URL.createObjectURL(e.target.files[0]))
         setFile(e.target.files[0])
     }
@@ -86,7 +82,7 @@ export default function NewPostForm() {
                             <>
                                 {!picture ? (
                                     <>
-                                        <img src="./img/icons/picture.svg" alt="image" />
+                                        <img src="./img/icons/picture.svg" alt="pic-icon" />
                                         <input
                                             type="file"
                                             id="file-upload"

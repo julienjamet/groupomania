@@ -47,6 +47,7 @@ export default function FriendsHint() {
         if (allAreFollowed && !FollowAll) {
             notFriendList()
         }
+        // eslint-disable-next-line
     }, [clientData.followings.length, usersData.length, FollowAll, allAreFollowed])
 
     function seeProfile(e) {

@@ -1,5 +1,5 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-import { PUT_BIO, UNFOLLOWED_USER } from "../actions/client.action"
+import { UNFOLLOWED_USER } from "../actions/client.action"
 import { GET_USERS } from "../actions/users.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 

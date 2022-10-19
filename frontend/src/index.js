@@ -23,8 +23,8 @@ import './styles/index.css'
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk))) /*Creates a Redux Store*/
 
 store.dispatch(GetUsers()) /*Runs a Get (All users) action*/
-store.dispatch(GetPosts()) /*Runs a Get (All posts) action*/
-store.dispatch(GetAllPosts())
+store.dispatch(GetPosts()) /*Runs a Get (Posts) action*/
+store.dispatch(GetAllPosts()) /*Runs a Get (All posts) action*/
 
 /*------------React App*/
 const root = ReactDOM.createRoot(document.getElementById('root')) /*Creates a React Root*/

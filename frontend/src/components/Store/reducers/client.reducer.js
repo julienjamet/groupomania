@@ -1,5 +1,5 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-import { GET_CLIENT, PUT_IMAGE, PUT_BIO, FOLLOW_USER, UNFOLLOW_USER } from "../actions/client.action"
+import { GET_CLIENT, PUT_BIO, FOLLOW_USER, UNFOLLOW_USER } from "../actions/client.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
