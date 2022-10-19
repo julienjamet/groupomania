@@ -9,7 +9,9 @@ export const GET_CLIENT = "GET_CLIENT"
 export const PUT_IMAGE = "PUT_IMAGE"
 export const PUT_BIO = "PUT_BIO"
 export const FOLLOW_USER = "FOLLOW_USER"
+export const FOLLOWED_USER = "FOLLOWED_USER"
 export const UNFOLLOW_USER = "UNFOLLOW_USER"
+export const UNFOLLOWED_USER = "UNFOLLOWED_USER"
 
 /*------------GET (Client)*/
 export default function GetClient(clientId) { /*Exports a Get (Client) action...*/
@@ -33,21 +35,13 @@ export function PutImage(data, clientId) { /*Exports a Put (Image) action...*/
             withCredentials: true
         })
 
-            .then(() => {
-                axios.get(`http://localhost:5000/api/user/${clientId}`, { withCredentials: true }) /*...then runs a GET (Client) request...*/
-
-                    .then(res => { /*...before sending the retrieved data to the Client reducer*/
-                        dispatch({ type: GET_CLIENT, payload: res.data })
-                        axios.get(`http://localhost:5000/api/user`, { withCredentials: true })
-
-                            .then(res => dispatch({ type: GET_USERS, payload: res.data }))
-                            .catch(error => console.log(error))
-                    })
-                    .catch(error => console.log(error))
+            .then(res => { /*...before sending the retrieved data to the Client reducer*/
+                dispatch({ type: PUT_IMAGE, payload: data })
             })
             .catch(error => console.log(error))
     }
 }
+
 
 /*------------PUT (Bio)*/
 export function PutBio(bio, clientId) { /*Exports a Put (Bio) action...*/
@@ -56,7 +50,7 @@ export function PutBio(bio, clientId) { /*Exports a Put (Bio) action...*/
         axios({ /*...that runs a PUT (Bio) request...*/
             method: "put",
             url: `http://localhost:5000/api/user/${clientId}`,
-            data: { bio },
+            data: bio,
             withCredentials: true
         })
 
@@ -76,7 +70,10 @@ export function FollowUser(idToFollow, userId) { /*Exports a Patch (Follow) acti
             withCredentials: true
         })
 
-            .then(() => { dispatch({ type: FOLLOW_USER, payload: idToFollow }) }) /*...before sending the id to follow to the Client reducer*/
+            .then(() => { /*...before sending the id to follow to the Client reducer*/
+                dispatch({ type: FOLLOW_USER, payload: idToFollow })
+                dispatch({ type: FOLLOWED_USER, payload: userId })
+            })
             .catch(error => console.log(error))
     }
 }
@@ -92,7 +89,10 @@ export function UnfollowUser(idToUnfollow, userId) { /*Exports a Patch (Unfollow
             withCredentials: true
         })
 
-            .then(() => { dispatch({ type: UNFOLLOW_USER, payload: idToUnfollow }) }) /*...before sending the id to unfollow to the Client reducer*/
+            .then(() => { /*...before sending the id to unfollow to the Client reducer*/
+                dispatch({ type: UNFOLLOW_USER, payload: idToUnfollow })
+                dispatch({ type: UNFOLLOWED_USER, payload: userId })
+            })
             .catch(error => console.log(error))
     }
 }

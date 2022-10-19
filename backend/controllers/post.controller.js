@@ -13,15 +13,21 @@ module.exports.createPost = (req, res) => { /*Exports to the Post router a creat
         return res.status(401).json({ message: "Vous ne pouvez pas créer un post à la place de quelqu'un d'autre !" }) /*...the function returns an error message*/
     }
 
-    const newPost = new PostModel({ /*Otherwise it creates a Post object...*/
+    const newPost = new PostModel(req.file ? { /*Otherwise it creates a Post object...*/
         posterId: req.body.posterId,
         posterPseudo: res.locals.user.pseudo,
         message: req.body.message,
         picture: `./uploads/profil/${req.file.filename}`,
         likers: [],
         comments: []
+    } : {
+        posterId: req.body.posterId,
+        posterPseudo: res.locals.user.pseudo,
+        message: req.body.message,
+        likers: [],
+        comments: []
     })
-    console.log(newPost)
+
     newPost.save() /*...and saves it on the database*/
         .then(() => res.status(201).json({ message: "Votre post a été créé !" }))
         .catch(error => res.status(400).json(error))
@@ -49,6 +55,7 @@ module.exports.updatePost = (req, res) => { /*Exports to the Post router a updat
             const postUpdate = { /*Otherwise it creates a new Post object...*/
                 message: req.body.message
             }
+
             PostModel.updateOne({ _id: req.params.id }, { ...postUpdate, _id: req.params.id }) /*...then updates the former Post object with the new information*/
                 .then(() => res.status(200).json({ message: 'La modification a été effectuée !' }))
                 .catch(error => {
@@ -71,12 +78,20 @@ module.exports.deletePost = (req, res) => { /*Exports to the Post router a delet
                 return res.status(401).json({ message: "Vous ne pouvez pas supprimer le post de quelqu'un d'autre !" }) /*...the function returns an error message*/
             }
 
-            const filename = post.picture.split('/profil/')[1] /*Otherwise it targets in the "images" folder any image associated with this post...*/
-            fs.unlink(`../frontend/public/uploads/profil/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
+            const filename = post.picture?.split('/profil/')[1] /*Otherwise it targets in the "images" folder any image associated with this post...*/
+
+            if (filename) {
+                fs.unlink(`../frontend/public/uploads/profil/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
+                    PostModel.deleteOne({ _id: req.params.id }) /*...before deleting the Post object itself*/
+                        .then(() => res.status(200).json({ message: `Le post a été supprimé !` }))
+                        .catch(error => res.status(500).json({ error }))
+                })
+            }
+            else {
                 PostModel.deleteOne({ _id: req.params.id }) /*...before deleting the Post object itself*/
                     .then(() => res.status(200).json({ message: `Le post a été supprimé !` }))
                     .catch(error => res.status(500).json({ error }))
-            })
+            }
         })
         .catch(error => res.status(404).json({ error }))
 }

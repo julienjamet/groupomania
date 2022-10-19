@@ -82,19 +82,24 @@ export default function NewPostForm() {
                     )}
 
                     <div className="footer-form">
-                        {!picture ? (
+                        {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && (
                             <>
-                                <img src="./img/icons/picture.svg" alt="image" />
-                                <input
-                                    type="file"
-                                    id="file-upload"
-                                    name="file"
-                                    accept=".jpg, .jpeg, .png"
-                                    onChange={(e) => { handlePicture(e) }} />
+                                {!picture ? (
+                                    <>
+                                        <img src="./img/icons/picture.svg" alt="image" />
+                                        <input
+                                            type="file"
+                                            id="file-upload"
+                                            name="file"
+                                            accept=".jpg, .jpeg, .png"
+                                            onChange={(e) => { handlePicture(e) }} />
+                                    </>
+                                ) : (
+                                    <span id="loaded">Votre fichier est chargé</span>
+                                )}
                             </>
-                        ) : (
-                            <span id="loaded">Votre fichier est chargé</span>
                         )}
+
                         {message || picture ? (
                             <div id="buttons">
                                 <button id="newpost--cancel" onClick={cancelPost}>Annuler</button>

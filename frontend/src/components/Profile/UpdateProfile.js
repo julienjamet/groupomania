@@ -73,15 +73,6 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
             }
         })
 
-        await usersData.map(user => {
-            if (user.followings.includes(clientData._id)) {
-                return user.followings.filter(id => id !== clientData._id)
-            }
-            else {
-                return null
-            }
-        })
-
         await allPostsData.map(post => {
             if (post.posterId === clientData._id) {
                 return dispatch(DeletePost(post._id))

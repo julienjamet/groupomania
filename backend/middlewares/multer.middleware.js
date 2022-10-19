@@ -18,12 +18,12 @@ const storage = multer.diskStorage({ /*Runs the Multer diskStorage() function to
         const name2 = name.split('.')[0]
 
         const extension = MIME_TYPES[file.mimetype] /*... and converting formats with the MIME type dictionary*/
-        callback(null, name2 + '.' + extension)
+        callback(null, name2 + Date.now() + '.' + extension)
     }
 })
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Export-------------------------------------------------------------------------------------------------------------*/
-module.exports = multer({ storage }).single('image') /*Exports the Multer middleware and configures it to only target image files*/
+module.exports = multer({ storage }).single('picture') /*Exports the Multer middleware and configures it to only target image files*/
 /*-------------------------------------------------------------------------------------------------------------------*/
