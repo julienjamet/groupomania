@@ -66,18 +66,22 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
     async function handleDelete() {
         await usersData.map(user => {
             if (user.followers.includes(clientData._id)) {
+                console.log("clear A1")
                 return dispatch(UnfollowUser(user._id, clientData._id))
             }
             else {
+                console.log("clear A2")
                 return null
             }
         })
 
         await allPostsData.map(post => {
             if (post.posterId === clientData._id) {
+                console.log("clear B1")
                 return dispatch(DeletePost(post._id))
             }
             else {
+                console.log("clear B2")
                 return null
             }
         })
@@ -85,9 +89,11 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
         await allPostsData.map(post => {
             post.comments.map(comment => {
                 if (comment.commenterId === clientData._id) {
+                    console.log("clear C1")
                     return dispatch(DeleteComment(post._id, comment._id, comment.commenterId))
                 }
                 else {
+                    console.log("clear C2")
                     return null
                 }
             })
@@ -95,24 +101,21 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
 
         await allPostsData.map(post => {
             if (post.likers.includes(clientData._id)) {
+                console.log("clear D1")
                 return dispatch(UnlikePost(clientData._id, post._id))
             }
             else {
+                console.log("clear D2")
                 return null
             }
         })
 
-        if (!allPostsData.includes(clientData._id)) {
-            axios.delete(`http://localhost:5000/api/user/${clientData._id}`, { withCredentials: true })
-                .then(() => { setIsDeleted(true) })
-        }
+        await axios.delete(`http://localhost:5000/api/user/${clientData._id}`, { withCredentials: true })
+            .then(() => {
+                console.log("test")
+                window.location = "/home"
+            })
     }
-
-    useEffect(() => {
-        if (isDeleted === true) {
-            window.location = "/home"
-        }
-    }, [isDeleted])
 
     /*------------Return*/
     return ( /*The UpdateProfile component returns...*/

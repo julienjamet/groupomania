@@ -1,5 +1,5 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-import { FOLLOWED_USER, UNFOLLOWED_USER } from "../actions/client.action"
+import { FOLLOWED_USER, PUT_BIO, UNFOLLOWED_USER } from "../actions/client.action"
 import { GET_USER, RESET } from "../actions/user.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
@@ -11,6 +11,12 @@ export default function userReducer(state = initialState, action) { /*Exports a 
     switch (action.type) {
         case GET_USER:
             return action.payload
+
+        case PUT_BIO:
+            return {
+                ...state,
+                bio: action.payload.bio
+            }
 
         case FOLLOWED_USER:
             return {

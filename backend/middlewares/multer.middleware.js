@@ -25,5 +25,5 @@ const storage = multer.diskStorage({ /*Runs the Multer diskStorage() function to
 
 
 /*Export-------------------------------------------------------------------------------------------------------------*/
-module.exports = multer({ storage }).single('picture') /*Exports the Multer middleware and configures it to only target image files*/
+module.exports = multer({ storage }).single('image') /*Exports the Multer middleware and configures it to only target image files*/
 /*-------------------------------------------------------------------------------------------------------------------*/

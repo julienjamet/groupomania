@@ -56,7 +56,8 @@ exports.updateUser = (req, res) => { /*Exports to the User router a updateUser()
 
             const filename = user.picture.split('/profil/')[1] /*Otherwise it targets in the "images" folder any image associated with this user...*/
 
-            if (filename !== "random-user.png") {
+            if (req.file !== undefined && filename !== "random-user.png") {
+                console.log("cas 1")
                 fs.unlink(`../frontend/public/uploads/profil/${filename}`, () => {
                     UserModel.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id }) /*...then updates the former User object with the new information*/
                         .then(() => res.status(200).json({ message: "La modification a été effectuée !" }))
@@ -65,6 +66,15 @@ exports.updateUser = (req, res) => { /*Exports to the User router a updateUser()
                             res.status(400).json({ errors })
                         })
                 })
+            }
+            else if ((req.file !== undefined && filename === "random-user.png") || req.file === undefined) {
+                console.log("cas 2")
+                UserModel.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id }) /*...then updates the former User object with the new information*/
+                    .then(() => res.status(200).json({ message: "La modification a été effectuée !" }))
+                    .catch(error => {
+                        const errors = errorHandling(error)
+                        res.status(400).json({ errors })
+                    })
             }
         })
         .catch(error => res.status(400).json({ error }))
@@ -83,12 +93,17 @@ exports.deleteUser = (req, res) => { /*Exports to the User router a deleteUser()
             }
 
             const filename = user.picture.split('/profil/')[1] /*Otherwise it targets in the "images" folder any image associated with this user...*/
-            if (filename && filename !== "random-user.png") {
+            if (filename !== "random-user.png") {
                 fs.unlink(`../frontend/public/uploads/profil/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
                     UserModel.deleteOne({ _id: req.params.id }) /*...before deleting the User object itself*/
                         .then(() => res.status(200).json({ message: `Le compte de ${user.pseudo} a été supprimé !` }))
                         .catch(error => res.status(500).json({ error }))
                 })
+            }
+            else {
+                UserModel.deleteOne({ _id: req.params.id }) /*...before deleting the User object itself*/
+                    .then(() => res.status(200).json({ message: `Le compte de ${user.pseudo} a été supprimé !` }))
+                    .catch(error => res.status(500).json({ error }))
             }
         })
         .catch(error => res.status(404).json({ error }))

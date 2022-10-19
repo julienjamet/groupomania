@@ -7,21 +7,15 @@ import { GET_CLIENT, PUT_IMAGE, PUT_BIO, FOLLOW_USER, UNFOLLOW_USER } from "../a
 const initialState = {}
 
 export default function clientReducer(state = initialState, action) { /*Exports a Client reducer...*/
-    console.log(action.payload)
+
     switch (action.type) {
         case GET_CLIENT:
             return action.payload /*...that sends to the Store the data retrieved from the Client actions*/
 
-        case PUT_IMAGE:
-            return {
-                ...state,
-                picture: action.payload.picture
-            }
-
         case PUT_BIO:
             return {
                 ...state,
-                bio: action.payload
+                bio: action.payload.bio
             }
 
         case FOLLOW_USER:

@@ -26,7 +26,7 @@ export default function GetClient(clientId) { /*Exports a Get (Client) action...
 
 /*------------PUT (Image)*/
 export function PutImage(data, clientId) { /*Exports a Put (Image) action...*/
-
+    console.log(data, clientId)
     return (dispatch) => {
         axios({ /*...that runs a PUT (Image) request...*/
             method: "put",
@@ -35,8 +35,14 @@ export function PutImage(data, clientId) { /*Exports a Put (Image) action...*/
             withCredentials: true
         })
 
-            .then(res => { /*...before sending the retrieved data to the Client reducer*/
-                dispatch({ type: PUT_IMAGE, payload: data })
+            .then(() => {
+                axios.get(`http://localhost:5000/api/user/${clientId}`, { withCredentials: true })
+                    .then(res => { dispatch({ type: GET_CLIENT, payload: res.data }) }) /*...before sending the retrieved data to the Client reducer*/
+                    .catch(error => console.log(error))
+
+                axios.get(`http://localhost:5000/api/user`, { withCredentials: true })
+                    .then(res => { dispatch({ type: GET_USERS, payload: res.data }) }) /*...before sending the retrieved data to the Client reducer*/
+                    .catch(error => console.log(error))
             })
             .catch(error => console.log(error))
     }
@@ -50,11 +56,11 @@ export function PutBio(bio, clientId) { /*Exports a Put (Bio) action...*/
         axios({ /*...that runs a PUT (Bio) request...*/
             method: "put",
             url: `http://localhost:5000/api/user/${clientId}`,
-            data: bio,
+            data: { bio },
             withCredentials: true
         })
 
-            .then(() => { dispatch({ type: PUT_BIO, payload: bio }) }) /*...before sending the bio to the Client reducer*/
+            .then(() => { dispatch({ type: PUT_BIO, payload: { bio, clientId } }) }) /*...before sending the bio to the Client reducer*/
             .catch(error => console.log(error))
     }
 }
