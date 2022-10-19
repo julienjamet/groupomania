@@ -25,6 +25,8 @@ export default function UploadImage() { /*Exports to the UpdateProfile an Upload
         data.append("image", file) /*...containing the data retrieved from the State...*/
 
         dispatch(PutImage(data, clientData._id)) /*...then runs a PUT (Image) action...*/
+
+        setTimeout(() => { setLoadedFile(false) }, 500)
     }
 
     /*------------Return*/
