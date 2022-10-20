@@ -1,0 +1,13 @@
+Bonjour !
+Voici la marche à suivre pour utiliser l'application Groupomania :
+
+- Tout d'abord, veuillez cloner le repo sur votre machine
+
+- Ensuite, copiez les deux fichiers ".env.example" fournis dans le livrable n° 2.
+- Celui contenant la variable REACT_APP_ADMIN_ID doit être collé à la base du dossier frontend de l'application.
+- L'autre doit être collé dans le sous-dossier "config" du dossier backend de l'application.
+
+- Ensuite, exécutez les commandes "npm install" puis "npm start" depuis le dossier backend. Votre console devrait vous informer que vous êtes connecté(e) à MongoDB.
+- Exécutez enfin les commandes "npm install" puis "nmp start" depuis le dossier frontend pour lancer l'application.
+
+Bonne découverte !
