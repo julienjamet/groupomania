@@ -11,6 +11,6 @@ Voici la marche à suivre pour utiliser l'application Groupomania :
 - Le fichier ".env(back).example" peut être simplement copié/collé dans le sous-dossier "config" du dossier backend de l'application et renommé ".env".
 
 - Ensuite, exécutez les commandes "npm install" puis "npm start" depuis le dossier backend. Votre console devrait vous informer que vous êtes connecté(e) à MongoDB.
-- Exécutez enfin les commandes "npm install" puis "nmp start" depuis le dossier frontend pour lancer l'application.
+- Exécutez enfin les commandes "npm install" puis "npm start" depuis le dossier frontend pour lancer l'application.
 
 Bonne découverte !
