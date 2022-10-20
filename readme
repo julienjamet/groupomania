@@ -3,7 +3,7 @@ Voici la marche à suivre pour utiliser l'application Groupomania :
 
 - Tout d'abord, veuillez cloner le repo sur votre machine
 
-- Ensuite, rendez-vous dans le dossier "Variables d'environnement" du livrable n° 2. Vous y trouverez deux fichiers.
+- Ensuite, rendez-vous dans le dossier "Variables d'environnement" du livrable n° 2. Vous y trouverez deux fichiers, ".env(front).example" et ".env(back).example".
 - Si vous ne voyez pas les deux fichiers dans le dossier, assurez-vous que vous affichez les fichiers masqués.
 
 - Le fichier ".env(front).example" doit être copié/collé à la base du dossier frontend de l'application.
