@@ -26,7 +26,7 @@ export default function UploadImage() { /*Exports to the UpdateProfile an Upload
 
         dispatch(PutImage(data, clientData._id)) /*...then runs a PUT (Image) action...*/
 
-        setTimeout(() => { setLoadedFile(false) }, 500)
+        setTimeout(() => { setLoadedFile(false) }, 500) /*...before setting the LoadedFile State to false*/
     }
 
     /*------------Return*/
@@ -39,13 +39,13 @@ export default function UploadImage() { /*Exports to the UpdateProfile an Upload
                 id="file"
                 name="id"
                 accept=".jpg, .jpeg, .png"
-                onChange={(e) => { /*...and whose input sets the States when manipulated*/
+                onChange={(e) => { /*...and whose input sets the States when manipulated...*/
                     setFile(e.target.files[0])
                     setLoadedFile(true)
                 }}
             />
             <br />
-            {loadedFile && <input type="submit" id="submit-image" value="Envoyer" />}
+            {loadedFile && <input type="submit" id="submit-image" value="Envoyer" />} {/*...and, if the LoadedFile State has been set to "true", a button that submits the form*/}
         </form>
     )
 }

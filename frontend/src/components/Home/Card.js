@@ -109,19 +109,6 @@ export default function Card({ post }) { /*Exports to the Thread a Card componen
 
                 {post.picture && <img src={post.picture} alt="card-pic" className="card-pic" />}
 
-                {post.video && (
-                    <iframe
-                        title={post._id}
-                        width="500"
-                        height="300"
-                        src={post.video}
-                        allowFullScreen
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-                        gyroscope; picture-in-picture"
-                        frameBorder="0">
-                    </iframe>
-                )}
-
                 {(clientData._id === post.posterId || clientData._id === `${process.env.REACT_APP_ADMIN_ID}`) && ( /*If the client is the creator of the post...*/
                     <div className="button-container">
                         <div onClick={() => setUpdatePost(true)}> {/*...the Card component returns an icon that sets the UpdatePost State to "true" when clicked...*/}
