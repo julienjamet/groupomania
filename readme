@@ -8,7 +8,7 @@ Voici la marche à suivre pour utiliser l'application Groupomania :
 
 - Le fichier ".env(front).example" doit être copié/collé à la base du dossier frontend de l'application.
 - Copiez ensuite le fichier nouvellement créé et collez-le une seconde fois, toujours dans le dossier frontend.
-- Renommez cette seconde copie ".env". Le fichier doit alors être ignoré par Git.
+- Renommez cette seconde copie ".env(front) copy.example" en ".env". Le fichier devrait alors être ignoré par Git.
 
 - Le fichier ".env(back).example" doit être copié/collé dans le sous-dossier "config" du dossier backend de l'application et renommé ".env".
 
