@@ -8,14 +8,16 @@ import { Reset } from "../Store/actions/user.action"
 /*Operation----------------------------------------------------------------------------------------------------------*/
 export default function LeftNav() { /*Exports to the Home, Trendings and Profile pages a LeftNav component...*/
 
-    const clientData = useSelector(state => state.clientReducer)
+    /*------------Data*/
+    const clientData = useSelector(state => state.clientReducer) /*...that gets the cliend data from the Store...*/
     const dispatch = useDispatch()
 
-    function resetUserData() {
-        dispatch(Reset())
+    /*------------Middleware*/
+    function resetUserData() { /*...then runs a middleware...*/
+        dispatch(Reset()) /*...running itself a Reset action*/
     }
 
-    return ( /*...that returns a navigation menu*/
+    return ( /*The LeftNav component returns a navigation menu*/
         <div className="left-nav-container">
             <div className="icons">
                 <div className="icons-bis">

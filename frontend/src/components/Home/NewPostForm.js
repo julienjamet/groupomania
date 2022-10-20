@@ -1,18 +1,27 @@
+/*Imports------------------------------------------------------------------------------------------------------------*/
+/*------------React & Redux modules*/
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
+
+/*------------Actions*/
 import { AddPost } from "../Store/actions/posts.action"
+/*-------------------------------------------------------------------------------------------------------------------*/
 
-export default function NewPostForm() {
 
-    const clientData = useSelector(state => state.clientReducer)
+/*Operation----------------------------------------------------------------------------------------------------------*/
+export default function NewPostForm() { /*Exports a NewPostForm component...*/
+
+    /*------------Data*/
+    const clientData = useSelector(state => state.clientReducer) /*...that gets the clientData from the Store...*/
     const dispatch = useDispatch()
 
     const [message, setMessage] = useState('')
     const [picture, setPicture] = useState('')
     const [file, setFile] = useState('')
 
-    function handlePost(e) {
+    /*------------Middlewares*/
+    function handlePost(e) { /*...then runs a HandlePost middleware...*/
 
         if (message || picture) {
             const data = new FormData()
@@ -20,25 +29,27 @@ export default function NewPostForm() {
             data.append("message", message)
             if (file) data.append("image", file)
 
-            dispatch(AddPost(data))
+            dispatch(AddPost(data)) /*...running a Add (post) action...*/
         }
 
-        setMessage('')
+        setMessage('') /*...before resetting the States..*/
         setPicture('')
         setFile('')
     }
 
-    function cancelPost() {
-        setMessage('')
+    function cancelPost() { /*...a CancelPost middleware...*/
+
+        setMessage('') /*...that resets the States*/
         setPicture('')
         setFile('')
     }
 
-    function handlePicture(e) {
-        setPicture(URL.createObjectURL(e.target.files[0]))
+    function handlePicture(e) { /*...and a HandlePicture middleware...*/
+        setPicture(URL.createObjectURL(e.target.files[0])) /*...that sets the Picture and File States*/
         setFile(e.target.files[0])
     }
 
+    /*------------Return*/
     return (
         <div className="post-container">
             <div className="data">
@@ -110,3 +121,4 @@ export default function NewPostForm() {
         </div>
     )
 }
+/*-------------------------------------------------------------------------------------------------------------------*/

@@ -15,8 +15,8 @@ import UserProfile from "../components/Profile/UserProfile"
 export default function Home() { /*Exports a Home component...*/
 
     /*------------Data*/
-    const userData = useSelector(state => state.userReducer)
-    const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/
+    const userData = useSelector(state => state.userReducer) /*...that gets the user data...*/
+    const clientData = useSelector(state => state.clientReducer) /*...and the client data from the Store...*/
 
     /*------------Return*/
     return ( /*...then returns...*/

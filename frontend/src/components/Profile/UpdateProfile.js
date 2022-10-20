@@ -1,21 +1,23 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------Redux & React modules*/
+/*------------Redux, React & Axios modules*/
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 import axios from "axios"
 
 /*------------Actions*/
 import { PutBio, UnfollowUser } from "../Store/actions/client.action"
+import { DeleteComment, DeletePost, UnlikePost } from "../Store/actions/posts.action"
+import GetUser from "../Store/actions/user.action"
 
 /*------------Components*/
 import LeftNav from "../Navbars/LeftNav"
 import UploadImage from "./UploadImage"
-import dateParser from "../Utils"
 import FollowHandler from "./FollowHandler"
 import Card from "../Home/Card"
-import GetUser from "../Store/actions/user.action"
 import UserProfile from "./UserProfile"
-import { DeleteComment, DeletePost, UnlikePost } from "../Store/actions/posts.action"
+
+/*------------Utils*/
+import dateParser from "../Utils"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -24,9 +26,9 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
 
     /*------------Data*/
     const clientData = useSelector(state => state.clientReducer) /*...that gets the client data...*/
-    const usersData = useSelector(state => state.usersReducer) /*...and the users data from the Store...*/
-    const userData = useSelector(state => state.userReducer)
-    const allPostsData = useSelector(state => state.allPostsReducer)
+    const usersData = useSelector(state => state.usersReducer) /*...the users data...*/
+    const userData = useSelector(state => state.userReducer) /*...the user data*/
+    const allPostsData = useSelector(state => state.allPostsReducer) /*...and the users data from the Store...*/
     const dispatch = useDispatch()
 
     const [bio, setBio] = useState(clientData.bio)
@@ -41,29 +43,29 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
         setUpdateForm(false) /*...and setting the UpdateForm State to "false"*/
     }
 
-    function cancelUpdate() { /*...and a cancelling middleware...*/
+    function cancelUpdate() { /*...a cancelling middleware...*/
         setBio(clientData.bio) /*...setting the Bio State to its initial state...*/
         setUpdateForm(false) /*...and the UpdateForm State to "false"*/
     }
 
 
-    function seeProfile(e) {
+    function seeProfile(e) { /*...a SeeProfile middleware*/
         if (followers) {
-            setFollowers(false)
+            setFollowers(false) /*...setting the Followers State...*/
             dispatch(GetUser(e.target.id))
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
         }
         else if (followings) {
-            setFollowings(false)
-            dispatch(GetUser(e.target.id))
+            setFollowings(false) /*...or the Followings State to "false"...*/
+            dispatch(GetUser(e.target.id)) /*...and running a Get (User) action*/
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
         }
     }
 
 
-    async function handleDelete() {
+    async function handleDelete() { /*...and a HandleDelete middleware that removes the client, its posts, comments, likes and follows from the database...*/
         await usersData.map(user => {
             if (user.followers.includes(clientData._id)) {
                 return dispatch(UnfollowUser(user._id, clientData._id))
@@ -104,7 +106,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
 
         await axios.delete(`http://localhost:5000/api/user/${clientData._id}`, { withCredentials: true })
             .then(() => {
-                window.location = "/home"
+                window.location = "/home" /*...before redirecting the user to the Home page*/
             })
     }
 
@@ -118,6 +120,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
                         <div id="profile-title">
                             <h1>Profil de {clientData.pseudo}</h1>
                             <button onClick={() => {
+                                /*...a button running the handleDelete middleware when clicked...*/
                                 if (window.confirm("Attention, cette action est irréversible ! Voulez-vous vraiment supprimer votre compte ?")) {
                                     handleDelete()
                                 }
@@ -224,11 +227,11 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
                             )
                         }
                     </div >
-                    <div id="activity">
+                    <div id="activity"> {/*The UpdateProfile component finally returns...*/}
                         <h2>Activité de {clientData.pseudo}</h2>
                         <div className="thread-container">
                             <ul>
-                                {allPostsData.map(post => { /*...and, for each post retrieved from the Store...*/
+                                {allPostsData.map(post => { /*...for each post retrieved from the Store that has been created by the client...*/
                                     if (post.posterId === clientData._id) {
                                         return (
                                             <li key={post._id} className="card-container">
@@ -245,7 +248,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
                     </div>
                 </>
             ) : (
-                <UserProfile />
+                <UserProfile /> /*If there is client data, the UpdateProfile component returns instead a UserProfile component*/
             )}
         </>
     )

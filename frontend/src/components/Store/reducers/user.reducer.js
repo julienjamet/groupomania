@@ -1,5 +1,5 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-import { FOLLOWED_USER, PUT_BIO, UNFOLLOWED_USER } from "../actions/client.action"
+import { FOLLOWED_USER, UNFOLLOWED_USER } from "../actions/client.action"
 import { GET_USER, RESET } from "../actions/user.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
