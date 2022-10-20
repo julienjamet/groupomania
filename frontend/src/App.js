@@ -1,67 +1,51 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------Modules*/
-import { useEffect, useState } from "react" /*Imports the useState() and useEffect() hooks*/
-import { BrowserRouter, Routes, Route } from "react-router-dom" /*Imports BrowserRouter*/
-import axios from "axios" /*Imports Axios*/
+/*------------Redux, React & Axios modules*/
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import axios from "axios"
 
-/*------------Pages*/
-import Home from "./pages/Home" /*Imports the Home page*/
-import Trendings from "./pages/Trendings" /*Imports the Trendings page*/
-import Profile from "./pages/Profile" /*Imports the Profile page*/
+/*------------Actions*/
+import GetClient from "./components/Store/actions/client.action"
 
 /*------------Components*/
-import { UserDataContext } from "./components/AppContext" /*Imports the Context*/
-import Navbar from "./components/Navbars/Navbar" /*Imports the Navbar component*/
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Navbar from "./components/Navbars/Navbar"
+import Home from "./pages/Home"
+import Profile from "./pages/Profile"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-function App() { /*Runs an App() function...*/
+export default function App() { /*Exports to the Root an App component...*/
 
-  /*------------Calls*/
-  const [userData, setUserData] = useState(null) /*...that calls the useState() hook...*/
+  /*------------Data*/
+  const clientData = useSelector(state => state.clientReducer)
 
   /*------------Middleware*/
-  useEffect(() => { /*...and the useEffect() hook...*/
+  const dispatch = useDispatch()
 
-    axios({ /*...that runs itself an Axios GET method on the backend "/token" route*/
-      method: "get",
-      url: `http://localhost:5000/token`,
-      withCredentials: true
-    })
+  useEffect(() => { /*...that runs a useEffect hook...*/
+    axios.get('http://localhost:5000/token', { withCredentials: true }) /*...running a GET (Token) request...*/
+
       .then(res => {
-        axios({ /*If there is a token, it then runs another Axios GET method on the backend "/api/user/:id" route...*/
-          method: "get",
-          url: `http://localhost:5000/api/user/${res.data}`,
-          withCredentials: true
-        })
-          .then(res => {
-            return setUserData(res.data) /*...before setting the useState() hook with the retrieved user data*/
-          })
+        axios.get(`http://localhost:5000/api/user/${res.data}`, { withCredentials: true }) /*...then a GET (One user) request using the data retrieved from the token...*/
+
+          .then(res => { dispatch(GetClient(res.data._id)) }) /*...before running a Get client action*/
           .catch(error => console.log(error))
       })
-      .catch(() => console.log("Vous n'êtes pas authentifié(e) !")) /*If there is no token, it returns an error message*/
-
-  }, [userData])
+      .catch(error => console.log(error))
+  }, [dispatch])
 
   /*------------Return*/
-  return ( /*The App() function finally returns...*/
-    <UserDataContext.Provider value={userData}> {/*...a Context that stores the user data...*/}
-      <BrowserRouter> {/*...and a browser router...*/}
-        <Navbar /> {/*...that runs the Navbar component on all routes...*/}
-        <Routes>
-          <Route path="/home" element={<Home />} /> {/*...the Home page on the "/home" route...*/}
-          <Route path="/trendings" element={<Trendings />} /> {/*...the Trendings page on the "/trendings" route...*/}
-          <Route path="/profile" element={<Profile />} /> {/*...the Profile page on the "/profile" route...*/}
-          <Route path="*" element={<Home />} /> {/*...and the Home page on any other route...*/}
-        </Routes>
-      </BrowserRouter>
-    </UserDataContext.Provider>
+  return ( /*The App component returns...*/
+    <BrowserRouter> {/*...a Router...*/}
+      <Navbar /> {/*...running the Navbar component on all routes*/}
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && <Route path="/profile" element={<Profile />} />}
+        <Route path="*" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
-/*-------------------------------------------------------------------------------------------------------------------*/
-
-
-/*Export-------------------------------------------------------------------------------------------------------------*/
-export default App /*Exports the App component to the "index.js" file
 /*-------------------------------------------------------------------------------------------------------------------*/

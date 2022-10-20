@@ -1,37 +1,43 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------Modules*/
-import { useContext } from "react" /*Imports the useContext() hook*/
+/*------------Redux modules*/
+import { useDispatch, useSelector } from "react-redux"
 
 /*------------Components*/
-import { UserDataContext } from "../AppContext" /*Imports the Context*/
-import { NavLink } from "react-router-dom" /*Imports a NavLink component*/
-import Logout from "../Log/Logout" /*Imports the Logout component*/
+import { NavLink } from "react-router-dom"
+import Logout from "../Log/Logout"
+import { Reset } from "../Store/actions/user.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-function Navbar() { /*Runs a Navbar function...*/
-    /*------------Calls*/
-    const userData = useContext(UserDataContext) /*...that runs itself the useContext() hook to retrieve the user data*/
+export default function Navbar() { /*Exports to the App a Navbar component...*/
 
-    /*------------Return*/
-    return ( /*The function then returns...*/
-        <nav> {/*...a navigation bar...*/}
+    /*------------Data*/
+    const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/
+    const dispatch = useDispatch()
+
+    /*------------Middleware*/
+    function resetUserData() { /*...then runs a middleware...*/
+        dispatch(Reset()) /*...running itself a Reset action*/
+    }
+
+    return ( /*The Navbar component returns...*/
+        <nav> {/*...a navigation menu...*/}
             <div className="nav-container">
                 <div className="logo">
-                    <NavLink to="/home"> {/*...that in all cases contains a link to the Home page...*/}
+                    <NavLink to="/home" onClick={resetUserData}> {/*...that contains a link to the Home page running the middleware when clicked...*/}
                         <div className="logo">
                             <img src="./img/round_logo.png" alt="icon" />
                             <h3>Groupomania</h3>
                         </div>
                     </NavLink>
                 </div>
-                {userData ? ( /*...and, if the Context contains user data...*/
+                {clientData._id ? ( /*...and, if there is client data...*/
                     <ul>
                         <li></li>
                         <li className="welcome">
-                            <NavLink to="/profile"> {/*...that also contains one to the authenticated profile page...*/}
-                                <h5>Bienvenue {userData.pseudo} !</h5>
+                            <NavLink to="/profile" onClick={resetUserData}> {/*...that also contains one to the Profile page running the middleware when clicked...*/}
+                                <h5>Bienvenue {clientData.pseudo} !</h5>
                             </NavLink>
                         </li>
                         <Logout /> {/*...and the Logout component*/}
@@ -43,9 +49,4 @@ function Navbar() { /*Runs a Navbar function...*/
         </nav>
     )
 }
-/*-------------------------------------------------------------------------------------------------------------------*/
-
-
-/*Export-------------------------------------------------------------------------------------------------------------*/
-export default Navbar /*Exports the Navbar component to the App component*/
 /*-------------------------------------------------------------------------------------------------------------------*/

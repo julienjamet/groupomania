@@ -1,3 +1,10 @@
+.thread-container, .home-header {
+  width: 70%;
+}
+.home-header {
+  height: 290px;
+}
+
 .card-container {
   display: grid;
   grid-template-columns: 66px 1fr;
@@ -31,6 +38,9 @@
       border-radius: 20px;
       box-shadow: 1px 1px 3px rgba(51, 51, 51, 0.192);
       object-fit: cover;
+      transform: scale(1);
+      transition: 400ms;
+     
 
       @media screen and(max-width: 590px) {
         height: 40px;
@@ -39,6 +49,12 @@
         border-radius: 14px;
       }
     }
+        .see-user {
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+          }
+        }
     @media screen and(max-width: 590px) {
       position: absolute;
       transform: translate(17px, 18px);
@@ -87,9 +103,10 @@
             box-shadow: none;
             height: 28px;
             width: 28px;
+            transform: translate(6px, 3px);
 
             &:hover {
-              transform: scale(1.2) translate(0px, 0px);
+              transform: scale(1.2) translate(6px, 3px);
             }
           }
 
@@ -104,7 +121,6 @@
 
       span {
         font-style: italic;
-        font-family: $font-1;
 
         @media screen and(max-width: 440px) {
           transform: translate(52px, -20px);
@@ -121,21 +137,21 @@
     }
     .update-post {
       textarea {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         border: 1px solid $color-2;
         padding: 10px;
         border-radius: 20px 20px 6px 20px;
       }
       .button-container {
         .btn {
-          background: $color-2;
+          background: $color-3;
+          color: $color-2;
           width: 240px;
           transform: translateY(-3px);
 
           &:hover {
-            background: $color-1;
-            width: 250px;
-            letter-spacing: 1px;
+            background: white;
+            color: $color-1;
           }
         }
       }
@@ -178,8 +194,7 @@
     .card-footer {
       display: flex;
       align-items: center;
-      justify-content: center;
-      justify-content: space-between;
+      justify-content: space-around;
       padding: 12px 0 4px;
 
       img {
@@ -205,7 +220,7 @@
       }
     }
     .comment-container.client {
-      background: $color-4;
+      background: $color-2;
       border: none;
       border-radius: 20px 20px 6px 20px;
     }
@@ -223,12 +238,19 @@
         border-radius: 14px;
         box-shadow: 1px 1px 3px rgba(51, 51, 51, 0.192);
         object-fit: cover;
+        transition: 400ms;
 
         @media screen and(max-width: 440px) {
           height: 37px;
           width: 37px;
         }
       }
+            .see-user {
+              &:hover {
+                cursor: pointer;
+                transform: scale(1.1);
+              }
+            }
       .comment-header {
         display: flex;
         justify-content: space-between;
@@ -240,25 +262,27 @@
         .pseudo {
           display: flex;
 
-          h3 {
-            font-family: $font-1;
-          }
           span {
-            transform: translateX(6px);
+            cursor: pointer;
+          }
+          img {
+            box-shadow: none;
+            height: 15px;
+            width: 15px;
+            transform: translate(6px, 2px);
           }
         }
 
         span {
           font-size: 0.9rem;
           font-style: italic;
-          font-family: $font-1;
         }
       }
       p {
         margin-top: 8px;
       }
       .edit-comment {
-        color: $color-2;
+        color: $color-3;
         img {
           float: right;
           margin-left: 10px;
@@ -267,9 +291,10 @@
           box-shadow: none;
           height: 20px;
           width: 20px;
+          transition: 400ms;
 
           &:hover {
-            transform: scale(1.1);
+            background-color: white;
           }
         }
 
@@ -283,7 +308,6 @@
             cursor: pointer;
             transition: 0.2s;
             display: inline-block;
-            font-family: $font-3;
 
             &:hover {
               transform: scale(1.05);
@@ -291,8 +315,10 @@
           }
           input[type="text"] {
             margin: 4px 0;
+            color: grey;
+            font-style: italic;
             background: $white;
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             padding: 16px;
             width: 100%;
             border-radius: 6px 20px 6px 20px;
@@ -303,21 +329,21 @@
             float: right;
 
             span {
-              background: $white;
+              background: $color-2;
               padding: 10px 5px;
               border-radius: 50px;
               margin-right: 6px;
-              transition: 0.2s;
               cursor: pointer;
-
-              &:hover {
-                background: $color-2;
-              }
 
               img {
                 transform: translate(-5px, 0);
+                transition: 0.4s;
+                &:hover {
+                    background-color: white;
+                  }
               }
             }
+            
             input[type="submit"] {
               background: $color-2;
               width: inherit;
@@ -329,6 +355,18 @@
               }
             }
           }
+          #edit-button, #cancel-edit {
+            background-color: $color-3;
+            color: $color-2;
+            &:hover {
+              background-color: $color-4;
+              color: $color-1;
+              filter: brightness(110%);
+            }
+          }
+          #cancel-edit {
+            margin-left: 10px;
+          }
         }
       }
     }
@@ -337,10 +375,12 @@
 
       input[type="text"] {
         width: 100%;
-        background: $color-4;
+        background: white;
+        border: 1px solid $color-2;
         border-radius: 20px 20px 6px 20px;
         padding: 20px;
-        font-size: 1.4rem;
+        font-size: 1.05rem;
+        color: $color-3;
 
         &:focus {
           box-shadow: 0 0 2px rgba(51, 51, 51, 0.5);
@@ -350,15 +390,19 @@
         margin-top: 4px;
         padding: 12px 16px;
         width: 120px;
-        background: $color-2;
+        background-color: $color-2;
+        color: $color-3;
         border-radius: 20px 6px 20px 20px;
         transition: 0.2s;
         float: right;
+        transform: translateX(0px);
+        transition: transform 400ms;
 
         &:hover {
-          background: $color-1;
-          letter-spacing: 2px;
-          width: 130px;
+          transform: translateX(-5px);
+          background-color: $color-4;
+          color: $color-1;
+          filter: brightness(110%);
         }
       }
       button {

@@ -7,14 +7,14 @@ const fs = require('fs') /*Calls FS*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-/*------------GET(All)*/
+/*------------GET (All)*/
 exports.getAllUsers = (req, res) => { /*Exports to the User router a getAllUsers() function...*/
     UserModel.find().select('-password') /*...that searches the database and selects all User objects (omitting passwords)...*/
         .then(users => res.status(200).json(users)) /*...before returning them to the frontend*/
         .catch(error => res.status(404).json({ error }))
 }
 
-/*------------GET(One)*/
+/*------------GET (One)*/
 exports.userInfo = (req, res) => { /*Exports to the User router a userInfo() function...*/
     if (!ObjectId.isValid(req.params.id)) { /*...that runs the ObjectId isValid() function to check that the identifier is indeed present in the database. If it is not...*/
         return res.status(404).json({ message: `Ce compte n'existe pas !` }) /*...the function returns an error message*/
@@ -37,9 +37,9 @@ exports.updateUser = (req, res) => { /*Exports to the User router a updateUser()
                 return res.status(401).json({ message: 'Vous ne pouvez pas modifier un autre utilisateur que vous !' }) /*...the function returns an error message*/
             }
 
-            const userObject = req.body.file ? {
-                ...JSON.parse(req.body),
-                imageUrl: `.uploads/profil/${req.file.filename}`,
+            const userObject = req.file ? {
+                ...req.body,
+                picture: `./uploads/profil/${req.file.filename}`,
                 id: user._id,
                 password: user.password,
                 followers: user.followers,
@@ -54,14 +54,29 @@ exports.updateUser = (req, res) => { /*Exports to the User router a updateUser()
                 likes: user.likes
             }
 
-            UserModel.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id }) /*...then updates the former User object with the new information*/
-                .then(() => res.status(200).json({ message: 'La modification a été effectuée !' }))
-                .catch(error => {
-                    const errors = errorHandling(error)
-                    res.status(400).json({ errors })
+            const filename = user.picture.split('/profil/')[1] /*Otherwise it targets in the "images" folder any image associated with this user...*/
+
+            if (req.file !== undefined && filename !== "random-user.png") {
+                fs.unlink(`../frontend/public/uploads/profil/${filename}`, () => {
+                    UserModel.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id }) /*...then updates the former User object with the new information*/
+                        .then(() => res.status(200).json({ message: "La modification a été effectuée !" }))
+                        .catch(error => {
+                            const errors = errorHandling(error)
+                            res.status(400).json({ errors })
+                        })
                 })
+            }
+
+            else if ((req.file !== undefined && filename === "random-user.png") || req.file === undefined) {
+                UserModel.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id }) /*...then updates the former User object with the new information*/
+                    .then(() => res.status(200).json({ message: "La modification a été effectuée !" }))
+                    .catch(error => {
+                        const errors = errorHandling(error)
+                        res.status(400).json({ errors })
+                    })
+            }
         })
-        .catch(error => res.status(404).json({ error }))
+        .catch(error => res.status(400).json({ error }))
 }
 
 /*------------DELETE*/
@@ -76,17 +91,24 @@ exports.deleteUser = (req, res) => { /*Exports to the User router a deleteUser()
                 return res.status(401).json({ message: 'Vous ne pouvez pas supprimer un autre utilisateur que vous !' }) /*...the function also returns an error message*/
             }
 
-            const filename = user.imageUrl.split('/images/')[1] /*Otherwise it targets in the "images" folder any image associated with this user...*/
-            fs.unlink(`images/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
+            const filename = user.picture.split('/profil/')[1] /*Otherwise it targets in the "images" folder any image associated with this user...*/
+            if (filename !== "random-user.png") {
+                fs.unlink(`../frontend/public/uploads/profil/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
+                    UserModel.deleteOne({ _id: req.params.id }) /*...before deleting the User object itself*/
+                        .then(() => res.status(200).json({ message: `Le compte de ${user.pseudo} a été supprimé !` }))
+                        .catch(error => res.status(500).json({ error }))
+                })
+            }
+            else {
                 UserModel.deleteOne({ _id: req.params.id }) /*...before deleting the User object itself*/
                     .then(() => res.status(200).json({ message: `Le compte de ${user.pseudo} a été supprimé !` }))
                     .catch(error => res.status(500).json({ error }))
-            })
+            }
         })
         .catch(error => res.status(404).json({ error }))
 }
 
-/*------------PATCH(Follow)*/
+/*------------PATCH (Follow)*/
 exports.follow = (req, res) => { /*Exports to the User router a follow() function...*/
     if (!ObjectId.isValid(req.params.id) || !ObjectId.isValid(req.body.idToFollow)) { /*...that runs the ObjectId isValid() function to check that the identifiers are indeed present in the database. If at least one of them is not...*/
         return res.status(404).json({ message: `Ce compte n'existe pas !` }) /*...the function returns an error message*/
@@ -122,7 +144,7 @@ exports.follow = (req, res) => { /*Exports to the User router a follow() functio
         .catch(() => res.status(404).json({ message: `Ce compte n'existe pas !` }))
 }
 
-/*------------PATCH(Unfollow)*/
+/*------------PATCH (Unfollow)*/
 exports.unfollow = (req, res) => { /*Exports to the User router an unfollow() function...*/
     if (!ObjectId.isValid(req.params.id) || !ObjectId.isValid(req.body.idToUnfollow)) { /*...that runs the ObjectId's isValid() function to check that the identifiers are indeed present in the database. If at least one of them is not...*/
         return res.status(404).json({ message: `Ce compte n'existe pas !` }) /*...the function returns an error message*/

@@ -13,14 +13,21 @@ module.exports.createPost = (req, res) => { /*Exports to the Post router a creat
         return res.status(401).json({ message: "Vous ne pouvez pas créer un post à la place de quelqu'un d'autre !" }) /*...the function returns an error message*/
     }
 
-    const newPost = new PostModel({ /*Otherwise it creates a Post object...*/
+    const newPost = new PostModel(req.file ? { /*Otherwise it creates a Post object...*/
         posterId: req.body.posterId,
         posterPseudo: res.locals.user.pseudo,
         message: req.body.message,
-        video: req.body.video,
+        picture: `./uploads/profil/${req.file.filename}`,
+        likers: [],
+        comments: []
+    } : {
+        posterId: req.body.posterId,
+        posterPseudo: res.locals.user.pseudo,
+        message: req.body.message,
         likers: [],
         comments: []
     })
+
     newPost.save() /*...and saves it on the database*/
         .then(() => res.status(201).json({ message: "Votre post a été créé !" }))
         .catch(error => res.status(400).json(error))
@@ -41,13 +48,14 @@ module.exports.updatePost = (req, res) => { /*Exports to the Post router a updat
 
     PostModel.findOne({ _id: req.params.id }) /*Otherwise, it searches the database and selects the Post object corresponding to the identifier passed as a parameter*/
         .then((post) => {
-            if (post.posterId != res.locals.user._id) { /*If the modifiying user is different from the modified post creator...*/
+            if (post.posterId != res.locals.user._id && res.locals.user._id != `${process.env.ADMIN_ID}`) { /*If the modifiying user is different from the modified post creator...*/
                 return res.status(401).json({ message: "Vous ne pouvez pas modifier le post de quelqu'un d'autre !" }) /*...the function returns an error message*/
             }
 
             const postUpdate = { /*Otherwise it creates a new Post object...*/
                 message: req.body.message
             }
+
             PostModel.updateOne({ _id: req.params.id }, { ...postUpdate, _id: req.params.id }) /*...then updates the former Post object with the new information*/
                 .then(() => res.status(200).json({ message: 'La modification a été effectuée !' }))
                 .catch(error => {
@@ -66,21 +74,29 @@ module.exports.deletePost = (req, res) => { /*Exports to the Post router a delet
 
     PostModel.findOne({ _id: req.params.id }) /*Otherwise, it searches the database and selects the Post object corresponding to the identifier passed as a parameter*/
         .then((post) => {
-            if (post.posterId != res.locals.user._id) { /*If the modifiying user is different from the modified post creator...*/
+            if (post.posterId != res.locals.user._id && res.locals.user._id != `${process.env.ADMIN_ID}`) { /*If the modifiying user is different from the modified post creator...*/
                 return res.status(401).json({ message: "Vous ne pouvez pas supprimer le post de quelqu'un d'autre !" }) /*...the function returns an error message*/
             }
 
-            const filename = post.imageUrl.split('/images/')[1] /*Otherwise it targets in the "images" folder any image associated with this post...*/
-            fs.unlink(`images/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
+            const filename = post.picture?.split('/profil/')[1] /*Otherwise it targets in the "images" folder any image associated with this post...*/
+
+            if (filename) {
+                fs.unlink(`../frontend/public/uploads/profil/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
+                    PostModel.deleteOne({ _id: req.params.id }) /*...before deleting the Post object itself*/
+                        .then(() => res.status(200).json({ message: `Le post a été supprimé !` }))
+                        .catch(error => res.status(500).json({ error }))
+                })
+            }
+            else {
                 PostModel.deleteOne({ _id: req.params.id }) /*...before deleting the Post object itself*/
                     .then(() => res.status(200).json({ message: `Le post a été supprimé !` }))
                     .catch(error => res.status(500).json({ error }))
-            })
+            }
         })
         .catch(error => res.status(404).json({ error }))
 }
 
-/*------------PATCH(Like)*/
+/*------------PATCH (Like)*/
 module.exports.likePost = (req, res) => { /*Exports to the Post router a likePost() function...*/
     if (!ObjectId.isValid(req.params.id)) { /*...that runs the ObjectId isValid() function to check that the identifier of the post is indeed present in the database. If it is not...*/
         return res.status(404).json({ message: `Ce post n'existe pas !` }) /*...the function returns an error message*/
@@ -108,7 +124,7 @@ module.exports.likePost = (req, res) => { /*Exports to the Post router a likePos
         .catch(() => res.status(404).json({ message: `Ce post n'existe pas !` }))
 }
 
-/*------------PATCH(Unlike)*/
+/*------------PATCH (Unlike)*/
 module.exports.unlikePost = (req, res) => { /*Exports to the Post router an unlikePost() function...*/
     if (!ObjectId.isValid(req.params.id)) { /*...that runs the ObjectId isValid() function to check that the identifier of the post is indeed present in the database. If it is not...*/
         return res.status(404).json({ message: `Ce post n'existe pas !` }) /*...the function returns an error message*/
@@ -136,7 +152,7 @@ module.exports.unlikePost = (req, res) => { /*Exports to the Post router an unli
         .catch(() => res.status(404).json({ message: `Ce post n'existe pas !` }))
 }
 
-/*------------PATCH(Add comment post)*/
+/*------------PATCH (Add comment post)*/
 module.exports.commentPost = (req, res) => { /*Exports to the Post router a commentPost() function...*/
     if (!ObjectId.isValid(req.params.id)) { /*...that runs the ObjectId isValid() function to check that the identifier of the post is indeed present in the database. If it is not...*/
         return res.status(404).json({ message: `Ce post n'existe pas !` }) /*...the function returns an error message*/
@@ -164,13 +180,13 @@ module.exports.commentPost = (req, res) => { /*Exports to the Post router a comm
         .catch(() => res.status(404).json({ message: `Ce post n'existe pas !` }))
 }
 
-/*------------PATCH(Edit comment post)*/
+/*------------PATCH (Edit comment post)*/
 module.exports.editCommentPost = (req, res) => { /*Exports to the Post router an editCommentPost() function...*/
     if (!ObjectId.isValid(req.params.id)) { /*...that runs the ObjectId isValid() function to check that the identifier of the post is indeed present in the database. If it is not...*/
         return res.status(404).json({ message: `Ce post n'existe pas !` }) /*...the function returns an error message*/
     }
 
-    if (req.body.commenterId != res.locals.user._id) { /*If the user impersonates someone else...*/
+    if (req.body.commenterId != res.locals.user._id && res.locals.user._id != `${process.env.ADMIN_ID}`) { /*If the user impersonates someone else...*/
         return res.status(401).json({ message: "Vous ne pouvez pas modifier un commentaire à la place de quelqu'un d'autre !" }) /*...the function also returns an error message*/
     }
 
@@ -180,7 +196,7 @@ module.exports.editCommentPost = (req, res) => { /*Exports to the Post router an
             if (commentToEdit == undefined) { /*If the function does not find this comment...*/
                 return res.status(404).json({ message: "Ce commentaire n'existe pas !" }) /*...it returns an error message*/
             }
-            if (commentToEdit.commenterId != res.locals.user._id) { /*If the modifiying user is different from the user who created the comment...*/
+            if (commentToEdit.commenterId != res.locals.user._id && res.locals.user._id != `${process.env.ADMIN_ID}`) { /*If the modifiying user is different from the user who created the comment...*/
                 return res.status(404).json({ message: "Vous ne pouvez pas modifier un commentaire qui n'est pas le vôtre !" }) /*...it also returns an error message*/
             }
 
@@ -193,13 +209,13 @@ module.exports.editCommentPost = (req, res) => { /*Exports to the Post router an
         .catch(error => res.status(404).json({ error }))
 }
 
-/*------------DELETE(Delete comment post)*/
+/*------------DELETE (Delete comment post)*/
 module.exports.deleteCommentPost = (req, res) => { /*Exports to the Post router an deleteCommentPost() function...*/
     if (!ObjectId.isValid(req.params.id)) { /*...that runs the ObjectId isValid() function to check that the identifier of the post is indeed present in the database. If it is not...*/
         return res.status(404).json({ message: `Ce post n'existe pas !` }) /*...the function returns an error message*/
     }
 
-    if (req.body.commenterId != res.locals.user._id) { /*If the user impersonates someone else...*/
+    if (req.body.commenterId != res.locals.user._id && res.locals.user._id != `${process.env.ADMIN_ID}`) { /*If the user impersonates someone else...*/
         return res.status(401).json({ message: "Vous ne pouvez pas supprimer un commentaire à la place de quelqu'un d'autre !" }) /*...the function also returns an error message*/
     }
 
@@ -209,7 +225,7 @@ module.exports.deleteCommentPost = (req, res) => { /*Exports to the Post router 
             if (commentToEdit == undefined) { /*If the function does not find this comment...*/
                 return res.status(404).json({ message: "Ce commentaire n'existe pas !" }) /*...it returns an error message*/
             }
-            if (commentToEdit.commenterId != res.locals.user._id) { /*If the deleting user is different from the user who created the comment...*/
+            if (commentToEdit.commenterId != res.locals.user._id && res.locals.user._id != `${process.env.ADMIN_ID}`) { /*If the deleting user is different from the user who created the comment...*/
                 return res.status(404).json({ message: "Vous ne pouvez pas supprimer un commentaire qui n'est pas le vôtre !" }) /*...it also returns an error message*/
             }
 

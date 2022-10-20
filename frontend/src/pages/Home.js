@@ -1,41 +1,61 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------Modules*/
-import { useContext } from "react" /*Imports the useContext() hook*/
+/*------------Redux modules*/
+import { useSelector } from "react-redux"
 
 /*------------Components*/
-import { UserDataContext } from "../components/AppContext" /*Imports the Context*/
-import LeftNav from "../components/Navbars/LeftNav" /*Imports the LeftNav component*/
-import Log from "../components/Log" /*Imports the Log component*/
+import NewPostForm from "../components/Home/NewPostForm"
+import Thread from "../components/Home/Thread"
+import FriendsHint from "../components/Profile/FriendsHint"
+import LogModal from "../components/Log/LogModal"
+import UserProfile from "../components/Profile/UserProfile"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-function Home() { /*Runs a Home() function...*/
-    /*------------Calls*/
-    const userData = useContext(UserDataContext) /*...that runs itself the useContext() hook to retrieve the user data*/
+export default function Home() { /*Exports a Home component...*/
+
+    /*------------Data*/
+    const userData = useSelector(state => state.userReducer)
+    const clientData = useSelector(state => state.clientReducer) /*...that gets the client data from the Store...*/
 
     /*------------Return*/
-    return (
-        <div className="profil-page">
-            {userData ? ( /*If the Context contains indeed user data...*/
-                <>
-                    <LeftNav />
-                    <h1>HOME PAGE</h1> {/*...the user is automatically redirected to its authenticated home page*/}
-                </>
-            ) : (
-                <div className="log-container">
-                    <Log signUp={false} signIn={true} /> {/*Otherwise it is redirected to the Log component to register or log in*/}
-                    <div className="img-container">
-                        <img src="./img/log.svg" alt="img-log" />
-                    </div>
+    return ( /*...then returns...*/
+        <div>
+            {!userData._id ? (
+
+                <div className="profil-page">
+
+                    {clientData._id ? ( /*...if there is client data...*/
+                        <>
+                            <div className="main">
+                                <div className="home-header">
+                                    <NewPostForm /> {/*...the NewPostForm component...*/}
+                                </div>
+                                <Thread /> {/*...the Thread component...*/}
+                            </div>
+                            <div className="right-side">
+                                <div className="right-side-container">
+                                    <div className="wrapper">
+                                        {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && <FriendsHint />}
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+
+                    ) : ( /*...and if there is no client data...*/
+
+                        <div className="log-container">
+                            <LogModal /> {/*...the LogModal component*/}
+                            <div className="img-container">
+                                <img src="./img/log.svg" alt="img-log" />
+                            </div>
+                        </div>
+                    )}
                 </div>
+            ) : ( /*If there is userData, the Home component returns instead...*/
+                <UserProfile /> /*...a UserProfile component*/
             )}
         </div>
     )
 }
-/*-------------------------------------------------------------------------------------------------------------------*/
-
-
-/*Export-------------------------------------------------------------------------------------------------------------*/
-export default Home /*Exports the Home page to the App component*/
 /*-------------------------------------------------------------------------------------------------------------------*/

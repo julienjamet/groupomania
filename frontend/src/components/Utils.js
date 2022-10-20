@@ -1,8 +1,6 @@
-function dateParser(num) {
-    let options = {
-        year: "numeric", month: "short", weekday: "long", day: "numeric",
-        hour: "2-digit", minute: "2-digit", second: "2-digit"
-    }
+/*------------Date Parser*/
+export default function dateParser(num) {
+    let options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
 
     let timestamp = Date.parse(num)
 
@@ -11,4 +9,11 @@ function dateParser(num) {
     return date.toString()
 }
 
-export default dateParser
+/*------------Timestamp Parser*/
+export function timestampParser(num) {
+    let options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
+
+    let date = new Date(num).toLocaleDateString('fr-FR', options)
+
+    return date.toString()
+}

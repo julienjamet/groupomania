@@ -21,9 +21,6 @@ const postSchema = new mongoose.Schema( /*Runs the Mongoose schema() function to
         picture: {
             type: String,
         },
-        video: {
-            type: String
-        },
         likers: {
             type: [String],
             required: true

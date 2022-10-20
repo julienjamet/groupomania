@@ -1,22 +1,39 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-/*------------Modules*/
-import React from 'react' /*Imports React*/
-import ReactDOM from 'react-dom/client' /*Imports ReactDOM*/
+/*------------Redux & React modules*/
+import { createStore, applyMiddleware } from "redux"
+import { composeWithDevTools } from "redux-devtools-extension"
+import thunk from "redux-thunk"
+import ReactDOM from 'react-dom/client'
+import React from 'react'
 
-/*------------Components*/
-import App from './App' /*Imports the App component*/
-import './styles/index.css' /*Imports styles*/
+/*------------Reducers & Actions*/
+import rootReducer from "./components/Store/reducers/root.reducer"
+import GetUsers from './components/Store/actions/users.action'
+import GetPosts, { GetAllPosts } from './components/Store/actions/posts.action'
+
+/*------------Components & Styles*/
+import { Provider } from "react-redux"
+import App from './App'
+import './styles/index.css'
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 
 /*Operation----------------------------------------------------------------------------------------------------------*/
-/*------------Calls*/
-const root = ReactDOM.createRoot(document.getElementById('root')) /*Targets the "root" div of the "index.html" file and runs the ReactDOM createRoot() function on it*/
+/*------------Redux Store*/
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk))) /*Creates a Redux Store*/
+
+store.dispatch(GetUsers()) /*Runs a Get (All users) action*/
+store.dispatch(GetPosts()) /*Runs a Get (Posts) action*/
+store.dispatch(GetAllPosts()) /*Runs a Get (All posts) action*/
 
 /*------------React App*/
-root.render( /*Runs on the "root" div the App component as a React App*/
-  <React.StrictMode>
-    <App />
+const root = ReactDOM.createRoot(document.getElementById('root')) /*Creates a React Root*/
+
+root.render( /*Runs on the Root...*/
+  <React.StrictMode> {/*...a React App...*/}
+    <Provider store={store}> {/*...that uses the Store at its highest level...*/}
+      <App /> {/*...and runs the App component*/}
+    </Provider>
   </React.StrictMode>
 )
 /*-------------------------------------------------------------------------------------------------------------------*/
