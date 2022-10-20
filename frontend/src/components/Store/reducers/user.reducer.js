@@ -12,12 +12,6 @@ export default function userReducer(state = initialState, action) { /*Exports a 
         case GET_USER:
             return action.payload
 
-        case PUT_BIO:
-            return {
-                ...state,
-                bio: action.payload.bio
-            }
-
         case FOLLOWED_USER:
             if (state._id === action.payload.idToFollow) {
                 return {
@@ -30,9 +24,14 @@ export default function userReducer(state = initialState, action) { /*Exports a 
             }
 
         case UNFOLLOWED_USER:
-            return {
-                ...state,
-                followers: state.followers.filter(id => id !== action.payload)
+            if (state._id === action.payload.idToUnfollow) {
+                return {
+                    ...state,
+                    followers: state.followers.filter(id => id !== action.payload.userId)
+                }
+            }
+            else {
+                return state
             }
 
         case RESET:

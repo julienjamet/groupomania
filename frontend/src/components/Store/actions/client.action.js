@@ -97,7 +97,7 @@ export function UnfollowUser(idToUnfollow, userId) { /*Exports a Patch (Unfollow
 
             .then(() => { /*...before sending the id to unfollow to the Client reducer*/
                 dispatch({ type: UNFOLLOW_USER, payload: idToUnfollow })
-                dispatch({ type: UNFOLLOWED_USER, payload: userId })
+                dispatch({ type: UNFOLLOWED_USER, payload: { userId, idToUnfollow } })
             })
             .catch(error => console.log(error))
     }

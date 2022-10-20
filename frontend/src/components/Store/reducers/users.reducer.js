@@ -1,5 +1,5 @@
 /*Imports------------------------------------------------------------------------------------------------------------*/
-import { UNFOLLOWED_USER } from "../actions/client.action"
+import { FOLLOWED_USER, UNFOLLOWED_USER } from "../actions/client.action"
 import { GET_USERS } from "../actions/users.action"
 /*-------------------------------------------------------------------------------------------------------------------*/
 
@@ -14,12 +14,25 @@ export default function usersReducer(state = initialState, action) { /*Exports a
         case GET_USERS:
             return action.payload /*...that sends to the Store the data retrieved from the Users action*/
 
-        case UNFOLLOWED_USER:
+        case FOLLOWED_USER:
             return state.map(user => {
-                if (user.followings.includes(action.payload.userId)) {
+                if (user._id === action.payload.idToFollow) {
                     return {
                         ...user,
-                        followings: user.followings.filter(id => id !== action.payload.userId)
+                        followers: [action.payload.userId, ...user.followers]
+                    }
+                }
+                else {
+                    return user
+                }
+            })
+
+        case UNFOLLOWED_USER:
+            return state.map(user => {
+                if (user._id === action.payload.idToUnfollow) {
+                    return {
+                        ...user,
+                        followers: user.followers.filter(id => id !== action.payload.userId)
                     }
                 }
                 else {
