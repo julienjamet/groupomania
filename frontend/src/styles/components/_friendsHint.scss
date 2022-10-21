@@ -76,26 +76,32 @@
 
 @media all and (max-width: 1445px) {
   .get-friends-container {
-    margin-right: -5%;
-    width: 25%;
+    right: 3%;
   }
 }
-@media all and (max-width: 1210px) {
+@media all and (max-width: 1280px) {
   .get-friends-container {
-    margin-right: -8%;
+    right: 1%;
+  }
+}
+@media all and (max-width: 1220px) {
+  .get-friends-container {
+    width: 25%;
     li {
-      p {
+        p {
         display: none;
       }
+
       button {
         margin-left: 80%;
       }
     }
-  }
+    }  
 }
+
 @media all and (max-width: 900px) {
   .get-friends-container {
-    min-width: 220px;
+    
     li {
       p {
         display: none;

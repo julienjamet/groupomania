@@ -7,14 +7,10 @@ nav {
   z-index: 10;
   top: 0;
 
-  @media screen and(max-width: 1251px) {
-    padding: 0 20px;
-  }
-
   &::after {
     content: "";
     height: 45px;
-    width: 110%;
+    width: 100%;
     left: -20px;
     top:0;
     position: absolute;
@@ -77,5 +73,14 @@ nav {
         }
       }
     }
+  }
+}
+
+@media all and (max-width: 1375px) {
+  nav::after {
+    width: 80%;
+  }
+  nav .nav-container {
+    width: 80%;
   }
 }

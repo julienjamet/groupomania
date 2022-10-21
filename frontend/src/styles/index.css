@@ -113,6 +113,11 @@ i:hover {
   transform: scale(1.1);
 }
 
+html {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
 body {
   font-family: "Lato", sans-serif;
   line-height: 1.4rem;
@@ -216,15 +221,10 @@ nav {
   z-index: 10;
   top: 0;
 }
-@media screen and (max-width: 1251px) {
-  nav {
-    padding: 0 20px;
-  }
-}
 nav::after {
   content: "";
   height: 45px;
-  width: 110%;
+  width: 100%;
   left: -20px;
   top: 0;
   position: absolute;
@@ -281,6 +281,14 @@ nav .nav-container ul li img {
   height: 100%;
 }
 
+@media all and (max-width: 1375px) {
+  nav::after {
+    width: 80%;
+  }
+  nav .nav-container {
+    width: 80%;
+  }
+}
 .thread-container, .home-header {
   width: 70%;
 }
@@ -1427,6 +1435,12 @@ nav .nav-container ul li img {
     margin-left: 5%;
   }
 }
+@media all and (max-width: 418px) {
+  .post-form textarea {
+    width: 75%;
+    margin-left: 0;
+  }
+}
 .get-friends-container {
   display: flex;
   flex-direction: column;
@@ -1501,13 +1515,17 @@ nav .nav-container ul li img {
 
 @media all and (max-width: 1445px) {
   .get-friends-container {
-    margin-right: -5%;
-    width: 25%;
+    right: 3%;
   }
 }
-@media all and (max-width: 1210px) {
+@media all and (max-width: 1280px) {
   .get-friends-container {
-    margin-right: -8%;
+    right: 1%;
+  }
+}
+@media all and (max-width: 1220px) {
+  .get-friends-container {
+    width: 25%;
   }
   .get-friends-container li p {
     display: none;
@@ -1517,9 +1535,6 @@ nav .nav-container ul li img {
   }
 }
 @media all and (max-width: 900px) {
-  .get-friends-container {
-    min-width: 220px;
-  }
   .get-friends-container li p {
     display: none;
   }

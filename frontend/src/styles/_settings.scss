@@ -114,6 +114,11 @@ i {
   }
 }
 
+html {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
 body {
   font-family: $font-2;
   line-height: 1.4rem;
