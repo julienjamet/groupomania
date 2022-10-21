@@ -297,17 +297,6 @@ nav .nav-container ul li img {
   height: 290px;
 }
 
-@media all and (max-width: 1300px) {
-  .thread-container, .home-header {
-    position: relative;
-    left: 20px;
-  }
-}
-@media all and (max-width: 768px) {
-  .thread-container, .home-header {
-    left: 5px;
-  }
-}
 .card-container {
   display: grid;
   grid-template-columns: 66px 1fr;
@@ -1529,12 +1518,7 @@ nav .nav-container ul li img {
     right: 3%;
   }
 }
-@media all and (max-width: 1300px) {
-  .get-friends-container {
-    right: 1%;
-  }
-}
-@media all and (max-width: 1260px) {
+@media all and (max-width: 1290px) {
   .get-friends-container {
     width: 25%;
   }
@@ -1543,6 +1527,11 @@ nav .nav-container ul li img {
   }
   .get-friends-container li button {
     margin-left: 80%;
+  }
+}
+@media all and (max-width: 1200px) {
+  .get-friends-container {
+    right: 0;
   }
 }
 @media all and (max-width: 900px) {
@@ -1706,14 +1695,7 @@ nav .nav-container ul li img {
   }
 }
 @media all and (max-width: 1300px) {
-  .left-nav-container img {
-    width: 30px;
-    height: 30px;
-    margin-left: -32px;
-  }
-}
-@media all and (max-width: 768px) {
-  .left-nav-container img {
-    margin-left: -40px;
+  .left-nav-container {
+    display: none;
   }
 }/*# sourceMappingURL=index.css.map */

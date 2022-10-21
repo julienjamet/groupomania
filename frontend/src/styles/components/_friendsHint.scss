@@ -79,12 +79,7 @@
     right: 3%;
   }
 }
-@media all and (max-width: 1300px) {
-  .get-friends-container {
-    right: 1%;
-  }
-}
-@media all and (max-width: 1260px) {
+@media all and (max-width: 1290px) {
   .get-friends-container {
     width: 25%;
     li {
@@ -97,6 +92,11 @@
       }
     }
     }  
+}
+@media all and (max-width: 1200px) {
+  .get-friends-container {
+    right: 0;
+  }
 }
 
 @media all and (max-width: 900px) {

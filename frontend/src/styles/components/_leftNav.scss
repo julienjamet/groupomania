@@ -84,14 +84,7 @@
 }
 
 @media all and (max-width: 1300px) {
-  .left-nav-container img {
-    width: 30px;
-    height: 30px;
-    margin-left: -32px;
-  }
-}
-@media all and (max-width: 768px) {
-  .left-nav-container img {
-    margin-left: -40px;
+  .left-nav-container {
+    display: none;
   }
 }
