@@ -43,13 +43,6 @@
             width: 34px;
           }
         }
-
-        img {
-          @media screen and(max-width: 590px) {
-            height: 34px;
-            width: 34px;
-          }
-        }
       }
 
       .active-left-nav {
@@ -72,12 +65,27 @@
               transform: scaleY(1);
             }
           }
-          @media screen and(max-width: 590px) {
-            height: 33px;
+          @media screen and(max-width: 1300px) {
+            background: none;
+            height: 20px;
             left: -8px;
           }
         }
       }
     }
+  }
+}
+
+@media all and (max-width: 1400px) {
+  .left-nav-container {
+    position: absolute;
+    left: 0;
+  }
+}
+
+@media all and (max-width: 1300px) {
+  .left-nav-container img {
+    width: 30px;
+    height: 30px;
   }
 }

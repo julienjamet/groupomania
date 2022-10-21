@@ -72,3 +72,46 @@
     }
   }
 }
+
+
+@media all and (max-width: 1445px) {
+  .get-friends-container {
+    margin-right: -5%;
+    width: 25%;
+  }
+}
+@media all and (max-width: 1210px) {
+  .get-friends-container {
+    margin-right: -8%;
+    li {
+      p {
+        display: none;
+      }
+      button {
+        margin-left: 80%;
+      }
+    }
+  }
+}
+@media all and (max-width: 900px) {
+  .get-friends-container {
+    min-width: 220px;
+    li {
+      p {
+        display: none;
+      }
+      button {
+        margin-left: 70%;
+      }
+    }
+  }
+}
+@media all and (max-width: 768px) {
+  .get-friends-container {
+    display: none;
+  }
+  .home-header, .thread-container {
+    width: 90%;
+    margin-left: 7%;
+  }
+}

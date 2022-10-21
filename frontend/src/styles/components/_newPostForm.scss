@@ -237,3 +237,9 @@
     }
   }
 }
+
+@media all and (max-width: 520px) {
+  .post-form textarea {
+    margin-left: 5%;
+  }
+}
