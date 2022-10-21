@@ -5,6 +5,18 @@
   height: 290px;
 }
 
+@media all and (max-width: 1300px) {
+  .thread-container, .home-header {
+    position: relative;
+      left: 20px;
+    }
+}
+@media all and (max-width: 768px) {
+  .thread-container, .home-header {
+    left: 5px;
+  }
+}
+
 .card-container {
   display: grid;
   grid-template-columns: 66px 1fr;
