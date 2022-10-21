@@ -84,3 +84,16 @@ nav {
     width: 80%;
   }
 }
+@media all and (max-width: 768px) {
+  nav::after {
+    width: 100%;
+    background-color: white;
+    opacity: 1;
+  }
+
+  nav .nav-container {
+    width: 100%;
+    background-color: white;
+    opacity: 1;
+  }
+}
