@@ -122,8 +122,8 @@
       span {
         font-style: italic;
 
-        @media screen and(max-width: 440px) {
-          transform: translate(52px, -20px);
+        @media screen and(max-width: 580px) {
+          display: none;
         }
       }
     }

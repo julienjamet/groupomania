@@ -416,9 +416,9 @@ nav .nav-container ul li img {
 .card-container .card-right .card-header span {
   font-style: italic;
 }
-@media screen and (max-width: 440px) {
+@media screen and (max-width: 580px) {
   .card-container .card-right .card-header span {
-    transform: translate(52px, -20px);
+    display: none;
   }
 }
 .card-container .card-right p {
