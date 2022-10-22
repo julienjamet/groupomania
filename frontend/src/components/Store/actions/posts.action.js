@@ -44,7 +44,6 @@ export function GetAllPosts() {
 export function AddPost(data) { /*Exports a Post (Add post) action...*/
 
     return (dispatch) => {
-        console.log("test1")
         axios({ /*...that runs a POST (Add post) request...*/
             method: "post",
             url: `http://localhost:5000/api/post`,
@@ -53,7 +52,6 @@ export function AddPost(data) { /*Exports a Post (Add post) action...*/
         })
 
             .then(() => {
-                console.log("test2")
                 axios.get('http://localhost:5000/api/post', { withCredentials: true }) /*...that runs a GET (All posts) request...*/
 
                     .then(res => {

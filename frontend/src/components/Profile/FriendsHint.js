@@ -1,9 +1,20 @@
-import { useEffect, useState } from "react"
+/*Imports------------------------------------------------------------------------------------------------------------*/
+/*------------Redux & React modules*/
 import { useDispatch, useSelector } from "react-redux"
-import GetUser from "../Store/actions/user.action"
-import FollowHandler from "./FollowHandler"
+import { useEffect, useState } from "react"
 
+/*------------Actions*/
+import GetUser from "../Store/actions/user.action"
+
+/*------------Components*/
+import FollowHandler from "./FollowHandler"
+/*-------------------------------------------------------------------------------------------------------------------*/
+
+
+/*Operation----------------------------------------------------------------------------------------------------------*/
 export default function FriendsHint() {
+
+    /*------------Data*/
     const clientData = useSelector(state => state.clientReducer)
     const usersData = useSelector(state => state.usersReducer)
     const dispatch = useDispatch()
@@ -13,6 +24,7 @@ export default function FriendsHint() {
     const [allAreFollowed, setAllAreFollowed] = useState(false)
     const [friendsHint, setFriendsHint] = useState([])
 
+    /*------------Middlewares*/
     function notFriendList() {
         let array = []
 
@@ -54,6 +66,7 @@ export default function FriendsHint() {
         dispatch(GetUser(e.target.id))
     }
 
+    /*------------Return*/
     return (
         <div className="get-friends-container">
             <h4>Suggestions</h4>
@@ -83,3 +96,4 @@ export default function FriendsHint() {
         </div>
     )
 }
+/*-------------------------------------------------------------------------------------------------------------------*/
