@@ -1,4 +1,5 @@
 ------A L'ATTENTION DU JURY FINAL OPENCLASSROOMS------
+
 Bonjour !
 Voici la marche à suivre pour utiliser l'application Groupomania :
 
@@ -15,8 +16,10 @@ Voici la marche à suivre pour utiliser l'application Groupomania :
 - Exécutez enfin les commandes "npm install" puis "npm start" depuis le dossier frontend pour lancer l'application.
 
 Bonne découverte !
+
 ----------------------------------------------------
 
+----------------------------------------------------
 
 Hi and welcome to the Groupomania application !
 
@@ -26,11 +29,15 @@ Then, please follow these instructions :
 - Create a MongoDB database and make sure you have admin access
 - Clone the repository
 
-- Copy/paste the [./backend/.env.example] file
+- Copy/paste the [./backend/config/.env.example] file
 - Rename the newly created `.env copy.example` file to `.env`
-- Insert your MongoDB connection string into the `.env` file (don't forget to include your password)
-- From the [./backend] folder, run `npm install` then `node server`
-- Your console should now be indicating "Listening on port 3000 - Connected to MongoDB"
+- Choose a PORT and a client URL. For example, PORT could be "5000" and client URL could be "http://localhost:3000".
+- Insert your MongoDB connection string (don't forget to include your password)
+- Note that you can upgrade your account to an admin account by inserting your ID into the associated field. You will need to do the same thing with the [./frontend/.env.example] file
 
-- From the [root] folder, run `npm install` then `ng serve`
-- Navigate to `http://localhost:4200`
+- From the [./backend] folder, run `npm install` then `npm start`
+- Your console should now be indicating that your are connected to MongoDB
+
+- From the [./frontend] folder, run `npm install` then `npm start"
+
+- Your're done ! I hope you will enjoy it !
