@@ -1,0 +1,33 @@
+This project has been made from scratch during my dev training (React).
+
+My purpose was to build a complete MERN application (MongoDB, Express, React, Node).
+
+I followed a tutorial from the Youtube french channel "From Scratch" (links below).
+
+Backend part : https://www.youtube.com/watch?v=SUPDFHuvhRc
+Frontend part : https://www.youtube.com/watch?v=ghdRD3pt8rg
+
+To run the app locally, you will need to have Node and npm installed on your machine.
+
+Then please follow these instructions :
+
+- Create a MongoDB database and make sure you have admin access
+- Clone the repository
+
+- Copy/paste the [./backend/config/.env.example] file
+- Rename the newly created `.env copy.example` file to `.env`
+- Repeat this protocol with the [./frontend/.env.example] file
+- Insert your MongoDB connection string into the `MONGODB_CREDENTIALS` field (don't forget to include your password)
+
+- From the [./backend] folder, run `npm install` then `npm start`
+- Your console should now be indicating "Listening on port 5000 - Connected to MongoDB"
+
+- From the [./frontend] folder, run `npm install` then `npm start`
+
+- You're done !
+
+For the app to work perfectly, there must be an admin account.
+
+Once an account will have been created, you will be able to upgrade it to an admin account by inserting its MongoDB ID into the `ADMIN_ID` and `REACT_APP_ADMIN_ID` fields of the `.env` files.
+
+You will then have to restart both backend and frontend.
