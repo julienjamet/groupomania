@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema( /*Runs the Mongoose schema() function to
         },
         picture: {
             type: String,
-            default: `https://api.julienjamet-groupomania.com/images/random-user.png`
+            default: `http://api.julienjamet-groupomania.com/images/random-user.png`
         },
         bio: {
             type: String,
