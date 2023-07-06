@@ -81,7 +81,7 @@ module.exports.deletePost = (req, res) => { /*Exports to the Post router a delet
             const filename = post.picture?.split('/profil/')[1] /*Otherwise it targets in the "images" folder any image associated with this post...*/
 
             if (filename) {
-                fs.unlink(`https://julienjamet-groupomania.com/frontend/public/uploads/profil/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
+                fs.unlink(`https://julienjamet-groupomania.com/public/uploads/profil/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
                     PostModel.deleteOne({ _id: req.params.id }) /*...before deleting the Post object itself*/
                         .then(() => res.status(200).json({ message: `Le post a été supprimé !` }))
                         .catch(error => res.status(500).json({ error }))
