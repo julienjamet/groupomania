@@ -39,7 +39,7 @@ exports.updateUser = (req, res) => { /*Exports to the User router a updateUser()
 
             const userObject = req.file ? {
                 ...req.body,
-                picture: `http://api.julienjamet-groupomania.com/images/${req.file.filename}`,
+                picture: `http://julienjamet-groupomania.onrender.com/images/${req.file.filename}`,
                 id: user._id,
                 password: user.password,
                 followers: user.followers,
@@ -57,7 +57,7 @@ exports.updateUser = (req, res) => { /*Exports to the User router a updateUser()
             const filename = user.picture.split('/profil/')[1] /*Otherwise it targets in the "images" folder any image associated with this user...*/
 
             if (req.file !== undefined && filename !== "random-user.png") {
-                fs.unlink(`http://api.julienjamet-groupomania.com/images/${filename}`, () => {
+                fs.unlink(`http://julienjamet-groupomania.onrender.com/images/${filename}`, () => {
                     UserModel.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id }) /*...then updates the former User object with the new information*/
                         .then(() => res.status(200).json({ message: "La modification a été effectuée !" }))
                         .catch(error => {
@@ -93,7 +93,7 @@ exports.deleteUser = (req, res) => { /*Exports to the User router a deleteUser()
 
             const filename = user.picture.split('/profil/')[1] /*Otherwise it targets in the "images" folder any image associated with this user...*/
             if (filename !== "random-user.png") {
-                fs.unlink(`http://api.julienjamet-groupomania.com/images/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
+                fs.unlink(`http://julienjamet-groupomania.onrender.com/images/${filename}`, () => { /*...then runs the FS unlink() function to delete this image from the folder...*/
                     UserModel.deleteOne({ _id: req.params.id }) /*...before deleting the User object itself*/
                         .then(() => res.status(200).json({ message: `Le compte de ${user.pseudo} a été supprimé !` }))
                         .catch(error => res.status(500).json({ error }))
