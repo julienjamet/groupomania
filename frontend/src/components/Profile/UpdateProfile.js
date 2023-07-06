@@ -104,7 +104,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
             }
         })
 
-        await axios.delete(`http://localhost:5000/api/user/${clientData._id}`, { withCredentials: true })
+        await axios.delete(`https://api.julienjamet-groupomania.com/api/user/${clientData._id}`, { withCredentials: true })
             .then(() => {
                 window.location = "/home" /*...before redirecting the user to the Home page*/
             })

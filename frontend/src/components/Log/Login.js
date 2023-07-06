@@ -22,7 +22,7 @@ export default function Login() { /*Exports to the LogModal a Login component...
 
         axios({ /*...that runs a POST (Login) request...*/
             method: "post",
-            url: `http://localhost:5000/api/user/login`,
+            url: `https://api.julienjamet-groupomania.com/api/user/login`,
             withCredentials: true,
             data: {
                 email,

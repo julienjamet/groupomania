@@ -25,7 +25,7 @@ app.use(cookieParser()) /*Runs Cookie-Parser to parse cookies*/
 app.use(helmet({ crossOriginResourcePolicy: false })) /*Runs Helmet to protect the app from common attacks*/
 
 app.use((req, res, next) => { /*Sets accesses to the app*/
-    res.setHeader('Access-Control-Allow-Origin', `http://localhost:3000`)
+    res.setHeader('Access-Control-Allow-Origin', `https://julienjamet-groupomania.com`)
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization')
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH')
     res.setHeader('Access-Control-Allow-Credentials', 'true')
