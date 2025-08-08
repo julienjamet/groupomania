@@ -90,7 +90,7 @@ export default function UserProfile() { /*Exports to the Home page a UserProfile
                             <h3>Abonnements</h3>
                             <span onClick={() => setFollowings(false)} className="cross">&#10005;</span>
                             <ul>
-                                {usersData.map(user => {
+                                {usersData?.length && usersData.map(user => {
                                     for (let i = 0; i < userData.followings.length; i++) {
                                         if (user._id === userData.followings[i]) {
                                             return ( /*...that returns, for each user found in the user's subscriptions list...*/
@@ -124,7 +124,7 @@ export default function UserProfile() { /*Exports to the Home page a UserProfile
                                 <h3>Abonnés</h3>
                                 <span onClick={() => setFollowers(false)} className="cross">&#10005;</span>
                                 <ul>
-                                    {usersData.map(user => {
+                                    {usersData?.length && usersData.map(user => {
                                         for (let i = 0; i < userData.followers.length; i++) {
                                             if (user._id === userData.followers[i]) {
                                                 return ( /*...that returns, for each user found in the user's followers list...*/
@@ -157,7 +157,7 @@ export default function UserProfile() { /*Exports to the Home page a UserProfile
                 <h2>Activité de {userData.pseudo}</h2>
                 <div className="thread-container">
                     <ul>
-                        {allPostsData.map(post => { /*...for each post retrieved from the Store that has been created by the user...*/
+                        {allPostsData?.length && allPostsData.map(post => { /*...for each post retrieved from the Store that has been created by the user...*/
                             if (post.posterId === userData._id) {
                                 return (
                                     <li key={post._id} className="card-container">

@@ -50,7 +50,7 @@ export default function CardComments({ post }) { /*Exports a CardComments compon
                         <div className="left-part">
                             <img
                                 src={
-                                    usersData.map(user => {
+                                    usersData?.length && usersData.map(user => {
                                         if (user._id === comment.commenterId) {
                                             return user.picture /*...the profile picture...*/
                                         }

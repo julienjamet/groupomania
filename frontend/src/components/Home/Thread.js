@@ -45,7 +45,7 @@ export default function Thread() { /*Exports to the Home page a Thread component
         <div className="thread-container">
             {clientData._id !== `${process.env.REACT_APP_ADMIN_ID}` && <LeftNav />} {/*...the LeftNav component...*/}
             <ul>
-                {postsData.map(post => { /*...and, for each post retrieved from the Store...*/
+                {postsData?.length && postsData.map(post => { /*...and, for each post retrieved from the Store...*/
                     return (
                         <li key={post._id} className="card-container">
                             <Card post={post} /> {/*...a Card component*/}

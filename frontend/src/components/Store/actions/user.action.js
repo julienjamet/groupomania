@@ -11,7 +11,7 @@ export const RESET = "RESET"
 export default function GetUser(userId) {
 
     return (dispatch) => {
-        axios.get(`https://api.julienjamet-groupomania.com/api/user/${userId}`, { withCredentials: true })
+        axios.get(`${process.env.REACT_APP_API_URL}/groupomania/users/${userId}`, { withCredentials: true })
 
             .then(res => dispatch({ type: GET_USER, payload: res.data }))
             .catch(error => console.log(error))

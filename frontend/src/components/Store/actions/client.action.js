@@ -17,7 +17,7 @@ export const UNFOLLOWED_USER = "UNFOLLOWED_USER"
 export default function GetClient(clientId) { /*Exports a Get (Client) action...*/
 
     return (dispatch) => {
-        axios.get(`https://api.julienjamet-groupomania.com/api/user/${clientId}`, { withCredentials: true }) /*...that runs a GET (Client) request...*/
+        axios.get(`${process.env.REACT_APP_API_URL}/groupomania/users/${clientId}`, { withCredentials: true }) /*...that runs a GET (Client) request...*/
 
             .then(res => { dispatch({ type: GET_CLIENT, payload: res.data }) }) /*...then sends the retrieved data to the Client reducer*/
             .catch(error => console.log(error))
@@ -30,17 +30,17 @@ export function PutImage(data, clientId) { /*Exports a Put (Image) action...*/
     return (dispatch) => {
         axios({ /*...that runs a PUT (Image) request...*/
             method: "put",
-            url: `https://api.julienjamet-groupomania.com/api/user/${clientId}`,
+            url: `${process.env.REACT_APP_API_URL}/groupomania/users/${clientId}`,
             data: data,
             withCredentials: true
         })
 
             .then(() => {
-                axios.get(`https://api.julienjamet-groupomania.com/api/user/${clientId}`, { withCredentials: true })
+                axios.get(`${process.env.REACT_APP_API_URL}/groupomania/users/${clientId}`, { withCredentials: true })
                     .then(res => { dispatch({ type: GET_CLIENT, payload: res.data }) }) /*...before sending the retrieved data to the Client reducer*/
                     .catch(error => console.log(error))
 
-                axios.get(`https://api.julienjamet-groupomania.com/api/user`, { withCredentials: true })
+                axios.get(`${process.env.REACT_APP_API_URL}/groupomania/users`, { withCredentials: true })
                     .then(res => { dispatch({ type: GET_USERS, payload: res.data }) }) /*...before sending the retrieved data to the Client reducer*/
                     .catch(error => console.log(error))
             })
@@ -55,7 +55,7 @@ export function PutBio(bio, clientId) { /*Exports a Put (Bio) action...*/
     return (dispatch) => {
         axios({ /*...that runs a PUT (Bio) request...*/
             method: "put",
-            url: `https://api.julienjamet-groupomania.com/api/user/${clientId}`,
+            url: `${process.env.REACT_APP_API_URL}/groupomania/users/${clientId}`,
             data: { bio },
             withCredentials: true
         })
@@ -71,7 +71,7 @@ export function FollowUser(idToFollow, userId) { /*Exports a Patch (Follow) acti
     return (dispatch) => {
         axios({ /*...that runs a PATCH (Follow) request...*/
             method: "patch",
-            url: `https://api.julienjamet-groupomania.com/api/user/follow/${userId}`,
+            url: `${process.env.REACT_APP_API_URL}/groupomania/users/follow/${userId}`,
             data: { idToFollow },
             withCredentials: true
         })
@@ -90,7 +90,7 @@ export function UnfollowUser(idToUnfollow, userId) { /*Exports a Patch (Unfollow
     return (dispatch) => {
         axios({ /*...that runs a PATCH (Unfollow) request...*/
             method: "patch",
-            url: `https://api.julienjamet-groupomania.com/api/user/unfollow/${userId}`,
+            url: `${process.env.REACT_APP_API_URL}/groupomania/users/unfollow/${userId}`,
             data: { idToUnfollow },
             withCredentials: true
         })

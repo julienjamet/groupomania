@@ -8,9 +8,9 @@ export default function Logout() { /*Exports to the Navbar a Logout component...
 
     /*------------Middleware*/
     function logout() {
-        axios.get('https://api.julienjamet-groupomania.com/api/user/logout', { withCredentials: true }) /*...running a GET (Logout) request...*/
+        axios.post(`${process.env.REACT_APP_API_URL}/logout`, {}, { withCredentials: true }) /*...running a GET (Logout) request...*/
 
-        setTimeout(() => { window.location.reload() }, 100) /*...then reloading the current page*/
+            .catch(() => window.location.reload()); /*...then reloading the current page*/
     }
 
     /*------------Return*/

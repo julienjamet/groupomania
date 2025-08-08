@@ -48,7 +48,7 @@ export default function SignUpForm() { /*Exports to the LogModal a Register comp
 
         axios({ /*...then runs a POST (Register) request...*/
             method: "post",
-            url: 'https://api.julienjamet-groupomania.com/api/user/register',
+            url: `${process.env.REACT_APP_API_URL}/groupomania/signup`,
             data: {
                 pseudo: pseudo,
                 email: email,

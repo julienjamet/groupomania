@@ -28,7 +28,7 @@ export default function FriendsHint() {
     function notFriendList() {
         let array = []
 
-        usersData.map(user => {
+        usersData?.length && usersData.map(user => {
             if (user._id !== clientData._id && user._id !== `${process.env.REACT_APP_ADMIN_ID}` && !clientData.followings.includes(user._id)) {
                 return array.push(user)
             }

@@ -66,7 +66,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
 
 
     async function handleDelete() { /*...and a HandleDelete middleware that removes the client, its posts, comments, likes and follows from the database...*/
-        await usersData.map(user => {
+        await usersData?.length && usersData.map(user => {
             if (user.followers.includes(clientData._id)) {
                 return dispatch(UnfollowUser(user._id, clientData._id))
             }
@@ -75,7 +75,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
             }
         })
 
-        await allPostsData.map(post => {
+        await allPostsData?.length && allPostsData.map(post => {
             if (post.posterId === clientData._id) {
                 return dispatch(DeletePost(post._id))
             }
@@ -84,7 +84,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
             }
         })
 
-        await allPostsData.map(post => {
+        await allPostsData?.length && allPostsData.map(post => {
             return post.comments.map(comment => {
                 if (comment.commenterId === clientData._id) {
                     return dispatch(DeleteComment(post._id, comment._id, comment.commenterId))
@@ -95,7 +95,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
             })
         })
 
-        await allPostsData.map(post => {
+        await allPostsData?.length && allPostsData.map(post => {
             if (post.likers.includes(clientData._id)) {
                 return dispatch(UnlikePost(clientData._id, post._id))
             }
@@ -104,7 +104,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
             }
         })
 
-        await axios.delete(`https://api.julienjamet-groupomania.com/api/user/${clientData._id}`, { withCredentials: true })
+        await axios.delete(`${process.env.REACT_APP_API_URL}/groupomania/users/${clientData._id}`, { withCredentials: true })
             .then(() => {
                 window.location = "/home" /*...before redirecting the user to the Home page*/
             })
@@ -165,7 +165,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
                                     <h3>Abonnements</h3>
                                     <span onClick={() => setFollowings(false)} className="cross">&#10005;</span>
                                     <ul>
-                                        {usersData.map(user => {
+                                        {usersData?.length && usersData.map(user => {
                                             for (let i = 0; i < clientData.followings.length; i++) {
                                                 if (user._id === clientData.followings[i]) {
                                                     return ( /*...that returns, for each user found in the client's subscriptions list...*/
@@ -199,7 +199,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
                                         <h3>Abonnés</h3>
                                         <span onClick={() => setFollowers(false)} className="cross">&#10005;</span>
                                         <ul>
-                                            {usersData.map(user => {
+                                            {usersData?.length && usersData.map(user => {
                                                 for (let i = 0; i < clientData.followers.length; i++) {
                                                     if (user._id === clientData.followers[i]) {
                                                         return ( /*...that returns, for each user found in the client's followers list...*/
@@ -231,7 +231,7 @@ export default function UpdateProfile() { /*Exports to the Profile page an Updat
                         <h2>Activité de {clientData.pseudo}</h2>
                         <div className="thread-container">
                             <ul>
-                                {allPostsData.map(post => { /*...for each post retrieved from the Store that has been created by the client...*/
+                                {allPostsData?.length && allPostsData.map(post => { /*...for each post retrieved from the Store that has been created by the client...*/
                                     if (post.posterId === clientData._id) {
                                         return (
                                             <li key={post._id} className="card-container">

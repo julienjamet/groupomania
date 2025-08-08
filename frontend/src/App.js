@@ -25,10 +25,10 @@ export default function App() { /*Exports to the Root an App component...*/
   const dispatch = useDispatch()
 
   useEffect(() => { /*...that runs a useEffect hook...*/
-    axios.get('https://api.julienjamet-groupomania.com/token', { withCredentials: true }) /*...running a GET (Token) request...*/
+      axios.get(`${process.env.REACT_APP_API_URL}/token`, { withCredentials: true }) /*...running a GET (Token) request...*/
 
       .then(res => {
-        axios.get(`https://api.julienjamet-groupomania.com/api/user/${res.data}`, { withCredentials: true }) /*...then a GET (One user) request using the data retrieved from the token...*/
+          axios.get(`${process.env.REACT_APP_API_URL}/groupomania/users/${res.data}`, { withCredentials: true }) /*...then a GET (One user) request using the data retrieved from the token...*/
 
           .then(res => { dispatch(GetClient(res.data._id)) }) /*...before running a Get client action*/
           .catch(error => console.log(error))

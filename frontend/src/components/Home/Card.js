@@ -54,7 +54,7 @@ export default function Card({ post }) { /*Exports to the Thread a Card componen
             <div className="card-left">
                 <img
                     src={
-                        usersData.map(user => {
+                        usersData?.length && usersData.map(user => {
                             if (user._id === post.posterId) {
                                 return user.picture /*...the profile picture...*/
                             }
@@ -62,7 +62,7 @@ export default function Card({ post }) { /*Exports to the Thread a Card componen
                         }).join('')
                     }
                     id={
-                        usersData.map(user => {
+                        usersData?.length && usersData.map(user => {
                             if (user._id === post.posterId) {
                                 return user._id /*...the profile picture...*/
                             }
@@ -80,7 +80,7 @@ export default function Card({ post }) { /*Exports to the Thread a Card componen
 
                     <div className="pseudo">
                         <h3>
-                            {usersData.map(user => { /*...and the pseudo of the post creator...*/
+                            {usersData?.length && usersData.map(user => { /*...and the pseudo of the post creator...*/
                                 if (user._id === post.posterId) {
                                     return user.pseudo
                                 }
